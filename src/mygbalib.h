@@ -24,18 +24,22 @@ void checkbutton(void)
     }
     if ((buttons & KEY_RIGHT) == KEY_RIGHT)
     {
+        drawSprite(A_R_NF, SCREEN_WIDTH / 2 - 8, SCREEN_HEIGHT / 2 - 8, 0);
         // buttonR();
     }
     if ((buttons & KEY_LEFT) == KEY_LEFT)
     {
+        drawSprite(A_L_NF, SCREEN_WIDTH / 2 - 8, SCREEN_HEIGHT / 2 - 8, 0);
         // buttonL();
     }
     if ((buttons & KEY_UP) == KEY_UP)
     {
+        drawSprite(A_R_F, SCREEN_WIDTH / 2 - 8, SCREEN_HEIGHT / 2 - 8, 0);
         // buttonU();
     }
     if ((buttons & KEY_DOWN) == KEY_DOWN)
     {
+        drawSprite(A_L_F, SCREEN_WIDTH / 2 - 8, SCREEN_HEIGHT / 2 - 8, 0);
         // buttonD();
     }
 }
@@ -64,6 +68,18 @@ void fillSprites(void)
         drawSprite(0, i, 240,160);
 }
 
+void drawSprite8x8(int numb, int N, int x, int y)
+{
+    // Gift function: displays sprite number numb on screen at position (x,y), as sprite object N
+    // (x,y) = upper left corner of sprite
+    // numb = number to show on screen
+    // N = when showing multiple number on the screen, must be different for each sprite
+    // 		(eg first sprite = 0, second sprite = 1, ...)
+    // 		moving a sprite -> redrawing with the same N
+    *(unsigned short *)(0x7000000 + 8*N) = y | 0x2000;
+    *(unsigned short *)(0x7000002 + 8*N) = x;
+    *(unsigned short *)(0x7000004 + 8*N) = numb*2;
+}
 
 void drawSprite(int numb, int N, int x, int y)
 {

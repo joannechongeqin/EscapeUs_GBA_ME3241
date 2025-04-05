@@ -274,3 +274,4 @@ typedef void (*fp)(void);
 #define spritePal                  ((unsigned short *) 0x5000200)
 #define REG_INT                    (*(unsigned int*)0x3007FFC)
 #endif
+
