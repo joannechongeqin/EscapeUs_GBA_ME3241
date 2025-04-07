@@ -2,6 +2,69 @@
 #define MYGBALIB_H
 
 #include "sprites.h"
+#include "player.h"
+#define INPUT                      (KEY_MASK & (~REG_KEYS))
+
+void checkbutton(void)
+{
+	// Gift function to show you how a function that can be called upon button interrupt to detect which button was pressed and run a specific function for each button could look like. You would have to define each buttonA/buttonB/... function yourself.
+    u16 buttons = INPUT;
+    
+    // if ((buttons & KEY_A) == KEY_A)
+    // {
+    //     // buttonA();
+    // }
+    // if ((buttons & KEY_B) == KEY_B)
+    // {
+    //     // buttonB();
+    // }
+    // if ((buttons & KEY_SELECT) == KEY_SELECT)
+    // {
+    //     // buttonSel();
+    // }
+    // if ((buttons & KEY_START) == KEY_START)
+    // {
+    //     // buttonS();
+    // }
+    // if ((buttons & KEY_RIGHT) == KEY_RIGHT)
+    // {
+    //     // buttonR();
+    // }
+    // if ((buttons & KEY_LEFT) == KEY_LEFT)
+    // {
+    //     // buttonL();
+    // }
+    // if ((buttons & KEY_UP) == KEY_UP)
+    // {
+    //     // buttonU();
+    // }
+    // if ((buttons & KEY_DOWN) == KEY_DOWN)
+    // {
+    //     // buttonD();
+    // }
+
+    if ((buttons & KEY_RIGHT) == KEY_RIGHT)
+    {
+        playerMoveRight();
+    }
+    if ((buttons & KEY_LEFT) == KEY_LEFT)
+    {
+        playerMoveLeft();
+    }
+    if ((buttons & KEY_UP) == KEY_UP)
+    {
+        playerJump();
+    }
+    if ((buttons & KEY_RIGHT) == 0 && (buttons & KEY_LEFT) == 0)
+    {
+        playerStop();
+    }
+
+    updatePlayer();
+    drawSprite(player.spriteIndex, player.spriteN, player.x, player.y);
+
+}
+
 
 void drawSprite8x8(int numb, int N, int x, int y)
 {
@@ -16,6 +79,7 @@ void drawSprite8x8(int numb, int N, int x, int y)
     *(unsigned short *)(0x7000004 + 8*N) = numb*2;
 }
 
+
 void drawSprite(int numb, int N, int x, int y)
 {
 	// Same as CA2, make specific sprite (based on its name/numb) appear on screen, as slide number N (each sprite needs a different, arbitrary, N >= 0)
@@ -23,6 +87,7 @@ void drawSprite(int numb, int N, int x, int y)
     *(unsigned short *)(0x7000002 + 8*N) = x | 0x4000;
     *(unsigned short *)(0x7000004 + 8*N) = numb*8;
 }
+
 
 void delSprite(int N)
 {
