@@ -15,7 +15,9 @@ PROGNAME=final_project
 #
 # Set a list of files you want to compile
 #
-OFILES +=main.o
+OFILES +=main.o	\
+	player.o	\
+	sprites.o
 
 #
 # Set a list of libraries you want to link
