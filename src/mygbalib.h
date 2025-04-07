@@ -2,51 +2,6 @@
 #define MYGBALIB_H
 
 #include "sprites.h"
-#define INPUT                      (KEY_MASK & (~REG_KEYS))
-
-void checkbutton(void)
-{
-	// Gift function to show you how a function that can be called upon button interrupt to detect which button was pressed and run a specific function for each button could look like. You would have to define each buttonA/buttonB/... function yourself.
-    u16 buttons = INPUT;
-    
-    if ((buttons & KEY_A) == KEY_A)
-    {
-        // buttonA();
-    }
-    if ((buttons & KEY_B) == KEY_B)
-    {
-        // buttonB();
-    }
-    if ((buttons & KEY_SELECT) == KEY_SELECT)
-    {
-        // buttonSel();
-    }
-    if ((buttons & KEY_START) == KEY_START)
-    {
-        // buttonS();
-    }
-    if ((buttons & KEY_RIGHT) == KEY_RIGHT)
-    {
-        // drawSprite(P_R_IDLE, 0, 0, 0);
-        // buttonR();
-    }
-    if ((buttons & KEY_LEFT) == KEY_LEFT)
-    {
-        // drawSprite(P_R_IDLE, 0, 0, 0);
-        // buttonL();
-    }
-    if ((buttons & KEY_UP) == KEY_UP)
-    {
-        // drawSprite(P_R_IDLE, 0, 0, 0);
-        // buttonU();
-    }
-    if ((buttons & KEY_DOWN) == KEY_DOWN)
-    {
-        // drawSprite(P_R_IDLE, 0, 0, 0);
-        // buttonD();
-    }
-}
-
 
 void drawSprite8x8(int numb, int N, int x, int y)
 {
@@ -67,6 +22,11 @@ void drawSprite(int numb, int N, int x, int y)
     *(unsigned short *)(0x7000000 + 8*N) = y | 0x2000;
     *(unsigned short *)(0x7000002 + 8*N) = x | 0x4000;
     *(unsigned short *)(0x7000004 + 8*N) = numb*8;
+}
+
+void delSprite(int N)
+{
+    drawSprite(EMPTY, N, 240, 160); // move sprite out of the screen
 }
 
 

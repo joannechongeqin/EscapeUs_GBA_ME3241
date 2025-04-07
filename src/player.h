@@ -11,8 +11,13 @@ typedef struct {
     int onGround;      // 1 if on ground, 0 if in the air
 } Player;
 
-Player player; 
+Player player; // currently only support one player
 
-void initPlayer(void);
+void initPlayer(int x, int y);
+void playerMoveRight();
+void playerMoveLeft();
+void playerJump();
+void playerStop();
+void updatePlayer();
 
 #endif

@@ -3,7 +3,8 @@
 // -----------------------------------------------------------------------------
 #include "gba.h"
 #include "mygbalib.h"
-#include "player.h"
+#include "menu.h"
+#include "game.h"
 
 // NOTE: GBA screen resolution is 240 x 160 -> top left is (0, 0)
 
@@ -34,9 +35,9 @@ int main(void)
     fillPalette();
     fillSprites();
 
-    // initialize player
-    initPlayer();
-    drawSprite(player.spriteIndex, player.spriteN, player.x, player.y);
+    // initialize game
+    gameState = MAIN_MENU;
+    showMainMenu();
 
     // Set Handler Function for interrupts and enable selected interrupts
     REG_INT = (int)&Handler;
@@ -53,5 +54,3 @@ int main(void)
 
 	return 0;
 }
-
-
