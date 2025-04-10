@@ -1,9 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
-#include "player.h"
-#include "mygbalib.h"
-#include  "level.h"
+#include "level.h"
 
 void drawTitle() {
     int title_first_x = 60;

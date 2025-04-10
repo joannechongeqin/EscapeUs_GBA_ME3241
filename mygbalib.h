@@ -1,8 +1,8 @@
 #ifndef MYGBALIB_H
 #define MYGBALIB_H
 
-#include "sprites.h"
 #include "player.h"
+
 #define INPUT                      (KEY_MASK & (~REG_KEYS))
 
 void drawSprite8x8(int numb, int N, int x, int y);

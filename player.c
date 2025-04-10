@@ -1,11 +1,6 @@
 #include "player.h"
 #include  "level.h"
 
-#define MOVE_INTERVAL       2   // number of pixel to move per step
-#define GRAVITY             1   // gravity force pulling the player down
-#define JUMP_STRENGTH       -9  // initial jump velocity
-
-
 void initPlayer(int x, int y) {
     player.x = x;
     player.y = y;
@@ -44,10 +39,9 @@ void playerJump() {
 
 
 int _onGroundCheck() {
-    // TODO: Once level is created, i think this should be returned by the level code(?) (which knows where is ground)
-
     int tileBelow = getTileAt(player.x + 8, player.y + 16);
     if (tileBelow == GROUND) {
+        player.y = (player.y / 16) * 16; // make sure y is multiple of 16, to snap the player's Y position to the nearest ground level
         player.vy = 0;
         return 1;
     }

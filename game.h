@@ -3,7 +3,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "mygbalib.h"
 #include "menu.h"
 
 enum GameState { MAIN_MENU, GAMEPLAY, WIN, LOSS } gameState;

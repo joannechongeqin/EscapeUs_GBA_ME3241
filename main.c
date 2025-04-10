@@ -1,9 +1,6 @@
 // -----------------------------------------------------------------------------
 // C-Skeleton to be used with HAM Library from www.ngine.de
 // -----------------------------------------------------------------------------
-#include "gba.h"
-#include "mygbalib.h"
-#include "menu.h"
 #include "game.h"
 
 // NOTE: GBA screen resolution is 240 x 160 -> top left is (0, 0)
