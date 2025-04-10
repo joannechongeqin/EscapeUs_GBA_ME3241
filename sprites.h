@@ -30,14 +30,13 @@ extern u16 sprites[];
 #define TITLE_M 7      // for title in menu
 #define TITLE_E 8      // for title in menu
 
-#define P_R_IDLE 9      // player idle facing RIGHT
-#define P_L_IDLE 10     // player idle facing LEFT
-#define P_R_MOVE 11     // player moving RIGHT
-#define P_L_MOVE 12     // player moving LEFT
+#define P_IDLE 9        // player idle facing FRONT
+#define P_R_MOVE 10     // player moving RIGHT
+#define P_L_MOVE 11     // player moving LEFT
 
-#define GROUND_SPRITE 13 // ground sprite (for level)
-#define KEY_SPRITE 14    // key sprite (for level)
-#define GOAL_SPRITE 15   // goal sprite (for level)
-#define BOMB_SPRITE 16   // bomb sprite (for level)
+#define GROUND_SPRITE 12 // ground sprite (for level)
+#define KEY_SPRITE 13    // key sprite (for level)
+#define GOAL_SPRITE 14   // goal sprite (for level)
+#define BOMB_SPRITE 15   // bomb sprite (for level)
 
 #endif

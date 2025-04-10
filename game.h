@@ -5,7 +5,7 @@
 
 #include "menu.h"
 
-enum GameState { MAIN_MENU, GAMEPLAY, WIN, LOSS } gameState;
+enum GameState { MAIN_MENU, GAMEPLAY, WIN, LOSE } gameState;
 
 
 #define INPUT                      (KEY_MASK & (~REG_KEYS))
@@ -38,11 +38,16 @@ void checkbutton(void)
         {
             playerStop();
         }
+
+        updatePlayer();
+        drawSprite(player.spriteIndex, player.spriteN, player.x, player.y);
     }
 
-    updatePlayer();
-    drawSprite(player.spriteIndex, player.spriteN, player.x, player.y);
-
+    // check and update game state
+    if (getTileBelow(player.x, player.y) == INVALID) {
+        gameState = MAIN_MENU;
+        showLoseScreen();
+    }
 }
 
 #endif

@@ -3,7 +3,7 @@
 
 #include "level.h"
 
-void drawTitle() {
+void _drawTitle() {
     int title_first_x = 60;
     int title_x_interval = 20;
     int title_y = 20;
@@ -13,14 +13,14 @@ void drawTitle() {
     drawSprite(TITLE_E, 4, title_first_x + title_x_interval * 3, title_y);
 }
 
-void delTitle() {
+void _delTitle() {
     delSprite(1);
     delSprite(2);
     delSprite(3);
     delSprite(4);
 }
 
-void drawStartButton() {
+void _drawStartButton() {
     int start_first_x = 60;
     int start_x_interval = 20;
     int start_y = 100;
@@ -31,7 +31,7 @@ void drawStartButton() {
     drawSprite(START_T, 9, start_first_x + start_x_interval * 4, start_y);
 }
 
-void delStartButton() {
+void _delStartButton() {
     delSprite(5);
     delSprite(6);
     delSprite(7);
@@ -40,18 +40,62 @@ void delStartButton() {
 }
 
 void showMainMenu() {
-    drawTitle();
-    drawStartButton();
+    _drawTitle();
+    _drawStartButton();
 }
 
 void hideMainMenu() {
-    delTitle();
-    delStartButton();
+    _delTitle();
+    _delStartButton();
 }
 
 void initGame() {
     hideMainMenu();
-    drawLevel(1);
+    drawLevel(0);
 }
 
+
+void _showYouLose() {
+    // TODO FIX THIS
+    int youLose_first_x = 60;
+    int youLose_interval = 20;
+    int youLose_y = 40;
+    int youLose_sprite_N = level_sprite_N + 1;
+    drawSprite(START_S, youLose_sprite_N,     youLose_first_x,                        youLose_y);
+    drawSprite(START_T, youLose_sprite_N + 1, youLose_first_x + youLose_interval,     youLose_y);
+    drawSprite(START_A, youLose_sprite_N + 2, youLose_first_x + youLose_interval * 2, youLose_y);
+    drawSprite(START_R, youLose_sprite_N + 3, youLose_first_x + youLose_interval * 3, youLose_y);
+    drawSprite(START_T, youLose_sprite_N + 4, youLose_first_x + youLose_interval * 4, youLose_y);
+    drawSprite(START_R, youLose_sprite_N + 5, youLose_first_x + youLose_interval * 5, youLose_y);
+    drawSprite(START_T, youLose_sprite_N + 6, youLose_first_x + youLose_interval * 6, youLose_y);
+}
+
+
+void showLoseScreen() {
+    // hideLevel();
+    _showYouLose();
+}
+
+void _showYouWin() {
+    // TODO FIX THIS
+    int youWin_first_x = 60;
+    int youWin_interval = 20;
+    int youWin_y = 40;
+    int youWin_sprite_N = level_sprite_N + 1;
+    drawSprite(START_S, youWin_sprite_N,     youWin_first_x,                       youWin_y);
+    drawSprite(START_T, youWin_sprite_N + 1, youWin_first_x + youWin_interval,     youWin_y);
+    drawSprite(START_A, youWin_sprite_N + 2, youWin_first_x + youWin_interval * 2, youWin_y);
+    drawSprite(START_R, youWin_sprite_N + 3, youWin_first_x + youWin_interval * 3, youWin_y);
+    drawSprite(START_T, youWin_sprite_N + 4, youWin_first_x + youWin_interval * 4, youWin_y);
+    drawSprite(START_R, youWin_sprite_N + 5, youWin_first_x + youWin_interval * 5, youWin_y);
+}
+
+
+void showWinScreen() {
+    // hideLevel();
+    _showYouWin();
+}
+
+
 #endif
+

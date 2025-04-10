@@ -6,7 +6,7 @@ void initPlayer(int x, int y) {
     player.y = y;
     player.vx = 0;
     player.vy = 0;
-    player.spriteIndex = P_R_IDLE;
+    player.spriteIndex = P_IDLE;
     player.spriteN = PLAYER_SPRITE_N;
     player.onGround = 1;
 }
@@ -26,7 +26,7 @@ void playerMoveLeft() {
 
 void playerStop() {
     player.vx = 0;
-    player.spriteIndex = P_R_IDLE;
+    player.spriteIndex = P_IDLE;
 }
 
 
@@ -39,9 +39,8 @@ void playerJump() {
 
 
 int _onGroundCheck() {
-    int tileBelow = getTileAt(player.x + 8, player.y + 16);
-    if (tileBelow == GROUND) {
-        player.y = (player.y / 16) * 16; // make sure y is multiple of 16, to snap the player's Y position to the nearest ground level
+    if (getTileBelow(player.x, player.y) == GROUND) {
+        player.y = (player.y / SPRITE_SIZE) * SPRITE_SIZE; // make sure y is multiple of 16, to snap the player's Y position to the nearest ground level
         player.vy = 0;
         return TRUE;
     }
@@ -49,14 +48,16 @@ int _onGroundCheck() {
 }
 
 
-void updatePlayer() {
-    if (player.onGround == FALSE) {
-        player.vy += GRAVITY;
-    }
+int _canMoveRight() {
+    return getTileRight(player.x, player.y) != GROUND;
+}
 
-    player.x += player.vx;
-    player.y += player.vy;
+int _canMoveLeft() {
+    return getTileLeft(player.x, player.y) != GROUND;
+}
 
+
+void _limitWithinScreenBoundaries() {
     // boundary checks
     if (player.x < 0)
         player.x = 0;
@@ -66,6 +67,23 @@ void updatePlayer() {
         player.y = 0;
     else if (player.y > SCREEN_HEIGHT - SPRITE_SIZE)
         player.y = SCREEN_HEIGHT - SPRITE_SIZE;
+}
 
+
+void updatePlayer() {
+
+    // horizontal movement
+    if ((player.vx > 0 && _canMoveRight()) || // moving right
+        (player.vx < 0 && _canMoveLeft())) {  // moving left
+        player.x += player.vx;
+    } 
+
+    // vertical movement
+    player.y += player.vy;
+    if (player.onGround == FALSE) { // apply gravity if not on the ground
+        player.vy += GRAVITY;
+    }
     player.onGround = _onGroundCheck();
+
+    _limitWithinScreenBoundaries();
 }

@@ -80,6 +80,7 @@ void drawLevel(int level) {
 
 
 void hideLevel() {
+    delSprite(PLAYER_SPRITE_N); // delete player sprite
     for (int i = LEVEL_SPRITE_N; i < level_sprite_N; i++) {
         delSprite(i);
     }
@@ -91,6 +92,21 @@ int getTileAt(int x, int y) {
     int (*levelData)[TILES_X] = _getLevelData(CURRENT_LEVEL);
     int col = x / SPRITE_SIZE;
     int row = y / SPRITE_SIZE;
-    if (row < 0 || row >= TILES_Y || col < 0 || col >= TILES_X) return -1; // out of bounds
+    if (row < 0 || row >= TILES_Y || col < 0 || col >= TILES_X) return INVALID; // out of bounds
     return levelData[row][col];
+}
+
+int getTileRight(int x, int y) {
+    return getTileAt(x + SPRITE_SIZE, y);
+}
+int getTileLeft(int x, int y) {
+    return getTileAt(x - 1, y);
+}
+
+int getTileAbove(int x, int y) {
+    return getTileAt(x + SPRITE_SIZE / 2, y - SPRITE_SIZE);
+}
+
+int getTileBelow(int x, int y) {
+    return getTileAt(x + SPRITE_SIZE / 2, y + SPRITE_SIZE);
 }

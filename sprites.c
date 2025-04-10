@@ -409,45 +409,7 @@ u16 sprites[] = {
 1,1,0,0,0,0,0,0,
 
 
-#define P_R_IDLE 9      // player idle facing RIGHT
-// Tile 00
-0,0,0,0,0,1,0,0,
-0,0,0,1,1,2,1,1,
-0,0,1,3,2,2,2,2,
-0,1,3,2,2,2,2,2,
-1,2,2,2,2,2,2,2,
-0,1,3,2,2,2,3,4,
-0,1,2,2,3,1,1,1,
-0,0,1,3,5,4,6,6,
-// Tile 01
-1,0,0,1,0,0,0,0,
-2,1,1,2,1,0,0,0,
-2,2,2,2,2,1,0,0,
-2,2,2,2,2,3,1,0,
-3,2,2,3,2,2,1,0,
-4,2,4,4,2,1,0,0,
-4,4,4,1,1,1,0,0,
-4,4,4,6,1,0,0,0,
-// Tile 02
-0,0,0,1,5,4,6,6,
-0,0,0,1,5,4,5,5,
-0,0,0,1,5,4,4,4,
-0,0,0,1,7,7,7,7,
-0,0,0,1,8,8,8,8,
-0,0,0,1,7,7,1,1,
-0,0,0,1,7,1,0,0,
-0,0,0,1,1,0,0,0,
-// Tile 03
-4,4,4,6,1,0,0,0,
-4,4,4,5,1,0,0,0,
-4,4,4,4,1,0,0,0,
-7,7,7,7,1,0,0,0,
-8,8,8,8,1,0,0,0,
-1,1,7,7,1,0,0,0,
-0,1,7,1,0,0,0,0,
-0,1,1,0,0,0,0,0,
-
-#define P_L_IDLE 10     // player idle facing LEFT
+#define P_IDLE 9        // player idle facing FRONT
 // Tile 00
 0,0,0,0,0,1,0,0,
 0,0,0,1,1,2,1,1,
@@ -486,7 +448,7 @@ u16 sprites[] = {
 0,1,1,0,0,0,0,0,
 
 
-#define P_R_MOVE 11     // player moving RIGHT
+#define P_R_MOVE 10     // player moving RIGHT
 // Tile 00
 0,0,0,0,0,0,1,1,
 0,0,0,0,0,1,1,2,
@@ -524,7 +486,7 @@ u16 sprites[] = {
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
 
-#define P_L_MOVE 12      // player moving LEFT
+#define P_L_MOVE 11      // player moving LEFT
 // Tile 00
 0,0,0,0,0,0,0,1,
 0,0,0,0,0,0,0,2,
@@ -562,7 +524,7 @@ u16 sprites[] = {
 0,1,1,0,0,0,0,0,
 1,1,3,0,0,0,0,0,
 
-#define GROUND_SPRITE 13 // ground sprite (for level)
+#define GROUND_SPRITE 12 // ground sprite (for level)
 // Tile 00
 1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,
@@ -600,7 +562,7 @@ u16 sprites[] = {
 1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,
 
-#define KEY_SPRITE 14    // key sprite (for level)
+#define KEY_SPRITE 13    // key sprite (for level)
 // Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
@@ -638,7 +600,7 @@ u16 sprites[] = {
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
 
-#define GOAL_SPRITE 15   // goal sprite (for level)
+#define GOAL_SPRITE 14   // goal sprite (for level)
 // Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
@@ -676,7 +638,7 @@ u16 sprites[] = {
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
 
-#define BOMB_SPRITE 16   // bomb sprite (for level)
+#define BOMB_SPRITE 15   // bomb sprite (for level)
 // Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
