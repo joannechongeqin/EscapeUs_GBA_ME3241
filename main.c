@@ -14,7 +14,7 @@ void Handler(void)
 
     if ((REG_IF & INT_TIMER0) == INT_TIMER0) // specify the interrupt you are handling -> NOTE: make sure it is enabled in REG_IE in main()
     {
-		checkbutton();
+		  checkbutton();
     }
 
     REG_IF = REG_IF; // Update interrupt table, to confirm we have handled this interrupt

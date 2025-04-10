@@ -12,8 +12,9 @@ extern int palette[];
 // Declare the sprites array as extern to avoid multiple definitions.
 extern u16 sprites[];
 
-#define TITLE_LENGTH 2
-#define START_LENGTH 1
+#define PLAYER_SPRITE_N     0   // unique N to draw sprite on screen
+#define LEVEL_SPRITE_N      1   // unique N to draw elements for level on screen (starting N)
+
 
 // Define sprite constants for easier reference
 // !!! implementation in sprites.c !!!
@@ -33,5 +34,10 @@ extern u16 sprites[];
 #define P_L_IDLE 10     // player idle facing LEFT
 #define P_R_MOVE 11     // player moving RIGHT
 #define P_L_MOVE 12     // player moving LEFT
+
+#define GROUND_SPRITE 13 // ground sprite (for level)
+#define KEY_SPRITE 14    // key sprite (for level)
+#define GOAL_SPRITE 15   // goal sprite (for level)
+#define BOMB_SPRITE 16   // bomb sprite (for level)
 
 #endif

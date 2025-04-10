@@ -3,6 +3,7 @@
 
 #include "player.h"
 #include "mygbalib.h"
+#include  "level.h"
 
 void drawTitle() {
     int title_first_x = 60;
@@ -52,7 +53,7 @@ void hideMainMenu() {
 
 void initGame() {
     hideMainMenu();
-    initPlayer(120, 120);
+    drawLevel(1);
 }
 
 #endif

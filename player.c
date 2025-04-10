@@ -1,6 +1,5 @@
 #include "player.h"
 
-#define PLAYER_SPRITE_N     0   // unique N to draw sprite on screen
 #define PLAYER_SPRITE_WIDTH 16
 #define MOVE_INTERVAL       2   // number of pixel to move per step
 #define GRAVITY             1   // gravity force pulling the player down
@@ -46,7 +45,7 @@ void playerJump() {
 
 int onGroundCheck() {
     // TODO: Once level is created, i think this should be returned by the level code(?) (which knows where is ground)
-    if (player.y == 120) { // assume 120 for ground level for now
+    if (player.y == 112) { // assume 120 for ground level for now
         player.vy = 0;
        return 1;
     }
