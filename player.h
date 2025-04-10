@@ -5,7 +5,7 @@
 
 #define MOVE_INTERVAL       2   // number of pixel to move per step
 #define GRAVITY             1   // gravity force pulling the player down
-#define JUMP_STRENGTH       -10  // initial jump velocity
+#define JUMP_STRENGTH       -9  // initial jump velocity
 
 typedef struct {
     int x, y;          // position

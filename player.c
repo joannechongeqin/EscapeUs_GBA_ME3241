@@ -43,14 +43,14 @@ int _onGroundCheck() {
     if (tileBelow == GROUND) {
         player.y = (player.y / 16) * 16; // make sure y is multiple of 16, to snap the player's Y position to the nearest ground level
         player.vy = 0;
-        return 1;
+        return TRUE;
     }
-    return 0;
+    return FALSE;
 }
 
 
 void updatePlayer() {
-    if (!player.onGround) {
+    if (player.onGround == FALSE) {
         player.vy += GRAVITY;
     }
 

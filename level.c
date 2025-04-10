@@ -91,6 +91,6 @@ int getTileAt(int x, int y) {
     int (*levelData)[TILES_X] = _getLevelData(CURRENT_LEVEL);
     int col = x / SPRITE_SIZE;
     int row = y / SPRITE_SIZE;
-    if (row < 0 || row >= TILES_X || col < 0 || col >= TILES_Y) return -1; // out of bounds
+    if (row < 0 || row >= TILES_Y || col < 0 || col >= TILES_X) return -1; // out of bounds
     return levelData[row][col];
 }
