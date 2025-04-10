@@ -17,7 +17,9 @@ PROGNAME=final_project
 #
 OFILES +=main.o	\
 	player.o	\
-	sprites.o
+	sprites.o	\
+	mygbalib.o	\
+	level.o
 
 #
 # Set a list of libraries you want to link

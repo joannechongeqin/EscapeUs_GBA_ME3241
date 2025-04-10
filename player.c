@@ -1,9 +1,9 @@
 #include "player.h"
+#include  "level.h"
 
-#define PLAYER_SPRITE_WIDTH 16
 #define MOVE_INTERVAL       2   // number of pixel to move per step
 #define GRAVITY             1   // gravity force pulling the player down
-#define JUMP_STRENGTH       -10 // initial jump velocity
+#define JUMP_STRENGTH       -9  // initial jump velocity
 
 
 void initPlayer(int x, int y) {
@@ -43,11 +43,13 @@ void playerJump() {
 }
 
 
-int onGroundCheck() {
+int _onGroundCheck() {
     // TODO: Once level is created, i think this should be returned by the level code(?) (which knows where is ground)
-    if (player.y == 112) { // assume 120 for ground level for now
+
+    int tileBelow = getTileAt(player.x + 8, player.y + 16);
+    if (tileBelow == GROUND) {
         player.vy = 0;
-       return 1;
+        return 1;
     }
     return 0;
 }
@@ -64,8 +66,12 @@ void updatePlayer() {
     // boundary checks
     if (player.x < 0)
         player.x = 0;
-    else if (player.x > (240 - PLAYER_SPRITE_WIDTH))
-        player.x = 240 - PLAYER_SPRITE_WIDTH;
+    else if (player.x > SCREEN_WIDTH - SPRITE_SIZE)
+        player.x = SCREEN_WIDTH - SPRITE_SIZE;
+    if (player.y < 0)
+        player.y = 0;
+    else if (player.y > SCREEN_HEIGHT - SPRITE_SIZE)
+        player.y = SCREEN_HEIGHT - SPRITE_SIZE;
 
-    player.onGround = onGroundCheck();
+    player.onGround = _onGroundCheck();
 }

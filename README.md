@@ -4,7 +4,7 @@
 - ```game.h```: check button, main logic of the game(?) *(hmm still thinking if this is the best way to structure it)*
 - ```menu.h```: simple menu to start a session
 - ```player.h/.c```: player movement (left / right, jump), gravity
-
+- ```level.h/.c```: store and get data for each level, draw level on screen
 
 ### TODOs
 - fix sprites data (player, menu screen title and start letters)

@@ -14,9 +14,9 @@ extern u16 sprites[];
 
 #define PLAYER_SPRITE_N     0   // unique N to draw sprite on screen
 #define LEVEL_SPRITE_N      1   // unique N to draw elements for level on screen (starting N)
+#define SPRITE_SIZE         16  // size of each sprite in pixels (16x16)
 
-
-// Define sprite constants for easier reference
+// Define sprite constants here for easier reference
 // !!! implementation in sprites.c !!!
 #define EMPTY 0        // empty sprite (mainly for delSprite())
 
