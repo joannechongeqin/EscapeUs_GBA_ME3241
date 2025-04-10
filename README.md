@@ -22,6 +22,7 @@
 
 
 ### Controls
+To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`.
 | Key             | Action                      |
 |-----------------|-----------------------------|
 | `START (ENTER)` | start game from main menu   |
