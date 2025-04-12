@@ -18,7 +18,7 @@
 ### Current Progress
 - dummy start + ending screen
 - using sprites/tiles of 16x16 pixels (GBA screen size 240x160), able to create [levels with static background of size 10x16 tiles](https://docs.google.com/spreadsheets/d/1p4TTlj3i2GXlGYyscvo-ErYltRo4AOVGPNbYYW5sz0M/edit?gid=0#gid=0)
-- support single player -> left/right/jump movements with correct ground + left/right obstacles detection
+- support two characters -> can switch players, left/right/jump movements with correct position update, ground + left/right obstacles detection
 
 
 ### Controls
@@ -51,4 +51,5 @@ To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`.
     - random falling bombs from the top?
     - button / pushable box? for the two players to co-op
     - bug to fix: sometimes player switched more than once when `A` is pressed once -> add debouncing(?)/cooldown/delay ✅
-    - bug to fix: after losing and restarting the game for a few times, some of the tile elements not rendering properly
+    - bug to fix: after restarting the game for a few times, some of the tile elements not rendering properly -> not sure if is a memory overflow thing or what hmmmm
+    - press `UP` and enter door effect to win?

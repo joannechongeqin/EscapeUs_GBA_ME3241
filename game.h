@@ -19,16 +19,6 @@ void updatePlayerState() {
 
     // draw arrow above current active player
     drawSprite(ARROW_, ARROW_SPRITE_N, players[activePlayerIndex].x, players[activePlayerIndex].y - SPRITE_SIZE); 
-    
-    if (gotKey) { // if already reached key, draw it near the player that has it
-        if (keyWithPlayer != activePlayerIndex) {
-            int dx = players[activePlayerIndex].x - players[keyWithPlayer].x;
-            int dy = players[activePlayerIndex].y - players[keyWithPlayer].y;
-            if (dx * dx + dy * dy <= KEY_GRAB_DISTANCE * KEY_GRAB_DISTANCE)
-                keyWithPlayer = activePlayerIndex; // Transfer key
-        }
-        drawSprite(KEY_, KEY_SPRITE_N, players[keyWithPlayer].x - SPRITE_SIZE / 2, players[keyWithPlayer].y - SPRITE_SIZE);
-    }
 }
 
 
@@ -42,9 +32,24 @@ void updateGameState() {
         }
     }
 
-    if (!gotKey && getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y) == KEY) { // first time touch key
-        gotKey = TRUE;
-        keyWithPlayer = activePlayerIndex; // player that has the key
+    if (gotKey) { // if already reached key, render the key it near the player that has it
+        if (keyWithPlayer != activePlayerIndex) {
+            int dx = players[activePlayerIndex].x - players[keyWithPlayer].x;
+            int dy = players[activePlayerIndex].y - players[keyWithPlayer].y;
+            if (dx * dx + dy * dy <= KEY_GRAB_DISTANCE * KEY_GRAB_DISTANCE)
+                keyWithPlayer = activePlayerIndex; // Transfer key
+        }
+        drawSprite(KEY_, KEY_SPRITE_N, players[keyWithPlayer].x - SPRITE_SIZE / 2, players[keyWithPlayer].y - SPRITE_SIZE);
+
+        // WIN
+        if (getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y) == GOAL) { // touch goal
+            gameState = END;
+            showEndingScreen(1);
+        }
+    }
+    else if (getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y) == KEY) { // no key and first time touch key, pick up key
+            gotKey = TRUE;
+            keyWithPlayer = activePlayerIndex; // player that has the key
     }
 }
 
