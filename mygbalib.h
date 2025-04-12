@@ -15,4 +15,6 @@ void fillPalette(void);
 
 void fillSprites(void);
 
+void testLetters(void);
+
 #endif

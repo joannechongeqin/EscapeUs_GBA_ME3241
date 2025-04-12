@@ -32,6 +32,8 @@ int main(void)
     fillPalette();
     fillSprites();
 
+    // testLetters();
+
     // initialize game
     gameState = MAIN_MENU;
     showMainMenu();

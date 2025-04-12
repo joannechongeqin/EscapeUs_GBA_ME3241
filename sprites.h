@@ -13,10 +13,12 @@ extern int palette[];
 extern u16 sprites[];
 
 #define SPRITE_SIZE       16  // size of each sprite in pixels (16x16)
+#define LETTER_SIZE       8   // size of each letter in pixels (8x8)
+#define LETTER_INTERVAL   20  // interval between letters in pixels
 
-#define TITLE_LENGTH      2 // <title> in menu
+#define TITLE_LENGTH      5 // <title> in menu
 #define START_LENGTH      5 // "START" button in menu
-#define ENDING_LENGTH     7 // "YOU WIN!" or "YOU LOSE" in ending screen
+#define ENDING_LENGTH     8 // "YOU WIN!" or "YOU LOSE" in ending screen
 
 #define PLAYER1_N         0
 #define PLAYER2_N         1
@@ -43,19 +45,32 @@ extern u16 sprites[];
 #define GOAL_    7      // goal sprite (for level)
 #define BOMB_    8      // bomb sprite (for level)
 
-#define LETTER_S 9
-#define LETTER_T 10
-#define LETTER_A 11
-#define LETTER_R 12
-#define LETTER_G 13
-#define LETTER_M 14
-#define LETTER_E 15
-#define LETTER_Y 16
-#define LETTER_O 17
-#define LETTER_U 18
-#define LETTER_W 19
-#define LETTER_I 20
-#define LETTER_N 21
-#define LETTER_L 22
-#define LETTER_EXCLAMATION 23
+#define LETTER_A 9
+#define LETTER_B (LETTER_A + 1)
+#define LETTER_C (LETTER_B + 1)
+#define LETTER_D (LETTER_C + 1)
+#define LETTER_E (LETTER_D + 1)
+#define LETTER_F (LETTER_E + 1)
+#define LETTER_G (LETTER_F + 1)
+#define LETTER_H (LETTER_G + 1)
+#define LETTER_I (LETTER_H + 1)
+#define LETTER_J (LETTER_I + 1)
+#define LETTER_K (LETTER_J + 1)
+#define LETTER_L (LETTER_K + 1)
+#define LETTER_M (LETTER_L + 1)
+#define LETTER_N (LETTER_M + 1)
+#define LETTER_O (LETTER_N + 1)
+#define LETTER_P (LETTER_O + 1)
+#define LETTER_Q (LETTER_P + 1)
+#define LETTER_R (LETTER_Q + 1)
+#define LETTER_S (LETTER_R + 1)
+#define LETTER_T (LETTER_S + 1)
+#define LETTER_U (LETTER_T + 1)
+#define LETTER_V (LETTER_U + 1)
+#define LETTER_W (LETTER_V + 1)
+#define LETTER_X (LETTER_W + 1)
+#define LETTER_Y (LETTER_X + 1)
+#define LETTER_Z (LETTER_Y + 1)
+#define LETTER_EXCLAMATION (LETTER_Z + 1)
+
 #endif

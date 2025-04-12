@@ -7,12 +7,28 @@
 
 enum GameState { MAIN_MENU, GAMEPLAY, END } gameState;
 
+int gotKey = FALSE;
+int keyWithPlayer = 0; // player that has the key
+#define KEY_GRAB_DISTANCE 16 // distance to grab key (in pixels)
+
 void updatePlayerState() {
     updatePlayers();
     for (int i = 0; i < MAX_PLAYERS; i++) {
         drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
+    } 
+
+    // draw arrow above current active player
+    drawSprite(ARROW_, ARROW_SPRITE_N, players[activePlayerIndex].x, players[activePlayerIndex].y - SPRITE_SIZE); 
+    
+    if (gotKey) { // if already reached key, draw it near the player that has it
+        if (keyWithPlayer != activePlayerIndex) {
+            int dx = players[activePlayerIndex].x - players[keyWithPlayer].x;
+            int dy = players[activePlayerIndex].y - players[keyWithPlayer].y;
+            if (dx * dx + dy * dy <= KEY_GRAB_DISTANCE * KEY_GRAB_DISTANCE)
+                keyWithPlayer = activePlayerIndex; // Transfer key
+        }
+        drawSprite(KEY_, KEY_SPRITE_N, players[keyWithPlayer].x - SPRITE_SIZE / 2, players[keyWithPlayer].y - SPRITE_SIZE);
     }
-    drawSprite(ARROW_, ARROW_SPRITE_N, players[activePlayerIndex].x, players[activePlayerIndex].y - SPRITE_SIZE); // draw arrow above current active player
 }
 
 
@@ -24,6 +40,11 @@ void updateGameState() {
             gameState = END;
             showEndingScreen(0);
         }
+    }
+
+    if (!gotKey && getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y) == KEY) { // first time touch key
+        gotKey = TRUE;
+        keyWithPlayer = activePlayerIndex; // player that has the key
     }
 }
 
@@ -54,6 +75,8 @@ void checkbutton(void)
         else if (gameState == MAIN_MENU) {
             clearScreen();
             drawLevel(0);
+            activePlayerIndex = 0; // reset active player index to 0 (first player)
+            gotKey = FALSE; // reset key state
             gameState = GAMEPLAY;
         }
     }

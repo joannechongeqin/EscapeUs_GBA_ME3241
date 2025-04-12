@@ -53,6 +53,16 @@ void fillSprites(void)
 }
 
 
+void testLetters(void) {
+    int i, x, y;
+    for(i = 0; i < 27; i++) {
+        x = (i % 15) * 16;
+        y = (i / 15) * 16; 
+        drawSprite(LETTER_A + i, i, x, y);
+    }
+}
+
+
 // void drawLaser(void)
 // {
 // 	// Gift function showing you how to draw an example sprite defined in sprite.h on screen, using drawSprite()
