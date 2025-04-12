@@ -14,30 +14,32 @@ void showMainMenu() {
     int title_first_x = 60;
     int title_x_interval = 20;
     int title_y = 20;
+    int title_letters[TITLE_LENGTH] = {LETTER_M, LETTER_E}; // TODO: THINK OF A TITLE
     for (int i = 0; i < TITLE_LENGTH; i++) 
-        drawSprite(TITLE_G, TITLE_SPRITE_N + i, title_first_x + title_x_interval * i, title_y); // TODO FIX SPRITE INDEX
+        drawSprite(title_letters[i], TITLE_SPRITE_N + i, title_first_x + title_x_interval * i, title_y);
 
     // DRAW START BUTTON
-    int start_first_x = 60;
+    int start_first_x = 60; int start_y = 100;
     int start_x_interval = 20;
-    int start_y = 100;
+    int start_letters[START_LENGTH] = {LETTER_S, LETTER_T, LETTER_A, LETTER_R, LETTER_T};
     for (int i = 0; i < START_LENGTH; i++) 
-        drawSprite(START_S, START_SPRITE_N + i, start_first_x + start_x_interval * i, start_y); // TODO FIX SPRITE INDEX
+        drawSprite(start_letters[i], START_SPRITE_N + i, start_first_x + start_x_interval * i, start_y);
 }
 
 
 void showEndingScreen(int isWin) {
-    int ending_first_x = 60;
+    int ending_first_x = 60; int ending_y = 40;
     int ending_interval = 20;
-    int ending_y = 40;
-    int ending_sprite_index;
+    int win_letters[ENDING_LENGTH]  = {LETTER_Y, LETTER_O, LETTER_U, LETTER_W, LETTER_I, LETTER_N, LETTER_EXCLAMATION};
+    int lose_letters[ENDING_LENGTH] = {LETTER_Y, LETTER_O, LETTER_U, LETTER_L, LETTER_O, LETTER_S, LETTER_E};
     if (isWin) {
-        ending_sprite_index = TITLE_G;
+        for (int i = 0; i < ENDING_LENGTH; i++) {
+            drawSprite(win_letters[i], ENDING_SPRITE_N + i, ending_first_x + ending_interval * i, ending_y);
+        }
     } else {
-        ending_sprite_index = TITLE_A;
-    }
-    for (int i = 0; i < ENDING_LENGTH; i++) {
-        drawSprite(ending_sprite_index, ENDING_SPRITE_N + i, ending_first_x + ending_interval * i, ending_y); // TODO FIX SPRITE INDEX
+        for (int i = 0; i < ENDING_LENGTH; i++) {
+            drawSprite(lose_letters[i], ENDING_SPRITE_N + i, ending_first_x + ending_interval * i, ending_y);
+        }   
     }
 }
 

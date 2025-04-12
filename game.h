@@ -12,7 +12,7 @@ void updatePlayerState() {
     for (int i = 0; i < MAX_PLAYERS; i++) {
         drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
     }
-    drawSprite(ARROW_SPRITE, ARROW_SPRITE_N, players[activePlayerIndex].x, players[activePlayerIndex].y - SPRITE_SIZE); // draw arrow above current active player
+    drawSprite(ARROW_, ARROW_SPRITE_N, players[activePlayerIndex].x, players[activePlayerIndex].y - SPRITE_SIZE); // draw arrow above current active player
 }
 
 
@@ -69,7 +69,6 @@ void checkbutton(void)
         updatePlayerState();
         updateGameState();
     }
-    
 }
 
 #endif

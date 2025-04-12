@@ -38,12 +38,12 @@ int (*_getLevelData(int level))[TILES_X] { // get pointer to selected level
     }
 }
 
-int CURRENT_LEVEL = 0;
+int current_level = 0;
 int level_sprite_N = LEVEL_SPRITE_N;
 
 void drawLevel(int level) {
     int (*levelData)[TILES_X] = _getLevelData(level);
-    CURRENT_LEVEL = level;
+    current_level = level;
 
     for (int row = 0; row < TILES_Y; row++) {
         for (int col = 0; col < TILES_X; col++) {
@@ -54,18 +54,18 @@ void drawLevel(int level) {
                 case EMPTY:
                     break; // no draw
                 case GROUND: 
-                    drawSprite(GROUND_SPRITE, level_sprite_N, x, y);
+                    drawSprite(GROUND_, level_sprite_N, x, y);
                     level_sprite_N += 1;
                     break;
                 case KEY: 
-                    drawSprite(KEY_SPRITE,    KEY_SPRITE_N, x, y);
+                    drawSprite(KEY_, KEY_SPRITE_N, x, y);
                     break;
                 case GOAL:   
-                    drawSprite(GOAL_SPRITE,   level_sprite_N, x, y);
+                    drawSprite(GOAL_, level_sprite_N, x, y);
                     level_sprite_N += 1;
                     break;
                 case BOMB:   
-                    drawSprite(BOMB_SPRITE,   level_sprite_N, x, y); 
+                    drawSprite(BOMB_, level_sprite_N, x, y); 
                     level_sprite_N += 1;
                     break;
                 case PLAYER1: 
@@ -85,7 +85,7 @@ void drawLevel(int level) {
 
 
 int getTileAt(int x, int y) {
-    int (*levelData)[TILES_X] = _getLevelData(CURRENT_LEVEL);
+    int (*levelData)[TILES_X] = _getLevelData(current_level);
     int col = x / SPRITE_SIZE;
     int row = y / SPRITE_SIZE;
     if (row < 0 || row >= TILES_Y || col < 0 || col >= TILES_X) return INVALID; // out of bounds
