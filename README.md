@@ -6,13 +6,13 @@
 | File(s)              | Description / Notes                                                                                  |
 |----------------------|------------------------------------------------------------------------------------------------------|
 | `main.c`             | project entry point                                                                                  |
-| `game.h`             | checkbutton, main logic of the game(?) *(hmm still thinking if this is the best way to structure it)*|
+| `game.h`             | checkbutton, main gameplay logic (update game state)                                                 |
 | `menu.h`             | simple menu to start a session, display win / lose ending screen                                     |
-| `level.h/.c`         | design levels, store and get data for each level, draw level on screen                               |
-| `mygbalib.h/.c`      | `drawSprite`, `delSprite`, `fillPalette`, `fillSprites`                                              |
-| `player.h/.c`        | player movement (left/right, jump), gravity                                                        |
+| `level.h/.c`         | level designs, store and get data for each level, draw level on screen                               |
+| `mygbalib.h/.c`      | graphics rendering (drawSprite, clearScreen etc)                                                     |
+| `player.h/.c`        | player movement (left/right, jump), gravity, switch player, update players                           |
 | `sprites.h/.c`       | sprites info *(if changing `#define` values, update both `.h` and `.c`, technically the `.h` one is being used everywhere else but just putting in `.c` for easy reference)* |
-| `gba.h`              | constant definitions                                                                                 |
+| `gba.h`              | gba constant value defines                                                                             |
 
 
 ### Current Progress
@@ -23,27 +23,27 @@
 
 ### Controls
 To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`.
-| Key                 | Action                              |
-|---------------------|-------------------------------------|
-| `START (ENTER)`     | start game from main menu / return to main menu after game  has ended          |
-| `RIGHT`             | move right                          |
-| `LEFT`              | move left                           |
-| `UP`                | jump                                |
-| `A (Z)`             | switch player                       |
+| Key                 | Action                                                               |
+|---------------------|----------------------------------------------------------------------|
+| `START (ENTER)`     | start game from main menu / return to main menu after game has ended |
+| `RIGHT`             | move right                                                           |
+| `LEFT`              | move left                                                            |
+| `UP` or `A (Z)`     | jump                                                                 |
+| `B (X)`             | switch player                                                        |
 
 ### TODOs
 - think of a game title!
 - `menu.h`
-    - fix start screen, youLose / youWin screen -> refactor into a for loop?
+    - fix start screen, youLose / youWin screen -> refactor into a for loop? ✅
 - `sprites.h/.c`
-    - fix sprites data (player, start screen "title?", "START", "YOU WIN", "YOU LOSE" letters) -> NONE of them is done ahhhh
+    - fix sprites data (player, start screen "title?", "START", "YOU WIN", "YOU LOSE" letters)
 - game logic `game.h` and `player.h/.c`: 
-    - detect if get key -> key follows player around after obtaining it
+    - detect if get key -> key follows player around after obtaining it ✅
     - detect if reach door with key -> WIN
-    - detect if hit bomb -> LOSE
-    - detect if fall off platform -> LOSE
+    - detect if hit bomb -> LOSE ✅
+    - detect if fall off platform -> LOSE ✅
 - tile/collision detection `level.c`:
-    - add some tolerance to getTileXXX()
+    - add some tolerance to getTileXXX() -> or math got some issue i think TT
 - `player.c`:
     - logic for: (1) players cannot walk into each other, (2) players can step on each other
 - ideas: 
@@ -51,3 +51,4 @@ To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`.
     - random falling bombs from the top?
     - button / pushable box? for the two players to co-op
     - bug to fix: sometimes player switched more than once when `A` is pressed once -> add debouncing(?)/cooldown/delay ✅
+    - bug to fix: after losing and restarting the game for a few times, some of the tile elements not rendering properly

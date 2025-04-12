@@ -53,6 +53,11 @@ void fillSprites(void)
 }
 
 
+void clearScreen(void) {
+    for(int i = 0; i < 128; i++)
+        drawSprite(0, i, SCREEN_WIDTH, SCREEN_HEIGHT);
+}
+
 void testLetters(void) {
     int i, x, y;
     for(i = 0; i < 27; i++) {

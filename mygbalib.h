@@ -15,6 +15,8 @@ void fillPalette(void);
 
 void fillSprites(void);
 
+void clearScreen(void);
+
 void testLetters(void);
 
 #endif
