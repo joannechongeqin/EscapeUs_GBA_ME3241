@@ -45,12 +45,15 @@ void checkbutton(void)
         for (int i = 0; i < MAX_PLAYERS; i++) {
             drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
         }
+        drawSprite(ARROW_SPRITE, ARROW_SPRITE_N, players[activePlayerIndex].x, players[activePlayerIndex].y - SPRITE_SIZE); // draw arrow above current player
     }
 
     // check and update game state
-    if (getTileBelow(currentPlayer()->x, currentPlayer()->y) == INVALID) {
-        gameState = MAIN_MENU;
-        showLoseScreen();
+    for (int i = 0; i < MAX_PLAYERS; i++) {
+        if (getTileBelow(players[i].x, players[i].y) == INVALID) {
+            gameState = MAIN_MENU;
+            showLoseScreen();
+        }
     }
 }
 

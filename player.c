@@ -94,7 +94,12 @@ void updatePlayers() {
         }
 
         // vertical movement
-        p->y += p->vy;
+        if (p->vy < 0 && getTileAbove(p->x, p->y) == GROUND) { // jumping and hitting the ceiling
+            p->y = ((p->y / SPRITE_SIZE)) * SPRITE_SIZE; // snap to just below the ceiling
+				p->vy = 0;
+        } else {
+				p->y += p->vy;
+		  }
         if (p->onGround == 0) { // apply gravity if not on the ground
             p->vy += GRAVITY;
         }

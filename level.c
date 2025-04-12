@@ -8,7 +8,7 @@ int level_0[TILES_Y][TILES_X] = {
     { 0,    KEY,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 2
     { 0,    GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 3
     { 0,    0,      0,      GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GOAL },   // Row 4
-    { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND }, // Row 5
+    { 0,    0,      0,      0,      0,      0,      GROUND,      0,      0,      0,      0,      0,      0,      0,      GROUND }, // Row 5
     { 0,    0,      0,      0,      0,      GROUND, 0,      0,      0,      0,      0,      0,      0,      GROUND, GROUND }, // Row 6
     { 0,    0,      0,      0,      0,      0,      PLAYER1,0,      BOMB,   PLAYER2,0,      0,      GROUND, GROUND, GROUND }, // Row 7
     { 0,    0,      0,      0,      0,      0,      GROUND, GROUND, GROUND, GROUND, 0,      GROUND, GROUND, GROUND, GROUND }, // Row 8

@@ -29,19 +29,25 @@ To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`.
 | `RIGHT`         | move right                  |
 | `LEFT`          | move left                   |
 | `UP`            | jump                        |
+| `A (Z)`         | switch player               |
 
 ### TODOs
 - think of a game title!
 - `menu.h`
     - fix start screen, youLose / youWin screen -> refactor into a for loop?
 - `sprites.h/.c`
-    - fix sprites data (player, start screen "title?", "START", "YOU WIN", "YOU LOSE" letters) 
+    - fix sprites data (player, start screen "title?", "START", "YOU WIN", "YOU LOSE" letters) -> NONE of them is done ahhhh
 - game logic `game.h` and `player.h/.c`: 
     - detect if get key -> key follows player around after obtaining it
     - detect if reach door with key -> WIN
     - detect if hit bomb -> LOSE
     - detect if fall off platform -> LOSE
-- idea: 
-    - make two players and press `B` to switch player to control? -> need to refactored `player.h/.c` into a "class"-like structure first (C dont support real class)
-    - random falling bombs from the top
+- tile/collision detection `level.c`:
+    - add some tolerance to getTileXXX()
+- `player.c`:
+    - logic for: (1) players cannot walk into each other, (2) players can step on each other
+- ideas: 
+    - make two players and press `A` to switch player to control? -> need to refactored `player.h/.c` into a "class"-like structure first (C dont support real class) ✅
+    - random falling bombs from the top?
     - button / pushable box? for the two players to co-op
+    - bug to fix: sometimes player switched more than once when `A` is pressed once -> add debouncing(?)/cooldown/delay

@@ -14,7 +14,8 @@ extern u16 sprites[];
 
 #define PLAYER1_N           0
 #define PLAYER2_N           1
-#define LEVEL_SPRITE_N      5   // unique N to draw elements for level on screen (starting N)
+#define ARROW_SPRITE_N      2
+#define LEVEL_SPRITE_N      3   // starting of the unique N to draw elements (ground, key, door etc) for level on screen (basically each element/tile will have its own N)
 #define SPRITE_SIZE         16  // size of each sprite in pixels (16x16)
 
 // Define sprite constants here for easier reference
@@ -39,5 +40,7 @@ extern u16 sprites[];
 #define KEY_SPRITE 13    // key sprite (for level)
 #define GOAL_SPRITE 14   // goal sprite (for level)
 #define BOMB_SPRITE 15   // bomb sprite (for level)
+
+#define ARROW_SPRITE 16   // arrow sprite (to indicate current active player)
 
 #endif
