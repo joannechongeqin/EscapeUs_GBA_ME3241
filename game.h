@@ -12,7 +12,7 @@ void updatePlayerState() {
     for (int i = 0; i < MAX_PLAYERS; i++) {
         drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
     }
-    drawSprite(ARROW_SPRITE, ARROW_SPRITE_N, players[activePlayerIndex].x, players[activePlayerIndex].y - SPRITE_SIZE); // draw arrow above current active player
+    drawSprite(ARROW_, ARROW_SPRITE_N, players[activePlayerIndex].x, players[activePlayerIndex].y - SPRITE_SIZE); // draw arrow above current active player
 }
 
 
@@ -28,27 +28,40 @@ void updateGameState() {
 }
 
 
+#define COOLDOWN_TIME              5 // cooldown time in frames (for button press)
+int START_cooldown = 0;
+int KEY_A_cooldown = 0;
+void updateCooldown() {
+    if (START_cooldown > 0) START_cooldown--;
+    if (KEY_A_cooldown > 0) KEY_A_cooldown--;
+}
+
 #define INPUT                      (KEY_MASK & (~REG_KEYS))
 void checkbutton(void)
 {
 	// Gift function to show you how a function that can be called upon button interrupt to detect which button was pressed and run a specific function for each button could look like. You would have to define each buttonA/buttonB/... function yourself.
     u16 buttons = INPUT;
 
-    if ((buttons & KEY_SELECT) == KEY_SELECT && (gameState == END)) { // "BACKSPACE" on keyboard
-        clearScreen();
-        showMainMenu();
-        gameState = MAIN_MENU;
-    }
+    updateCooldown();
 
-    if ((buttons & KEY_START) == KEY_START && gameState == MAIN_MENU) { // "ENTER" on keyboard
-        clearScreen();
-        drawLevel(0);
-        gameState = GAMEPLAY;
+    if ((buttons & KEY_START) == KEY_START && START_cooldown == 0) {
+        START_cooldown = COOLDOWN_TIME;
+        if (gameState == END) {
+            clearScreen();
+            showMainMenu();
+            gameState = MAIN_MENU;
+        }
+        else if (gameState == MAIN_MENU) {
+            clearScreen();
+            drawLevel(0);
+            gameState = GAMEPLAY;
+        }
     }
 
     if (gameState == GAMEPLAY) {
         // switch player
-        if ((buttons & KEY_A) == KEY_A) { // "Z" on keyboard
+        if ((buttons & KEY_A) == KEY_A && KEY_A_cooldown == 0) { // "Z" on keyboard
+            KEY_A_cooldown = COOLDOWN_TIME;
             switchPlayer();
         }
         
@@ -69,7 +82,6 @@ void checkbutton(void)
         updatePlayerState();
         updateGameState();
     }
-    
 }
 
 #endif

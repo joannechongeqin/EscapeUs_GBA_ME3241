@@ -4,7 +4,6 @@
 #include "gba.h"
 
 #define NCOLS 20
-#define MAX_SPRITE_N 50
 
 // RGB palette used for sprites. The sprites defined below use the index of the color in the palette (so black = 0, white = 1, ...)
 // Declare as extern to avoid multiple definitions.
@@ -15,7 +14,7 @@ extern u16 sprites[];
 
 #define SPRITE_SIZE       16  // size of each sprite in pixels (16x16)
 
-#define TITLE_LENGTH      4 // <title> in menu
+#define TITLE_LENGTH      2 // <title> in menu
 #define START_LENGTH      5 // "START" button in menu
 #define ENDING_LENGTH     7 // "YOU WIN!" or "YOU LOSE" in ending screen
 
@@ -32,27 +31,31 @@ extern u16 sprites[];
 
 // Define sprite constants here for easier reference
 // !!! implementation in sprites.c !!!
-#define BLANK   0        // empty sprite (mainly for delSprite())
+#define BLANK   0       // empty sprite (mainly for delSprite())
 
-#define START_S 1      // for start button in menu
-#define START_T 2      // for start button in menu
-#define START_A 3      // for start button in menu
-#define START_R 4      // for start button in menu
+#define P_IDLE   1      // player idle facing FRONT
+#define P_R_MOVE 2      // player moving RIGHT
+#define P_L_MOVE 3      // player moving LEFT
+#define ARROW_   4      // arrow sprite (to indicate current active player)
 
-#define TITLE_G 5      // for title in menu
-#define TITLE_A 6      // for title in menu
-#define TITLE_M 7      // for title in menu
-#define TITLE_E 8      // for title in menu
+#define GROUND_  5      // ground sprite (for level)
+#define KEY_     6      // key sprite (for level)
+#define GOAL_    7      // goal sprite (for level)
+#define BOMB_    8      // bomb sprite (for level)
 
-#define P_IDLE 9        // player idle facing FRONT
-#define P_R_MOVE 10     // player moving RIGHT
-#define P_L_MOVE 11     // player moving LEFT
-
-#define GROUND_SPRITE 12 // ground sprite (for level)
-#define KEY_SPRITE 13    // key sprite (for level)
-#define GOAL_SPRITE 14   // goal sprite (for level)
-#define BOMB_SPRITE 15   // bomb sprite (for level)
-
-#define ARROW_SPRITE 16   // arrow sprite (to indicate current active player)
-
+#define LETTER_S 9
+#define LETTER_T 10
+#define LETTER_A 11
+#define LETTER_R 12
+#define LETTER_G 13
+#define LETTER_M 14
+#define LETTER_E 15
+#define LETTER_Y 16
+#define LETTER_O 17
+#define LETTER_U 18
+#define LETTER_W 19
+#define LETTER_I 20
+#define LETTER_N 21
+#define LETTER_L 22
+#define LETTER_EXCLAMATION 23
 #endif

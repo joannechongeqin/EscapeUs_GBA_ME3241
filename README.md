@@ -25,12 +25,11 @@
 To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`.
 | Key                 | Action                              |
 |---------------------|-------------------------------------|
-| `START (ENTER)`     | start game from main menu           |
+| `START (ENTER)`     | start game from main menu / return to main menu after game  has ended          |
 | `RIGHT`             | move right                          |
 | `LEFT`              | move left                           |
 | `UP`                | jump                                |
 | `A (Z)`             | switch player                       |
-| `SELECT (BACKSPACE)`| return to main menu after game ends |
 
 ### TODOs
 - think of a game title!
@@ -51,4 +50,4 @@ To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`.
     - make two players and press `A` to switch player to control? -> need to refactored `player.h/.c` into a "class"-like structure first (C dont support real class) ✅
     - random falling bombs from the top?
     - button / pushable box? for the two players to co-op
-    - bug to fix: sometimes player switched more than once when `A` is pressed once -> add debouncing(?)/cooldown/delay
+    - bug to fix: sometimes player switched more than once when `A` is pressed once -> add debouncing(?)/cooldown/delay ✅
