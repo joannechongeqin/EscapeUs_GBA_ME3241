@@ -17,10 +17,9 @@
 #define BOMB    6
 
 int level_0[TILES_Y][TILES_X];
-int level_sprite_N;
+extern int level_sprite_N;
 
 void drawLevel(int level);
-
 void hideLevel();
 
 int getTileAt(int x, int y);

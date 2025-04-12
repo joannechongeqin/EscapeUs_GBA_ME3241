@@ -23,13 +23,14 @@
 
 ### Controls
 To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`.
-| Key             | Action                      |
-|-----------------|-----------------------------|
-| `START (ENTER)` | start game from main menu   |
-| `RIGHT`         | move right                  |
-| `LEFT`          | move left                   |
-| `UP`            | jump                        |
-| `A (Z)`         | switch player               |
+| Key                 | Action                              |
+|---------------------|-------------------------------------|
+| `START (ENTER)`     | start game from main menu           |
+| `RIGHT`             | move right                          |
+| `LEFT`              | move left                           |
+| `UP`                | jump                                |
+| `A (Z)`             | switch player                       |
+| `SELECT (BACKSPACE)`| return to main menu after game ends |
 
 ### TODOs
 - think of a game title!

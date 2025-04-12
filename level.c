@@ -8,7 +8,7 @@ int level_0[TILES_Y][TILES_X] = {
     { 0,    KEY,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 2
     { 0,    GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 3
     { 0,    0,      0,      GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GOAL },   // Row 4
-    { 0,    0,      0,      0,      0,      0,      GROUND,      0,      0,      0,      0,      0,      0,      0,      GROUND }, // Row 5
+    { 0,    0,      0,      0,      0,      0,      GROUND,      0,      0,      0,      0,      0,      0,      0, GROUND }, // Row 5
     { 0,    0,      0,      0,      0,      GROUND, 0,      0,      0,      0,      0,      0,      0,      GROUND, GROUND }, // Row 6
     { 0,    0,      0,      0,      0,      0,      PLAYER1,0,      BOMB,   PLAYER2,0,      0,      GROUND, GROUND, GROUND }, // Row 7
     { 0,    0,      0,      0,      0,      0,      GROUND, GROUND, GROUND, GROUND, 0,      GROUND, GROUND, GROUND, GROUND }, // Row 8
@@ -58,8 +58,7 @@ void drawLevel(int level) {
                     level_sprite_N += 1;
                     break;
                 case KEY: 
-                    drawSprite(KEY_SPRITE,    level_sprite_N, x, y);
-                    level_sprite_N += 1;
+                    drawSprite(KEY_SPRITE,    KEY_SPRITE_N, x, y);
                     break;
                 case GOAL:   
                     drawSprite(GOAL_SPRITE,   level_sprite_N, x, y);
@@ -76,20 +75,12 @@ void drawLevel(int level) {
                     initPlayer(PLAYER2_N, x, y);
                     break;
             }
-            
         }
     }
-}
 
-
-void hideLevel() {
     for (int i = 0; i < MAX_PLAYERS; i++) {
-        delSprite(players[i].spriteN); // delete player sprite
+        drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
     }
-    for (int i = LEVEL_SPRITE_N; i < level_sprite_N; i++) {
-        delSprite(i);
-    }
-    level_sprite_N = LEVEL_SPRITE_N; // reset to starting N
 }
 
 

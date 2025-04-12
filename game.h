@@ -5,7 +5,27 @@
 
 #include "menu.h"
 
-enum GameState { MAIN_MENU, GAMEPLAY, WIN, LOSE } gameState;
+enum GameState { MAIN_MENU, GAMEPLAY, END } gameState;
+
+void updatePlayerState() {
+    updatePlayers();
+    for (int i = 0; i < MAX_PLAYERS; i++) {
+        drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
+    }
+    drawSprite(ARROW_SPRITE, ARROW_SPRITE_N, players[activePlayerIndex].x, players[activePlayerIndex].y - SPRITE_SIZE); // draw arrow above current active player
+}
+
+
+void updateGameState() {
+    for (int i = 0; i < MAX_PLAYERS; i++) {
+        // LOSE
+        if (getTileBelow(players[i].x, players[i].y) == INVALID || // fall off ground
+                getTileAt(players[i].x, players[i].y) == BOMB) { // touch bomb 
+            gameState = END;
+            showEndingScreen(0);
+        }
+    }
+}
 
 
 #define INPUT                      (KEY_MASK & (~REG_KEYS))
@@ -14,10 +34,15 @@ void checkbutton(void)
 	// Gift function to show you how a function that can be called upon button interrupt to detect which button was pressed and run a specific function for each button could look like. You would have to define each buttonA/buttonB/... function yourself.
     u16 buttons = INPUT;
 
-    if ((buttons & KEY_START) == KEY_START && gameState == MAIN_MENU) // "ENTER" on keyboard
-    {
-        
-        initGame();
+    if ((buttons & KEY_SELECT) == KEY_SELECT && (gameState == END)) { // "BACKSPACE" on keyboard
+        clearScreen();
+        showMainMenu();
+        gameState = MAIN_MENU;
+    }
+
+    if ((buttons & KEY_START) == KEY_START && gameState == MAIN_MENU) { // "ENTER" on keyboard
+        clearScreen();
+        drawLevel(0);
         gameState = GAMEPLAY;
     }
 
@@ -41,20 +66,10 @@ void checkbutton(void)
             playerStop();
         }
 
-        updatePlayers();
-        for (int i = 0; i < MAX_PLAYERS; i++) {
-            drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
-        }
-        drawSprite(ARROW_SPRITE, ARROW_SPRITE_N, players[activePlayerIndex].x, players[activePlayerIndex].y - SPRITE_SIZE); // draw arrow above current player
+        updatePlayerState();
+        updateGameState();
     }
-
-    // check and update game state
-    for (int i = 0; i < MAX_PLAYERS; i++) {
-        if (getTileBelow(players[i].x, players[i].y) == INVALID) {
-            gameState = MAIN_MENU;
-            showLoseScreen();
-        }
-    }
+    
 }
 
 #endif
