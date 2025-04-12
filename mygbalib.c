@@ -25,7 +25,7 @@ void drawSprite(int numb, int N, int x, int y)
 
 void delSprite(int N)
 {
-    drawSprite(EMPTY, N, 240, 160); // move sprite out of the screen
+    drawSprite(BLANK, N, 240, 160); // move sprite out of the screen
 }
 
 

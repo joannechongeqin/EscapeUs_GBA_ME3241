@@ -31,7 +31,7 @@ int palette[] = {
 // !!!!! RMB #DEFINE SPRITES_INDEX IN sprites.h !!!!!
 u16 sprites[] = {
 
-#define EMPTY 0         // empty sprite (mainly for delSprite())
+#define BLANK 0         // empty sprite (mainly for delSprite())
 // Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,

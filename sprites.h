@@ -12,13 +12,14 @@ extern int palette[];
 // Declare the sprites array as extern to avoid multiple definitions.
 extern u16 sprites[];
 
-#define PLAYER_SPRITE_N     0   // unique N to draw sprite on screen
-#define LEVEL_SPRITE_N      1   // unique N to draw elements for level on screen (starting N)
+#define PLAYER1_N           0
+#define PLAYER2_N           1
+#define LEVEL_SPRITE_N      5   // unique N to draw elements for level on screen (starting N)
 #define SPRITE_SIZE         16  // size of each sprite in pixels (16x16)
 
 // Define sprite constants here for easier reference
 // !!! implementation in sprites.c !!!
-#define EMPTY 0        // empty sprite (mainly for delSprite())
+#define BLANK   0        // empty sprite (mainly for delSprite())
 
 #define START_S 1      // for start button in menu
 #define START_T 2      // for start button in menu

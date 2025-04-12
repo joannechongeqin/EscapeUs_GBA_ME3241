@@ -22,29 +22,33 @@ void checkbutton(void)
     }
 
     if (gameState == GAMEPLAY) {
-        if ((buttons & KEY_RIGHT) == KEY_RIGHT)
-        {
+        // switch player
+        if ((buttons & KEY_A) == KEY_A) { // "Z" on keyboard
+            switchPlayer();
+        }
+        
+        // move player
+        if ((buttons & KEY_RIGHT) == KEY_RIGHT) {
             playerMoveRight();
         }
-        if ((buttons & KEY_LEFT) == KEY_LEFT)
-        {
+        if ((buttons & KEY_LEFT) == KEY_LEFT) {
             playerMoveLeft();
         }
-        if ((buttons & KEY_UP) == KEY_UP)
-        {
+        if ((buttons & KEY_UP) == KEY_UP) {
             playerJump();
         }
-        if ((buttons & KEY_RIGHT) == 0 && (buttons & KEY_LEFT) == 0)
-        {
+        if ((buttons & KEY_RIGHT) == 0 && (buttons & KEY_LEFT) == 0) {
             playerStop();
         }
 
-        updatePlayer();
-        drawSprite(player.spriteIndex, player.spriteN, player.x, player.y);
+        updatePlayers();
+        for (int i = 0; i < MAX_PLAYERS; i++) {
+            drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
+        }
     }
 
     // check and update game state
-    if (getTileBelow(player.x, player.y) == INVALID) {
+    if (getTileBelow(currentPlayer()->x, currentPlayer()->y) == INVALID) {
         gameState = MAIN_MENU;
         showLoseScreen();
     }

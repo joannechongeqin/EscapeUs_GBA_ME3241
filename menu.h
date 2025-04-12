@@ -52,6 +52,9 @@ void hideMainMenu() {
 void initGame() {
     hideMainMenu();
     drawLevel(0);
+    for (int i = 0; i < MAX_PLAYERS; i++) {
+        drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
+    }
 }
 
 

@@ -9,11 +9,12 @@
 
 #define INVALID -1
 #define EMPTY   0
-#define GROUND  1
-#define PLAYER  2
-#define KEY     3
-#define GOAL    4
-#define BOMB    5
+#define PLAYER1 1
+#define PLAYER2 2
+#define GROUND  3
+#define KEY     4
+#define GOAL    5
+#define BOMB    6
 
 int level_0[TILES_Y][TILES_X];
 int level_sprite_N;

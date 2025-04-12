@@ -6,6 +6,7 @@
 #define MOVE_INTERVAL       2   // number of pixel to move per step
 #define GRAVITY             1   // gravity force pulling the player down
 #define JUMP_STRENGTH       -9  // initial jump velocity
+#define MAX_PLAYERS         2
 
 typedef struct {
     int x, y;          // position
@@ -15,13 +16,17 @@ typedef struct {
     int onGround;      // 1 if on ground, 0 if in the air
 } Player;
 
-Player player; // currently only support one player
+extern Player players[MAX_PLAYERS];
+extern int activePlayerIndex;
 
-void initPlayer(int x, int y);
+void initPlayer(int index, int x, int y);
+Player* currentPlayer();
+void switchPlayer();
+
 void playerMoveRight();
 void playerMoveLeft();
 void playerJump();
 void playerStop();
-void updatePlayer();
+void updatePlayers();
 
 #endif
