@@ -30,10 +30,10 @@ void updateGameState() {
 
 #define COOLDOWN_TIME              5 // cooldown time in frames (for button press)
 int START_cooldown = 0;
-int KEY_A_cooldown = 0;
+int KEY_B_cooldown = 0;
 void updateCooldown() {
     if (START_cooldown > 0) START_cooldown--;
-    if (KEY_A_cooldown > 0) KEY_A_cooldown--;
+    if (KEY_B_cooldown > 0) KEY_B_cooldown--;
 }
 
 #define INPUT                      (KEY_MASK & (~REG_KEYS))
@@ -60,8 +60,8 @@ void checkbutton(void)
 
     if (gameState == GAMEPLAY) {
         // switch player
-        if ((buttons & KEY_A) == KEY_A && KEY_A_cooldown == 0) { // "Z" on keyboard
-            KEY_A_cooldown = COOLDOWN_TIME;
+        if ((buttons & KEY_B) == KEY_B && KEY_B_cooldown == 0) { // "Z" on keyboard
+            KEY_B_cooldown = COOLDOWN_TIME;
             switchPlayer();
         }
         
@@ -72,7 +72,7 @@ void checkbutton(void)
         if ((buttons & KEY_LEFT) == KEY_LEFT) {
             playerMoveLeft();
         }
-        if ((buttons & KEY_UP) == KEY_UP) {
+        if ((buttons & KEY_UP) == KEY_UP || (buttons & KEY_A) == KEY_A) {
             playerJump();
         }
         if ((buttons & KEY_RIGHT) == 0 && (buttons & KEY_LEFT) == 0) {

@@ -81,28 +81,29 @@ void drawLevel(int level) {
     for (int i = 0; i < MAX_PLAYERS; i++) {
         drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
     }
+    activePlayerIndex = 0; // reset active player index to 0 (first player)
 }
 
 
 int getTileAt(int x, int y) {
     int (*levelData)[TILES_X] = _getLevelData(current_level);
-    int col = x / SPRITE_SIZE;
+    int col = (x + SPRITE_SIZE / 2 - 1) / SPRITE_SIZE;
     int row = y / SPRITE_SIZE;
     if (row < 0 || row >= TILES_Y || col < 0 || col >= TILES_X) return INVALID; // out of bounds
     return levelData[row][col];
 }
 
 int getTileRight(int x, int y) {
-    return getTileAt(x + SPRITE_SIZE, y);
+    return getTileAt(x + SPRITE_SIZE / 2, y);
 }
 int getTileLeft(int x, int y) {
-    return getTileAt(x - 1, y);
+    return getTileAt(x - SPRITE_SIZE / 2 + 1, y);
 }
 
 int getTileAbove(int x, int y) {
-    return getTileAt(x + SPRITE_SIZE / 2, y - SPRITE_SIZE);
+    return getTileAt(x, y - SPRITE_SIZE);
 }
 
 int getTileBelow(int x, int y) {
-    return getTileAt(x + SPRITE_SIZE / 2, y + SPRITE_SIZE);
+    return getTileAt(x, y + SPRITE_SIZE);
 }
