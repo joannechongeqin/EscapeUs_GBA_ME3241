@@ -6,7 +6,6 @@
 int _firstXtoCentralizeText(int text_length, int letter_interval) {
 	int text_total_width = text_length * letter_interval;
 	return (SCREEN_WIDTH - text_total_width) / 2 + letter_interval / 4; 
-
 }
 
 void showMainMenu() {

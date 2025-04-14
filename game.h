@@ -9,7 +9,7 @@ enum GameState { MAIN_MENU, GAMEPLAY, END } gameState;
 
 int gotKey = FALSE;
 int keyWithPlayer = 0; // player that has the key
-#define KEY_GRAB_DISTANCE 16 // distance to grab key (in pixels)
+#define KEY_GRAB_DISTANCE 16 // distance to grab key from other player (in pixels)
 
 void updatePlayerState() {
     updatePlayers();
@@ -32,12 +32,12 @@ void updateGameState() {
         }
     }
 
-    if (gotKey) { // if already reached key, render the key it near the player that has it
+    if (gotKey) { // if already reached key, render the key near the player that has it
         if (keyWithPlayer != activePlayerIndex) {
             int dx = players[activePlayerIndex].x - players[keyWithPlayer].x;
             int dy = players[activePlayerIndex].y - players[keyWithPlayer].y;
             if (dx * dx + dy * dy <= KEY_GRAB_DISTANCE * KEY_GRAB_DISTANCE)
-                keyWithPlayer = activePlayerIndex; // Transfer key
+                keyWithPlayer = activePlayerIndex; // transfer key
         }
         drawSprite(KEY_, KEY_SPRITE_N, players[keyWithPlayer].x - SPRITE_SIZE / 2, players[keyWithPlayer].y - SPRITE_SIZE);
 
@@ -49,11 +49,11 @@ void updateGameState() {
     }
     else if (getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y) == KEY) { // no key and first time touch key, pick up key
             gotKey = TRUE;
-            keyWithPlayer = activePlayerIndex; // player that has the key
+            keyWithPlayer = activePlayerIndex;
     }
 }
 
-
+// cooldown to prevent a single button press from being registered multiple times
 #define COOLDOWN_TIME 10 // cooldown time in frames (for button press)
 int START_cooldown = 0;
 int KEY_B_cooldown = 0;
@@ -81,8 +81,8 @@ void checkbutton(void)
         else if (gameState == MAIN_MENU) {
             clearScreen();
             drawLevel(0);
-            activePlayerIndex = 0; // reset active player index to 0 (first player)
-            gotKey = FALSE; // reset key state
+            activePlayerIndex = 0;  // reset active player index to 0 (first player)
+            gotKey = FALSE;         // reset key state
             gameState = GAMEPLAY;
         }
     }

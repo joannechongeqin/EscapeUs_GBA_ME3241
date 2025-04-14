@@ -16,13 +16,14 @@
 
 
 ### Current Progress
-- dummy start + ending screen, with correct win / lose game state detection
+- dummy start + ending screen
+- correct win / lose gamestate detection
 - using sprites/tiles of 16x16 pixels (GBA screen size 240x160), able to create [levels with static background of size 10x16 tiles](https://docs.google.com/spreadsheets/d/1p4TTlj3i2GXlGYyscvo-ErYltRo4AOVGPNbYYW5sz0M/edit?gid=0#gid=0)
 - support two characters -> can switch players, left/right/jump movements with correct position update, ground + left/right obstacles detection
-
+- sprite data for basic letters (A-Z)
 
 ### Controls
-To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`.
+To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`. `()` are keybindings for PC/laptop keyboard. 
 | Key                 | Action                                                               |
 |---------------------|----------------------------------------------------------------------|
 | `START (ENTER)`     | start game from main menu / return to main menu after game has ended |
@@ -36,7 +37,7 @@ To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`.
 - `menu.h`
     - fix start screen, youLose / youWin screen -> refactor into a for loop? ✅
 - `sprites.h/.c`
-    - fix sprites data (player, start screen "title?", "START", "YOU WIN", "YOU LOSE" letters)
+    - fix sprites data (player, bomb, arrow, key, door etc) and color palette data 
 - game logic `game.h` and `player.h/.c`: 
     - detect if get key -> key follows player around after obtaining it ✅
     - detect if reach door with key -> WIN ✅
@@ -45,7 +46,7 @@ To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`.
 - tile/collision detection `level.c`:
     - add some tolerance to getTileXXX() -> or math got some issue i think TT
 - `player.c`:
-    - logic for: (1) players cannot walk into each other, (2) players can step on each other
+    - logic for: (1) players cannot walk into each other, (2) players can step on each other ✅
 - ideas: 
     - make two players and press `A` to switch player to control? -> need to refactored `player.h/.c` into a "class"-like structure first (C dont support real class) ✅
     - random falling bombs from the top?
