@@ -14,11 +14,12 @@ extern u16 sprites[];
 
 #define SPRITE_SIZE       16  // size of each sprite in pixels (16x16)
 #define LETTER_SIZE       8   // size of each letter in pixels (8x8)
-#define LETTER_INTERVAL   20  // interval between letters in pixels
+#define LETTER_INTERVAL   16  // interval between letters in pixels
 
-#define TITLE_LENGTH      5 // <title> in menu
-#define START_LENGTH      5 // "START" button in menu
-#define ENDING_LENGTH     8 // "YOU WIN!" or "YOU LOSE" in ending screen
+#define TITLE_LENGTH      5     // <title> in menu
+#define START_LENGTH1     11    // "PRESS START" button in menu
+#define START_LENGTH2     7     // "TO PLAY" in menu
+#define ENDING_LENGTH     8     // "YOU WIN!" or "YOU LOSE" in ending screen
 
 #define PLAYER1_N         0
 #define PLAYER2_N         1
@@ -27,7 +28,7 @@ extern u16 sprites[];
 
 #define TITLE_SPRITE_N    4
 #define START_SPRITE_N    TITLE_SPRITE_N + TITLE_LENGTH
-#define ENDING_SPRITE_N   START_SPRITE_N + START_LENGTH
+#define ENDING_SPRITE_N   START_SPRITE_N + START_LENGTH1 + START_LENGTH2
 #define LEVEL_SPRITE_N    ENDING_SPRITE_N + ENDING_LENGTH   // starting of the unique N to draw elements (ground, key, door etc) for level on screen (basically each element/tile will have its own N)
 
 

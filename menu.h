@@ -18,11 +18,17 @@ void showMainMenu() {
         drawSprite(title_letters[i], TITLE_SPRITE_N + i, title_first_x + LETTER_INTERVAL * i, title_y);
 
     // DRAW START BUTTON
-    int start_letters[START_LENGTH] = {LETTER_S, LETTER_T, LETTER_A, LETTER_R, LETTER_T};
-	int start_first_x = _firstXtoCentralizeText(START_LENGTH, LETTER_INTERVAL);
-    int start_y = 100;
-    for (int i = 0; i < START_LENGTH; i++) 
-        drawSprite(start_letters[i], START_SPRITE_N + i, start_first_x + LETTER_INTERVAL * i, start_y);
+    int press_start_letters[START_LENGTH1] = {LETTER_P, LETTER_R, LETTER_E, LETTER_S, LETTER_S, BLANK, LETTER_S, LETTER_T, LETTER_A, LETTER_R, LETTER_T};
+	int press_start_first_x = _firstXtoCentralizeText(START_LENGTH1, LETTER_INTERVAL);
+    int press_start_y = 100;
+    for (int i = 0; i < START_LENGTH1; i++) 
+        drawSprite(press_start_letters[i], START_SPRITE_N + i, press_start_first_x + LETTER_INTERVAL * i, press_start_y);
+
+    int to_play_letters[START_LENGTH2] = {LETTER_T, LETTER_O, BLANK, LETTER_P, LETTER_L, LETTER_A, LETTER_Y};
+    int to_play_first_x = _firstXtoCentralizeText(START_LENGTH2, LETTER_INTERVAL);
+    int to_play_y = 120;
+    for (int i = 0; i < START_LENGTH2; i++) 
+        drawSprite(to_play_letters[i], START_SPRITE_N + START_LENGTH1 + i, to_play_first_x + LETTER_INTERVAL * i, to_play_y);
 }
 
 

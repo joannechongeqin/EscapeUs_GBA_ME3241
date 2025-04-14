@@ -1,7 +1,7 @@
 #include "player.h"
 #include  "level.h"
 
-Player players[MAX_PLAYERS];
+Player players[NUM_PLAYERS];
 int activePlayerIndex = 0;
 
 
@@ -10,8 +10,16 @@ Player* currentPlayer() {
 }
 
 
+static int _isLandableTile(int tile) {
+    // can land on ground or other players
+    return tile == GROUND  || 
+            (activePlayerIndex != PLAYER1 && tile == PLAYER1) || 
+            (activePlayerIndex != PLAYER2 && tile == PLAYER2);
+}
+
+
 static int _onGroundCheck(Player* p) {
-    if (getTileBelow(p->x, p->y) == GROUND) {
+    if (_isLandableTile(getTileBelow(p->x, p->y))) {
         p->y = (p->y / SPRITE_SIZE) * SPRITE_SIZE; // make sure y is multiple of 16, to snap the player's Y position to the nearest ground level
         p->vy = 0;
         return 1;
@@ -32,7 +40,7 @@ void initPlayer(int index, int x, int y) {
 
 void switchPlayer() {
     playerStop(); // stop current player before switching
-    activePlayerIndex = (activePlayerIndex + 1) % MAX_PLAYERS;
+    activePlayerIndex = (activePlayerIndex + 1) % NUM_PLAYERS;
 }
 
 void playerMoveRight() {
@@ -63,12 +71,16 @@ void playerJump() {
 }
 
 
+static int _isWalkableTile(int tile) {
+    return tile == EMPTY || tile == GOAL || tile == KEY || tile == BOMB;
+}
+
 static int _canMoveRight(Player* p) {
-    return getTileRight(p->x, p->y) != GROUND;
+    return _isWalkableTile(getTileRight(p->x, p->y));
 }
 
 static int _canMoveLeft(Player* p) {
-    return getTileLeft(p->x, p->y) != GROUND;
+    return _isWalkableTile(getTileLeft(p->x, p->y));
 }
 
 
@@ -85,12 +97,24 @@ static void _limitWithinScreenBoundaries(Player* p) {
 
 
 void updatePlayers() {
-    for (int i = 0; i < MAX_PLAYERS; i++) {
+    for (int i = 0; i < NUM_PLAYERS; i++) {
         Player* p = &players[i];
 
         // horizontal movement
-        if ((p->vx > 0 && _canMoveRight(p)) || (p->vx < 0 && _canMoveLeft(p))) {
-            p->x += p->vx;
+        if (p->vx > 0) { // moving right
+            if (_canMoveRight(p)) {
+                p->x += p->vx;
+            } else {
+                // snap to just before hitting wall on the right
+                p->x = (p->x / SPRITE_SIZE) * SPRITE_SIZE;
+            }
+        } else if (p->vx < 0) { // moving left
+            if (_canMoveLeft(p)) {
+                p->x += p->vx;
+            } else {
+                // Snap to just before hitting wall on the left
+                p->x = ((p->x + SPRITE_SIZE - 1) / SPRITE_SIZE) * SPRITE_SIZE;
+            }
         }
 
         // vertical movement

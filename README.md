@@ -16,7 +16,7 @@
 
 
 ### Current Progress
-- dummy start + ending screen
+- dummy start + ending screen, with correct win / lose game state detection
 - using sprites/tiles of 16x16 pixels (GBA screen size 240x160), able to create [levels with static background of size 10x16 tiles](https://docs.google.com/spreadsheets/d/1p4TTlj3i2GXlGYyscvo-ErYltRo4AOVGPNbYYW5sz0M/edit?gid=0#gid=0)
 - support two characters -> can switch players, left/right/jump movements with correct position update, ground + left/right obstacles detection
 
@@ -39,7 +39,7 @@ To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`.
     - fix sprites data (player, start screen "title?", "START", "YOU WIN", "YOU LOSE" letters)
 - game logic `game.h` and `player.h/.c`: 
     - detect if get key -> key follows player around after obtaining it ✅
-    - detect if reach door with key -> WIN
+    - detect if reach door with key -> WIN ✅
     - detect if hit bomb -> LOSE ✅
     - detect if fall off platform -> LOSE ✅
 - tile/collision detection `level.c`:

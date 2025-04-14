@@ -78,7 +78,7 @@ void drawLevel(int level) {
         }
     }
 
-    for (int i = 0; i < MAX_PLAYERS; i++) {
+    for (int i = 0; i < NUM_PLAYERS; i++) {
         drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
     }
     
@@ -87,7 +87,7 @@ void drawLevel(int level) {
 
 int getTileAt(int x, int y) {
     int (*levelData)[TILES_X] = _getLevelData(current_level);
-    int col = (x + SPRITE_SIZE / 2 - 1) / SPRITE_SIZE;
+        int col = (x + SPRITE_SIZE / 2 - 1) / SPRITE_SIZE;
     int row = y / SPRITE_SIZE;
     if (row < 0 || row >= TILES_Y || col < 0 || col >= TILES_X) return INVALID; // out of bounds
     return levelData[row][col];
