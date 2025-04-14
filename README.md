@@ -1,7 +1,7 @@
 ### Code Structure
 - header/include dependency chain: `main.c -> game.h -> menu.h -> level.h -> mygbalib.h -> player.h -> sprites.h -> gba.h`
 - note: need to split `.h` and `.c`, else might get `multiple definitions` error
-
+- helpful shortcut keys: `F10` to `clean` (remove all build files) and `F7` to `Build + Run in VBA`
 
 | File(s)              | Description / Notes                                                                                  |
 |----------------------|------------------------------------------------------------------------------------------------------|
@@ -51,6 +51,6 @@ To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`. `()` are
     - make two players and press `A` to switch player to control? -> need to refactored `player.h/.c` into a "class"-like structure first (C dont support real class) ✅
     - random falling bombs from the top?
     - button / pushable box? for the two players to co-op
-    - bug to fix: sometimes player switched more than once when `A` is pressed once -> add debouncing(?)/cooldown/delay ✅
+    - bug to fix: sometimes player switched more than once when `A` is pressed once -> add cooldown/delay for button press ✅
     - bug to fix: after restarting the game for a few times, some of the tile elements not rendering properly -> not sure if is a memory overflow thing or what hmmmm
     - press `UP` and enter door effect to win?
