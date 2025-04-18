@@ -52,5 +52,5 @@ To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`. `()` are
     - random falling bombs from the top?
     - button / pushable box? for the two players to co-op
     - bug to fix: sometimes player switched more than once when `A` is pressed once -> add cooldown/delay for button press ✅
-    - bug to fix: after restarting the game for a few times, some of the tile elements not rendering properly -> not sure if is a memory overflow thing or what hmmmm
+    - bug to fix: after restarting the game for a few times, some of the tile elements not rendering properly -> not sure if is a memory overflow thing or what hmmmm ✅ (yes it's an overflow thing cuz `level_sprite_N` was a global variable that keep on adding without resetting)
     - press `UP` and enter door effect to win?

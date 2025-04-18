@@ -39,11 +39,11 @@ int (*_getLevelData(int level))[TILES_X] { // get pointer to selected level
 }
 
 int current_level = 0;
-int level_sprite_N = LEVEL_SPRITE_N;
 
 void drawLevel(int level) {
     int (*levelData)[TILES_X] = _getLevelData(level);
     current_level = level;
+    int level_sprite_N = LEVEL_SPRITE_N;
 
     for (int row = 0; row < TILES_Y; row++) {
         for (int col = 0; col < TILES_X; col++) {
@@ -84,26 +84,40 @@ void drawLevel(int level) {
     
 }
 
-
+// PLAYER X Y POSITION IS TOP LEFT CORNER (0, 0)
+// BOTTOM RIGHT OF PLAYER SPRITE IS (15, 15)
 int getTileAt(int x, int y) {
     int (*levelData)[TILES_X] = _getLevelData(current_level);
-        int col = (x + SPRITE_SIZE / 2 - 1) / SPRITE_SIZE;
+    // check top left corner
+    int col = x / SPRITE_SIZE;
     int row = y / SPRITE_SIZE;
     if (row < 0 || row >= TILES_Y || col < 0 || col >= TILES_X) return INVALID; // out of bounds
     return levelData[row][col];
 }
 
-int getTileRight(int x, int y) {
-    return getTileAt(x + SPRITE_SIZE / 2, y);
+
+
+int getTileRight(int x, int y) { // check (16, 0)
+    return getTileAt(x + SPRITE_SIZE, y);
 }
-int getTileLeft(int x, int y) {
-    return getTileAt(x - SPRITE_SIZE / 2 + 1, y);
+int getTileLeft(int x, int y) { // check (-1, 0)
+    return getTileAt(x - 1, y);
 }
 
 int getTileAbove(int x, int y) {
-    return getTileAt(x, y - SPRITE_SIZE);
+    return getTileAt(x, y - 1);
 }
 
-int getTileBelow(int x, int y) {
-    return getTileAt(x, y + SPRITE_SIZE);
+int getTileBelowCenter(int x, int y) { // check (7, 16)
+    return getTileAt(x + SPRITE_SIZE - 1, y + SPRITE_SIZE);
+}
+
+#define CHECK_TILE_BELOW_TOLERANCE 2
+
+int getTileBelowBottomLeft(int x, int y) { // check (CHECK_TILE_BELOW_TOLERANCE, 16)
+    return getTileAt(x + CHECK_TILE_BELOW_TOLERANCE, y + SPRITE_SIZE);
+}
+
+int getTileBelowBottomRight(int x, int y) { // check (15 - CHECK_TILE_BELOW_TOLERANCE, 16)
+    return getTileAt(x + SPRITE_SIZE - 1 - CHECK_TILE_BELOW_TOLERANCE, y + SPRITE_SIZE);
 }

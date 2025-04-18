@@ -26,6 +26,9 @@ int getTileAt(int x, int y);
 int getTileRight(int x, int y);
 int getTileLeft(int x, int y);
 int getTileAbove(int x, int y);
-int getTileBelow(int x, int y);
+
+int getTileBelowCenter(int x, int y);
+int getTileBelowBottomLeft(int x, int y);
+int getTileBelowBottomRight(int x, int y);
 
 #endif

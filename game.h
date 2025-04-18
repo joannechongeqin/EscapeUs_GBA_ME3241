@@ -22,13 +22,16 @@ void updatePlayerState() {
 }
 
 
+#define TOUCH_BOMB_TOLERANCE 6
+
 void updateGameState() {
     for (int i = 0; i < NUM_PLAYERS; i++) {
         // LOSE
-        if (getTileBelow(players[i].x, players[i].y) == INVALID || // fall off ground
-                getTileAt(players[i].x, players[i].y) == BOMB) { // touch bomb 
-            gameState = END;
-            showEndingScreen(0);
+        if (getTileBelowCenter(players[i].x, players[i].y) == INVALID || // fall off ground
+            getTileAt(players[i].x+TOUCH_BOMB_TOLERANCE, players[i].y) == BOMB || // check if leftmost of player touch bomb (with some tolerance)
+            getTileAt(players[i].x+SPRITE_SIZE-1-TOUCH_BOMB_TOLERANCE, players[i].y) == BOMB) {  // check if rightmost of player touch bomb (with some tolerance)
+                gameState = END;
+                showEndingScreen(0);
         }
     }
 
