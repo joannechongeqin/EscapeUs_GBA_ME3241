@@ -12,19 +12,36 @@ Player* currentPlayer() {
 
 static int _isLandableTile(int tile) {
     // can land on ground or other players
-    return tile == GROUND  || 
-            (activePlayerIndex != PLAYER1 && tile == PLAYER1) || 
-            (activePlayerIndex != PLAYER2 && tile == PLAYER2);
+    return tile == GROUND;
 }
 
 
 static int _onGroundCheck(Player* p) {
-    if (_isLandableTile(getTileBelow(p->x, p->y))) {
-        p->y = (p->y / SPRITE_SIZE) * SPRITE_SIZE; // make sure y is multiple of 16, to snap the player's Y position to the nearest ground level
-        p->vy = 0;
-        return 1;
+    // check if landing on another player
+    for (int i = 0; i < NUM_PLAYERS; i++) {
+        Player* other = &players[i];
+        if (other == p) continue; // skip self
+
+        int tolerance = 3; // allow some leeway for pixel overlap
+        int playerBottom = p->y + SPRITE_SIZE;
+        int otherTop = other->y;
+
+        if (
+            p->x + SPRITE_SIZE > other->x &&
+            p->x < other->x + SPRITE_SIZE && // horizontal overlap
+            playerBottom >= otherTop - tolerance &&
+            playerBottom <= otherTop + tolerance && // vertical "step"
+            p->vy >= 0 // must be falling onto them
+        ) {
+            p->y = other->y - SPRITE_SIZE; // snap on top of other player
+            p->vy = 0;
+            return TRUE;
+        }
     }
-    return 0;
+    if (_isLandableTile(getTileBelowBottomLeft(p->x, p->y)) || _isLandableTile(getTileBelowBottomRight(p->x, p->y))) {
+        return TRUE;
+    }
+    return FALSE; // not on ground or another player
 }
 
 
@@ -62,25 +79,42 @@ void playerStop() {
 }
 
 
+static int _canJump(Player* p) {
+    return p->onGround;
+}
+
 void playerJump() {
     Player* p = currentPlayer();
-    if (p->onGround) { // only jump if on ground
+    if (_canJump(p)) { // only jump if on ground
         p->vy = JUMP_STRENGTH;
         p->onGround = 0;
     }
 }
 
-
-static int _isWalkableTile(int tile) {
-    return tile == EMPTY || tile == GOAL || tile == KEY || tile == BOMB;
-}
-
 static int _canMoveRight(Player* p) {
-    return _isWalkableTile(getTileRight(p->x, p->y));
+    for (int i = 0; i < NUM_PLAYERS; i++) {
+        if (i != activePlayerIndex) {
+            Player* otherPlayer = &players[i];
+            // check if the other player is in the way
+            if (p->x + SPRITE_SIZE == otherPlayer->x && p->y == otherPlayer->y) {
+                return FALSE; // cannot move right, other player is in the way
+            }
+        }
+    }
+    return getTileRight(p->x, p->y) != GROUND;
 }
 
 static int _canMoveLeft(Player* p) {
-    return _isWalkableTile(getTileLeft(p->x, p->y));
+    for (int i = 0; i < NUM_PLAYERS; i++) {
+        if (i != activePlayerIndex) {
+            Player* otherPlayer = &players[i];
+            // check if the other player is in the way
+            if (p->x - SPRITE_SIZE == otherPlayer->x && p->y == otherPlayer->y) {
+                return FALSE; // cannot move left, other player is in the way
+            }
+        }
+    }
+    return getTileLeft(p->x, p->y) != GROUND;
 }
 
 
@@ -101,34 +135,32 @@ void updatePlayers() {
         Player* p = &players[i];
 
         // horizontal movement
-        if (p->vx > 0) { // moving right
-            if (_canMoveRight(p)) {
-                p->x += p->vx;
-            } else {
-                // snap to just before hitting wall on the right
-                p->x = (p->x / SPRITE_SIZE) * SPRITE_SIZE;
-            }
-        } else if (p->vx < 0) { // moving left
-            if (_canMoveLeft(p)) {
-                p->x += p->vx;
-            } else {
-                // Snap to just before hitting wall on the left
-                p->x = ((p->x + SPRITE_SIZE - 1) / SPRITE_SIZE) * SPRITE_SIZE;
-            }
+        if (p->vx > 0 && _canMoveRight(p)) { // moving right
+            p->x += p->vx;
+        } else if (p->vx < 0 && _canMoveLeft(p)) { // moving left
+            p->x += p->vx;
         }
 
         // vertical movement
         if (p->vy < 0 && getTileAbove(p->x, p->y) == GROUND) { // jumping and hitting the ceiling
             p->y = ((p->y / SPRITE_SIZE)) * SPRITE_SIZE; // snap to just below the ceiling
 				p->vy = 0;
-        } else {
+        } 
+        else {
 				p->y += p->vy;
-		  }
-        if (p->onGround == 0) { // apply gravity if not on the ground
+		}
+
+        if (_onGroundCheck(p)) {
+            if (p->vy >= 0) { // Only snap when falling down
+                p->y = (p->y / SPRITE_SIZE) * SPRITE_SIZE;
+                p->vy = 0;
+                p->onGround = 1;
+            }
+        } else {
+            p->onGround = 0;
             p->vy += GRAVITY;
         }
-
-        p->onGround = _onGroundCheck(p);
+        
         _limitWithinScreenBoundaries(p);
     }
 }
