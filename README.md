@@ -18,6 +18,7 @@
 ### Current Progress
 - dummy start + ending screen
 - correct win / lose gamestate detection
+- cooldown button press for `START`, `A`, `B` to prevent a single button press from being registered multiple times
 - using sprites/tiles of 16x16 pixels (GBA screen size 240x160), able to create [levels with static background of size 10x16 tiles](https://docs.google.com/spreadsheets/d/1p4TTlj3i2GXlGYyscvo-ErYltRo4AOVGPNbYYW5sz0M/edit?gid=0#gid=0)
 - support two characters -> can switch players, left/right/jump movements with correct position update, ground + left/right/top obstacles detection, player can stand on each other
 - sprite data for basic letters (A-Z)
@@ -51,6 +52,7 @@ To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`. `()` are
     - detect if reach door with key -> WIN ✅
     - detect if hit bomb -> LOSE ✅
     - detect if fall off platform -> LOSE ✅
+    - gameState naming is confusing... but i lazy fix now will fix one day
 - tile/collision detection `level.c`:
     - add some tolerance to getTileXXX() -> or math got some issue i think TT ✅ IT'S FINALLY WORKING NOW (I HOPE), basically just added more checks at diff pixels, lmk if noticed any bug
 - `player.c`:

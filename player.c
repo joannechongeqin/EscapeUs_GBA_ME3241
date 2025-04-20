@@ -31,7 +31,7 @@ static int _onGroundCheck(Player* p) {
             return TRUE;
         }
     }
-    if ((getTileBelowBottomLeft(p->x, p->y) == GROUND || getTileBelowBottomRight(p->x, p->y) == GROUND)) {
+    if (checkBelowIs(p->x, p->y, GROUND)) {
         return TRUE;
     }
     return FALSE; // not on ground or another player
@@ -94,7 +94,7 @@ static int _canMoveRight(Player* p) {
             }
         }
     }
-    return getTileRightTop(p->x, p->y) != GROUND && getTileRightBottom(p->x, p->y) != GROUND;
+    return !checkRightIs(p->x, p->y, GROUND);
 }
 
 static int _canMoveLeft(Player* p) {
@@ -107,7 +107,7 @@ static int _canMoveLeft(Player* p) {
             }
         }
     }
-    return getTileLeftTop(p->x, p->y) != GROUND && getTileLeftBottom(p->x, p->y) != GROUND;
+    return !checkLeftIs(p->x, p->y, GROUND);
 }
 
 

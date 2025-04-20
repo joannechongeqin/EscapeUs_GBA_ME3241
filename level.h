@@ -15,6 +15,8 @@
 #define KEY     4
 #define GOAL    5
 #define BOMB    6
+#define MONSTER 7
+
 
 int level_0[TILES_Y][TILES_X];
 extern int level_sprite_N;
@@ -23,13 +25,9 @@ void drawLevel(int level);
 void hideLevel();
 
 int getTileAt(int x, int y);
-int getTileRightTop(int x, int y);
-int getTileRightBottom(int x, int y);
-int getTileLeftTop(int x, int y);
-int getTileLeftBottom(int x, int y);
 
-int getTileBelowCenter(int x, int y);
-int getTileBelowBottomLeft(int x, int y);
-int getTileBelowBottomRight(int x, int y);
+int checkRightIs(int x, int y, int tile_type);
+int checkLeftIs(int x, int y, int tile_type);
+int checkBelowIs(int x, int y, int tile_type);
 
 #endif

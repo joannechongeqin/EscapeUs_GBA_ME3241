@@ -25,8 +25,9 @@ extern u16 sprites[];
 #define PLAYER2_N         1
 #define ARROW_SPRITE_N    2
 #define KEY_SPRITE_N      3
+#define MONSTER_N         4
 
-#define TITLE_SPRITE_N    4
+#define TITLE_SPRITE_N    5
 #define START_SPRITE_N    TITLE_SPRITE_N + TITLE_LENGTH
 #define ENDING_SPRITE_N   START_SPRITE_N + START_LENGTH1 + START_LENGTH2
 #define LEVEL_SPRITE_N    ENDING_SPRITE_N + ENDING_LENGTH   // starting of the unique N to draw elements (ground, key, door etc) for level on screen (basically each element/tile will have its own N)
@@ -45,8 +46,9 @@ extern u16 sprites[];
 #define KEY_     6      // key sprite (for level)
 #define GOAL_    7      // goal sprite (for level)
 #define BOMB_    8      // bomb sprite (for level)
+#define MONSTER_ 9      // monster sprite (TODO: can do left right also)
 
-#define LETTER_A 9
+#define LETTER_A 10
 #define LETTER_B (LETTER_A + 1)
 #define LETTER_C (LETTER_B + 1)
 #define LETTER_D (LETTER_C + 1)

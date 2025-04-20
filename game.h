@@ -27,7 +27,7 @@ void updatePlayerState() {
 void updateGameState() {
     for (int i = 0; i < NUM_PLAYERS; i++) {
         // LOSE
-        if (getTileBelowCenter(players[i].x, players[i].y) == INVALID || // fall off ground
+        if (checkBelowIs(players[i].x, players[i].y, INVALID) || // fall off ground
             getTileAt(players[i].x+TOUCH_BOMB_TOLERANCE, players[i].y) == BOMB || // check if leftmost of player touch bomb (with some tolerance)
             getTileAt(players[i].x+SPRITE_SIZE-1-TOUCH_BOMB_TOLERANCE, players[i].y) == BOMB) {  // check if rightmost of player touch bomb (with some tolerance)
                 gameState = END;
@@ -52,10 +52,10 @@ void updateGameState() {
         // WIN
         if (getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y) == GOAL) { // touch goal
             
-            if (gameState == WIN_LEVEL1) {
-                gameState = END;
-            } else {
-                gameState = WIN_LEVEL1; // go to next level
+            if (gameState == WIN_LEVEL1) { // win level 2
+                gameState = END; // go to level 1
+            } else { // win level 1
+                gameState = WIN_LEVEL1; // go to level 2
             }
             showEndingScreen(1);
         }
@@ -67,14 +67,15 @@ void updateGameState() {
 }
 
 // cooldown to prevent a single button press from being registered multiple times
-#define COOLDOWN_TIME 10 // cooldown time in frames (for button press)
+#define COOLDOWN_TIME 8 // cooldown time in frames (for button press)
 int START_cooldown = 0;
 int KEY_A_cooldown = 0;
 int KEY_B_cooldown = 0;
 static void updateCooldown() {
     if (START_cooldown > 0) START_cooldown--;
     if (KEY_A_cooldown > 0) KEY_A_cooldown--;
-    if (KEY_B_cooldown > 0) KEY_B_cooldown--;}
+    if (KEY_B_cooldown > 0) KEY_B_cooldown--;
+}
 
 static int keyPressedWithCooldown(u16 buttons, int key, int* cooldownVar) {
     if ((buttons & key) == key && *cooldownVar == 0) {

@@ -23,8 +23,8 @@ int level_1[TILES_Y][TILES_X] = {
     { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND, GROUND, GROUND  }, // Row 2
     { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0, GROUND,      0,      0,      0,      0       }, // Row 3
     { 0,        0,          0,      0,      0,      0,      0,      0, GROUND,      0,      0,      0,      0,      GOAL,   0       }, // Row 4
-    { 0,        0,          0,      0,      0,      0,      0, GROUND,      0,      0,      0,      0,      0,      GROUND, 0       }, // Row 5
-    { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0       }, // Row 6
+    { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND, 0       }, // Row 5
+    { 0,        0,          0,      0,      0,      0,      0, MONSTER,     0,      0,      0,      0,      0,      0,      0       }, // Row 6
     { PLAYER1,  PLAYER2,    0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      0,      GROUND  }, // Row 7
     { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      GROUND, GROUND  }, // Row 8
     { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      GROUND, GROUND  }  // Row 9
@@ -75,6 +75,9 @@ void drawLevel(int level) {
                 case PLAYER2: 
                     initPlayer(PLAYER2_N, x, y);
                     break;
+                case MONSTER: 
+                    drawSprite(MONSTER_, MONSTER_N, x, y); 
+                    break;
             }
         }
     }
@@ -96,32 +99,36 @@ int getTileAt(int x, int y) {
     return levelData[row][col];
 }
 
-
-
-int getTileRightTop(int x, int y) { // check (16, 0)
+static int _getTileRightTop(int x, int y) { // check (16, 0)
     return getTileAt(x + SPRITE_SIZE, y);
 }
-int getTileRightBottom(int x, int y) { // check (16, 15)
+static int _getTileRightBottom(int x, int y) { // check (16, 15)
     return getTileAt(x + SPRITE_SIZE, y + SPRITE_SIZE - 1) ;
 }
+int checkRightIs(int x, int y, int tile_type) {
+    return _getTileRightTop(x, y) == tile_type || _getTileRightBottom(x, y) == tile_type;
+}
 
-int getTileLeftTop(int x, int y) { // check (-1, 0)
+static int _getTileLeftTop(int x, int y) { // check (-1, 0)
     return getTileAt(x - 1, y);
 }
-int getTileLeftBottom(int x, int y) { // check (-1, 15)
+static int _getTileLeftBottom(int x, int y) { // check (-1, 15)
     return getTileAt(x - 1, y + SPRITE_SIZE - 1);
 }
+int checkLeftIs(int x, int y, int tile_type) {
+    return _getTileLeftTop(x, y) == tile_type || _getTileLeftBottom(x, y) == tile_type;
+}
+
 
 #define GET_TILE_TOLERANCE 2 // magic number to add some tolerance and prevent some bugs
 
-int getTileBelowCenter(int x, int y) { // check (7, 16)
-    return getTileAt(x + SPRITE_SIZE - 1, y + SPRITE_SIZE);
-}
-
-int getTileBelowBottomLeft(int x, int y) { // check (CHECK_TILE_BELOW_TOLERANCE, 16)
+static int _getTileBelowBottomLeft(int x, int y) { // check (CHECK_TILE_BELOW_TOLERANCE, 16)
     return getTileAt(x + GET_TILE_TOLERANCE, y + SPRITE_SIZE);
 }
-
-int getTileBelowBottomRight(int x, int y) { // check (15 - CHECK_TILE_BELOW_TOLERANCE, 16)
+static int _getTileBelowBottomRight(int x, int y) { // check (15 - CHECK_TILE_BELOW_TOLERANCE, 16)
     return getTileAt(x + SPRITE_SIZE - 1 - GET_TILE_TOLERANCE, y + SPRITE_SIZE);
+}
+
+int checkBelowIs(int x, int y, int tile_type) {
+    return _getTileBelowBottomLeft(x, y) == tile_type || _getTileBelowBottomRight(x, y) == tile_type;
 }
