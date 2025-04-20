@@ -23,9 +23,10 @@ void drawLevel(int level);
 void hideLevel();
 
 int getTileAt(int x, int y);
-int getTileRight(int x, int y);
-int getTileLeft(int x, int y);
-int getTileAbove(int x, int y);
+int getTileRightTop(int x, int y);
+int getTileRightBottom(int x, int y);
+int getTileLeftTop(int x, int y);
+int getTileLeftBottom(int x, int y);
 
 int getTileBelowCenter(int x, int y);
 int getTileBelowBottomLeft(int x, int y);

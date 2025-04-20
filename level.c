@@ -5,34 +5,35 @@ int level_0[TILES_Y][TILES_X] = {
     // 0     1       2       3       4       5       6       7       8       9      10      11      12      13      14
     { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 0
     { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 1
-    { 0,    KEY,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 2
+    // { 0,    KEY,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 2 // TODO: UNCOMMENT THIS LINE
+    { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY   },   // Row 2   // TODO: COMMENT THIS LINE (THIS JUST FOR DEBUGGING)
     { 0,    GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 3
-    { 0,    0,      0,      GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GOAL },   // Row 4
-    { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND }, // Row 5
-    { 0,    0,      0,      0,      0,      GROUND, 0,      0,      0,      0,      0,      0,      0,      GROUND, GROUND }, // Row 6
+    { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GOAL },   // Row 4
+    { 0,    0,      0,      GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND }, // Row 5
+    { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND, GROUND }, // Row 6
     { 0,    0,      0,      0,      0,      0,      PLAYER1,0,      BOMB,   PLAYER2,0,      0,      GROUND, GROUND, GROUND }, // Row 7
     { 0,    0,      0,      0,      0,      0,      GROUND, GROUND, GROUND, GROUND, 0,      GROUND, GROUND, GROUND, GROUND }, // Row 8
     { 0,    0,      0,      0,      0,      0,      GROUND, GROUND, GROUND, GROUND, 0,      GROUND, GROUND, GROUND, GROUND }  // Row 9
 };
 
-// int level_1[TILES_Y][TILES_X] = {
-//     // 0     1       2       3       4       5       6       7       8       9      10      11      12      13      14
-//     { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 0
-//     { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 1
-//     { 0,    KEY,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 2
-//     { 0,    GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY  },   // Row 3
-//     { 0,    0,      0,      GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GOAL },   // Row 4
-//     { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND }, // Row 5
-//     { 0,    0,      0,      0,      0,      GROUND, 0,      0,      0,      0,      0,      0,      0,      GROUND, GROUND }, // Row 6
-//     { 0,    0,      0,      0,      0,      0,      PLAYER1,0,      BOMB,   PLAYER2,0,      0,      GROUND, GROUND, GROUND }, // Row 7
-//     { 0,    0,      0,      0,      0,      0,      GROUND, GROUND, GROUND, GROUND, 0,      GROUND, GROUND, GROUND, GROUND }, // Row 8
-//     { 0,    0,      0,      0,      0,      0,      GROUND, GROUND, GROUND, GROUND, 0,      GROUND, GROUND, GROUND, GROUND }  // Row 9
-// };
+int level_1[TILES_Y][TILES_X] = {
+    // 0     1       2       3       4       5       6       7       8       9      10      11      12      13      14
+    { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0       }, // Row 0
+    { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY     }, // Row 1
+    { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND, GROUND, GROUND  }, // Row 2
+    { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0, GROUND,      0,      0,      0,      0       }, // Row 3
+    { 0,        0,          0,      0,      0,      0,      0,      0, GROUND,      0,      0,      0,      0,      GOAL,   0       }, // Row 4
+    { 0,        0,          0,      0,      0,      0,      0, GROUND,      0,      0,      0,      0,      0,      GROUND, 0       }, // Row 5
+    { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0       }, // Row 6
+    { PLAYER1,  PLAYER2,    0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      0,      GROUND  }, // Row 7
+    { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      GROUND, GROUND  }, // Row 8
+    { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      GROUND, GROUND  }  // Row 9
+};
 
 int (*_getLevelData(int level))[TILES_X] { // get pointer to selected level
     switch (level) {
         case 0: return level_0;
-        // case 1: return level_1;
+        case 1: return level_1;
         // case 2: return level_2;
         default: return level_0;
     }
@@ -97,27 +98,30 @@ int getTileAt(int x, int y) {
 
 
 
-int getTileRight(int x, int y) { // check (16, 0)
+int getTileRightTop(int x, int y) { // check (16, 0)
     return getTileAt(x + SPRITE_SIZE, y);
 }
-int getTileLeft(int x, int y) { // check (-1, 0)
-    return getTileAt(x - 1, y);
+int getTileRightBottom(int x, int y) { // check (16, 15)
+    return getTileAt(x + SPRITE_SIZE, y + SPRITE_SIZE - 1) ;
 }
 
-int getTileAbove(int x, int y) {
-    return getTileAt(x, y - 1);
+int getTileLeftTop(int x, int y) { // check (-1, 0)
+    return getTileAt(x - 1, y);
 }
+int getTileLeftBottom(int x, int y) { // check (-1, 15)
+    return getTileAt(x - 1, y + SPRITE_SIZE - 1);
+}
+
+#define GET_TILE_TOLERANCE 2 // magic number to add some tolerance and prevent some bugs
 
 int getTileBelowCenter(int x, int y) { // check (7, 16)
     return getTileAt(x + SPRITE_SIZE - 1, y + SPRITE_SIZE);
 }
 
-#define CHECK_TILE_BELOW_TOLERANCE 2
-
 int getTileBelowBottomLeft(int x, int y) { // check (CHECK_TILE_BELOW_TOLERANCE, 16)
-    return getTileAt(x + CHECK_TILE_BELOW_TOLERANCE, y + SPRITE_SIZE);
+    return getTileAt(x + GET_TILE_TOLERANCE, y + SPRITE_SIZE);
 }
 
 int getTileBelowBottomRight(int x, int y) { // check (15 - CHECK_TILE_BELOW_TOLERANCE, 16)
-    return getTileAt(x + SPRITE_SIZE - 1 - CHECK_TILE_BELOW_TOLERANCE, y + SPRITE_SIZE);
+    return getTileAt(x + SPRITE_SIZE - 1 - GET_TILE_TOLERANCE, y + SPRITE_SIZE);
 }

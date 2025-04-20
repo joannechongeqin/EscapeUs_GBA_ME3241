@@ -22,7 +22,7 @@ static int _onGroundCheck(Player* p) {
         Player* other = &players[i];
         if (other == p) continue; // skip self
 
-        int tolerance = 3; // allow some leeway for pixel overlap
+        int tolerance = SPRITE_SIZE / 2; // allow some leeway for pixel overlap
         int playerBottom = p->y + SPRITE_SIZE;
         int otherTop = other->y;
 
@@ -101,7 +101,7 @@ static int _canMoveRight(Player* p) {
             }
         }
     }
-    return getTileRight(p->x, p->y) != GROUND;
+    return getTileRightTop(p->x, p->y) != GROUND && getTileRightBottom(p->x, p->y) != GROUND;
 }
 
 static int _canMoveLeft(Player* p) {
@@ -114,7 +114,7 @@ static int _canMoveLeft(Player* p) {
             }
         }
     }
-    return getTileLeft(p->x, p->y) != GROUND;
+    return getTileLeftTop(p->x, p->y) != GROUND && getTileLeftBottom(p->x, p->y) != GROUND;
 }
 
 
@@ -142,11 +142,13 @@ void updatePlayers() {
         }
 
         // vertical movement
-        if (p->vy < 0 && getTileAbove(p->x, p->y) == GROUND) { // jumping and hitting the ceiling
-            p->y = ((p->y / SPRITE_SIZE)) * SPRITE_SIZE; // snap to just below the ceiling
-				p->vy = 0;
-        } 
-        else {
+        int hittingCeiling = p->vy < 0 &&
+                             (getTileAt(p->x, p->y + p->vy) == GROUND ||
+                             getTileAt(p->x + SPRITE_SIZE - 1, p->y + p->vy) == GROUND);
+        if (hittingCeiling) { // then snap to just below the ceiling      
+            p->y = ((p->y / SPRITE_SIZE)) * SPRITE_SIZE; 
+			p->vy = 0;
+        } else {
 				p->y += p->vy;
 		}
 
