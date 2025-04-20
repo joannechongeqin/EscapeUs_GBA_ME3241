@@ -9,13 +9,6 @@ Player* currentPlayer() {
     return &players[activePlayerIndex];
 }
 
-
-static int _isLandableTile(int tile) {
-    // can land on ground or other players
-    return tile == GROUND;
-}
-
-
 static int _onGroundCheck(Player* p) {
     // check if landing on another player
     for (int i = 0; i < NUM_PLAYERS; i++) {
@@ -38,7 +31,7 @@ static int _onGroundCheck(Player* p) {
             return TRUE;
         }
     }
-    if (_isLandableTile(getTileBelowBottomLeft(p->x, p->y)) || _isLandableTile(getTileBelowBottomRight(p->x, p->y))) {
+    if ((getTileBelowBottomLeft(p->x, p->y) == GROUND || getTileBelowBottomRight(p->x, p->y) == GROUND)) {
         return TRUE;
     }
     return FALSE; // not on ground or another player
