@@ -3,6 +3,7 @@
 
 #include "mygbalib.h"
 
+#define MAX_LEVELS      2
 #define SPRITE_SIZE     16
 #define TILES_X         (SCREEN_WIDTH / SPRITE_SIZE)  // 15
 #define TILES_Y         (SCREEN_HEIGHT / SPRITE_SIZE) // 10
@@ -18,8 +19,10 @@
 #define MONSTER 7
 
 
-int level_0[TILES_Y][TILES_X];
-extern int level_sprite_N;
+void updateMonsters();
+void drawMonsters();
+
+void drawPlayers();
 
 void drawLevel(int level);
 void hideLevel();

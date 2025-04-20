@@ -20,6 +20,7 @@ extern u16 sprites[];
 #define START_LENGTH1     11    // "PRESS START" button in menu
 #define START_LENGTH2     7     // "TO PLAY" in menu
 #define ENDING_LENGTH     8     // "YOU WIN!" or "YOU LOSE" in ending screen
+#define MAX_MONSTERS      1     // max number of monsters in all the level
 
 #define PLAYER1_N         0
 #define PLAYER2_N         1
@@ -27,7 +28,7 @@ extern u16 sprites[];
 #define KEY_SPRITE_N      3
 #define MONSTER_N         4
 
-#define TITLE_SPRITE_N    5
+#define TITLE_SPRITE_N    MONSTER_N + MAX_MONSTERS
 #define START_SPRITE_N    TITLE_SPRITE_N + TITLE_LENGTH
 #define ENDING_SPRITE_N   START_SPRITE_N + START_LENGTH1 + START_LENGTH2
 #define LEVEL_SPRITE_N    ENDING_SPRITE_N + ENDING_LENGTH   // starting of the unique N to draw elements (ground, key, door etc) for level on screen (basically each element/tile will have its own N)

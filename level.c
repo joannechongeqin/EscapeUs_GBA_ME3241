@@ -1,42 +1,106 @@
 #include "level.h"
 #include "player.h"
 
-int level_0[TILES_Y][TILES_X] = {
-    // 0     1       2       3       4       5       6       7       8       9      10      11      12      13      14
-    { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 0
-    { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 1
-    // { 0,    KEY,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 2 // TODO: UNCOMMENT THIS LINE
-    { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY   },   // Row 2   // TODO: COMMENT THIS LINE (THIS JUST FOR DEBUGGING)
-    { 0,    GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 3
-    { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GOAL },   // Row 4
-    { 0,    0,      0,      GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND }, // Row 5
-    { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND, GROUND }, // Row 6
-    { 0,    0,      0,      0,      0,      0,      PLAYER1,0,      BOMB,   PLAYER2,0,      0,      GROUND, GROUND, GROUND }, // Row 7
-    { 0,    0,      0,      0,      0,      0,      GROUND, GROUND, GROUND, GROUND, 0,      GROUND, GROUND, GROUND, GROUND }, // Row 8
-    { 0,    0,      0,      0,      0,      0,      GROUND, GROUND, GROUND, GROUND, 0,      GROUND, GROUND, GROUND, GROUND }  // Row 9
+int levels[MAX_LEVELS][TILES_Y][TILES_X] = {
+    {   // ----- LEVEL 0 -----
+        // 0     1       2       3       4       5       6       7       8       9      10      11      12      13      14
+        { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 0
+        { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 1
+        // { 0,    KEY,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 2 // TODO: UNCOMMENT THIS LINE
+        { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY   },   // Row 2   // TODO: COMMENT THIS LINE (THIS JUST FOR DEBUGGING)
+        { 0,    GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 3
+        { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GOAL },   // Row 4
+        { 0,    0,      0,      GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND }, // Row 5
+        { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND, GROUND }, // Row 6
+        { 0,    0,      0,      0,      0,      0,      PLAYER1,0,      BOMB,   PLAYER2,0,      0,      GROUND, GROUND, GROUND }, // Row 7
+        { 0,    0,      0,      0,      0,      0,      GROUND, GROUND, GROUND, GROUND, 0,      GROUND, GROUND, GROUND, GROUND }, // Row 8
+        { 0,    0,      0,      0,      0,      0,      GROUND, GROUND, GROUND, GROUND, 0,      GROUND, GROUND, GROUND, GROUND }  // Row 9
+    },
+    {   // ----- LEVEL 1 -----
+        // 0     1       2       3       4       5       6       7       8       9      10      11      12      13      14
+        { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0       }, // Row 0
+        { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY     }, // Row 1
+        { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND, GROUND, GROUND  }, // Row 2
+        { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0, GROUND,      0,      0,      0,      0       }, // Row 3
+        { 0,        0,          0,      0,      0,      0,      0,      0, GROUND,      0,      0,      0,      0,      GOAL,   0       }, // Row 4
+        { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND, 0       }, // Row 5
+        { 0,        0,          0,      0,      0,      0,      0, MONSTER,     0,      0,      0,      0,      0,      0,      0       }, // Row 6 // NOTE: NEED MANUALLY PUT THIS INFO IN initLevelMonsters
+        { PLAYER1,  PLAYER2,    0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      0,      GROUND  }, // Row 7
+        { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      GROUND, GROUND  }, // Row 8
+        { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      GROUND, GROUND  }  // Row 9
+    } 
 };
 
-int level_1[TILES_Y][TILES_X] = {
-    // 0     1       2       3       4       5       6       7       8       9      10      11      12      13      14
-    { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0       }, // Row 0
-    { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY     }, // Row 1
-    { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND, GROUND, GROUND  }, // Row 2
-    { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0, GROUND,      0,      0,      0,      0       }, // Row 3
-    { 0,        0,          0,      0,      0,      0,      0,      0, GROUND,      0,      0,      0,      0,      GOAL,   0       }, // Row 4
-    { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND, 0       }, // Row 5
-    { 0,        0,          0,      0,      0,      0,      0, MONSTER,     0,      0,      0,      0,      0,      0,      0       }, // Row 6
-    { PLAYER1,  PLAYER2,    0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      0,      GROUND  }, // Row 7
-    { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      GROUND, GROUND  }, // Row 8
-    { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      GROUND, GROUND  }  // Row 9
-};
+
+// --------------- START OF MONSTER ---------------
+typedef struct {
+    int spriteN;    // to move the sprite (redraw with same N)
+    int x, y;       // monster's position
+    int vx;         // horizontal speed (positive moves right, negative moves left)
+    int leftBound;  // leftmost position the monster can move
+    int rightBound; // rightmost position the monster can move
+} Monster;
+Monster monster;
+
+void initMonster(Monster *m, int spriteN, int x, int y, int leftBound, int rightBound, int vx) {
+    m->spriteN = spriteN;
+    m->x = x;
+    m->y = y;
+    m->vx = vx;
+    m->leftBound = leftBound;
+    m->rightBound = rightBound;
+}
+
+Monster monsters[MAX_MONSTERS];  // array to store monsters for a given level
+int numMonsters; // number of monsters in the current level // TODO: double check if numMonsters < MAX_MONSTERS??
+
+// NOTE: technically can do many monsters in one level
+static void _initLevelMonsters(int level) {
+    numMonsters = 0;
+    
+    // --- level 0  ---
+    // no monster
+
+    // --- level 1  ---
+    if (level == 1) {
+        numMonsters = 1; 
+        initMonster(&monsters[0], MONSTER_N, 8*SPRITE_SIZE, 6*SPRITE_SIZE, 4*SPRITE_SIZE, 10*SPRITE_SIZE, 1);
+    }
+}
+
+static void _updateMonster(Monster *m) {
+    m->x += m->vx; 
+    if (m->x <= m->leftBound || m->x >= m->rightBound) { // when monster hits left or right bounds
+        m->vx = -m->vx; // reverse direction
+    }
+}
+
+// update all monsters in the current level
+void updateMonsters() {
+    for (int i = 0; i < numMonsters; i++) {
+        _updateMonster(&monsters[i]);
+    }
+}
+
+// draw all monsters
+void drawMonsters() {
+    for (int i = 0; i < numMonsters; i++) {
+        drawSprite(MONSTER_, monsters[i].spriteN, monsters[i].x, monsters[i].y);
+    }
+}
+// --------------- END OF MONSTER ---------------
+
+
+void drawPlayers() {
+    for (int i = 0; i < NUM_PLAYERS; i++) {
+        drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
+    } 
+}
+
 
 int (*_getLevelData(int level))[TILES_X] { // get pointer to selected level
-    switch (level) {
-        case 0: return level_0;
-        case 1: return level_1;
-        // case 2: return level_2;
-        default: return level_0;
-    }
+    if (level >= 0 && level < MAX_LEVELS) return levels[level];
+    return levels[0]; // fallback to default
 }
 
 int current_level = 0;
@@ -45,6 +109,7 @@ void drawLevel(int level) {
     int (*levelData)[TILES_X] = _getLevelData(level);
     current_level = level;
     int level_sprite_N = LEVEL_SPRITE_N;
+    _initLevelMonsters(level);
 
     for (int row = 0; row < TILES_Y; row++) {
         for (int col = 0; col < TILES_X; col++) {
@@ -75,18 +140,14 @@ void drawLevel(int level) {
                 case PLAYER2: 
                     initPlayer(PLAYER2_N, x, y);
                     break;
-                case MONSTER: 
-                    drawSprite(MONSTER_, MONSTER_N, x, y); 
-                    break;
             }
         }
     }
 
-    for (int i = 0; i < NUM_PLAYERS; i++) {
-        drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
-    }
-    
+    drawPlayers();
+    drawMonsters();
 }
+
 
 // PLAYER X Y POSITION IS TOP LEFT CORNER (0, 0)
 // BOTTOM RIGHT OF PLAYER SPRITE IS (15, 15)
