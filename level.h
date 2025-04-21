@@ -19,6 +19,17 @@
 #define MONSTER 7
 
 
+typedef struct {
+    int spriteN;    // to move the sprite (redraw with same N)
+    int x, y;       // monster's position
+    int vx;         // horizontal speed (positive moves right, negative moves left)
+    int leftBound;  // leftmost position the monster can move
+    int rightBound; // rightmost position the monster can move
+} Monster;
+Monster monster;
+extern Monster monsters[MAX_MONSTERS];  // array to store monsters for a given level
+extern int numMonsters; // number of monsters in the current level
+
 void updateMonsters();
 void drawMonsters();
 

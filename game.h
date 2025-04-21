@@ -22,14 +22,32 @@ void updateMovingSpritesState() {
 int gotKey = FALSE;
 int keyWithPlayer = 0;          // player that has the key
 #define KEY_GRAB_DISTANCE 16    // distance to grab key from other player (in pixels)
-#define TOUCH_BOMB_TOLERANCE 6  // tolerance to check if player touch bomb (in pixels)
+#define LOSE_TOLERANCE 4        // tolerance to check if player touch bomb or monster (in pixels)
+
 
 void updateGameState() {
     for (int i = 0; i < NUM_PLAYERS; i++) {
+        int playerLeft = players[i].x; int playerRight = players[i].x + SPRITE_SIZE - 1; 
+
+        int touch_monster = FALSE;
+        for (int j = 0; j < numMonsters; j++) {
+            int monsterLeft = monsters[j].x; int monsterRight = monsters[j].x + SPRITE_SIZE - 1;
+            
+            int leftDiff = playerRight - monsterLeft;
+            int rightDiff = monsterRight - playerLeft;
+            if (players[i].y == monsters[j].y && 
+                ((leftDiff >= 0 && leftDiff <= SPRITE_SIZE - LOSE_TOLERANCE) || 
+                 (rightDiff >= 0 && rightDiff <=  SPRITE_SIZE - LOSE_TOLERANCE))) {
+                touch_monster = TRUE;
+                break;
+            }
+        }
+        
         // LOSE
-        if (checkBelowIs(players[i].x, players[i].y, INVALID) || // fall off ground
-            getTileAt(players[i].x+TOUCH_BOMB_TOLERANCE, players[i].y) == BOMB || // check if leftmost of player touch bomb (with some tolerance)
-            getTileAt(players[i].x+SPRITE_SIZE-1-TOUCH_BOMB_TOLERANCE, players[i].y) == BOMB) {  // check if rightmost of player touch bomb (with some tolerance)
+        if (touch_monster || // touch monster
+            checkBelowIs(players[i].x, players[i].y, INVALID) || // fall off ground
+            getTileAt(playerLeft  + LOSE_TOLERANCE, players[i].y) == BOMB || // check if leftmost of player touch bomb (with some tolerance)
+            getTileAt(playerRight - LOSE_TOLERANCE, players[i].y) == BOMB) {  // check if rightmost of player touch bomb (with some tolerance)
                 gameState = END;
                 if (gameState == WIN_LEVEL1) {
                     gameState = WIN_LEVEL1; // restart level 2 (TODO: IF WANT EVIL JUST RESTART FROM LEVEL 1 HOHO. i doing this for now cuz i lazy to replay everything for debugging)

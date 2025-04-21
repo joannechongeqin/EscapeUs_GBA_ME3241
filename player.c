@@ -4,7 +4,6 @@
 Player players[NUM_PLAYERS];
 int activePlayerIndex = 0;
 
-
 Player* currentPlayer() {
     return &players[activePlayerIndex];
 }
@@ -84,13 +83,25 @@ void playerJump() {
     }
 }
 
+#define VERTICAL_CHECK_TOLERANCE 4 
+
 static int _canMoveRight(Player* p) {
+    int nextRight = p->x + SPRITE_SIZE + 1;
+    int playerTop = p->y; int playerBottom = p->y + SPRITE_SIZE;
+
     for (int i = 0; i < NUM_PLAYERS; i++) {
         if (i != activePlayerIndex) {
-            Player* otherPlayer = &players[i];
-            // check if the other player is in the way
-            if (p->x + SPRITE_SIZE == otherPlayer->x && p->y == otherPlayer->y) {
-                return FALSE; // cannot move right, other player is in the way
+            Player* other = &players[i];
+            int otherLeft = other->x; int otherRight = other->x + SPRITE_SIZE;
+            int otherTop = other->y;  int otherBottom = other->y + SPRITE_SIZE;
+            
+            // check horizontal overlap after moving right
+            if (nextRight > otherLeft && nextRight - SPRITE_SIZE < otherRight) {
+                // check vertical overlap with tolerance
+                if (playerBottom > otherTop + VERTICAL_CHECK_TOLERANCE &&
+                    playerTop < otherBottom - VERTICAL_CHECK_TOLERANCE) {
+                    return FALSE;
+                }
             }
         }
     }
@@ -98,12 +109,22 @@ static int _canMoveRight(Player* p) {
 }
 
 static int _canMoveLeft(Player* p) {
+    int nextLeft = p->x - MOVE_INTERVAL;
+    int playerTop = p->y; int playerBottom = p->y + SPRITE_SIZE;
+
     for (int i = 0; i < NUM_PLAYERS; i++) {
         if (i != activePlayerIndex) {
-            Player* otherPlayer = &players[i];
-            // check if the other player is in the way
-            if (p->x - SPRITE_SIZE == otherPlayer->x && p->y == otherPlayer->y) {
-                return FALSE; // cannot move left, other player is in the way
+            Player* other = &players[i];
+            int otherLeft = other->x; int otherRight = other->x + SPRITE_SIZE;
+            int otherTop = other->y;  int otherBottom = other->y + SPRITE_SIZE;
+
+            // check horizontal overlap after moving left
+            if (nextLeft < otherRight && nextLeft + SPRITE_SIZE > otherLeft) {
+                // check vertical overlap -> if they overlap by more than MOVE_VERTICAL_CHECK_TOLERANCE pixels vertically
+                if (playerBottom > otherTop + VERTICAL_CHECK_TOLERANCE &&
+                    playerTop < otherBottom - VERTICAL_CHECK_TOLERANCE) {
+                    return FALSE;
+                }
             }
         }
     }

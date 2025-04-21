@@ -33,14 +33,8 @@ int levels[MAX_LEVELS][TILES_Y][TILES_X] = {
 
 
 // --------------- START OF MONSTER ---------------
-typedef struct {
-    int spriteN;    // to move the sprite (redraw with same N)
-    int x, y;       // monster's position
-    int vx;         // horizontal speed (positive moves right, negative moves left)
-    int leftBound;  // leftmost position the monster can move
-    int rightBound; // rightmost position the monster can move
-} Monster;
-Monster monster;
+Monster monsters[MAX_MONSTERS];  // array to store monsters for a given level
+int numMonsters; // number of monsters in the current level // TODO: double check if numMonsters < MAX_MONSTERS??
 
 void initMonster(Monster *m, int spriteN, int x, int y, int leftBound, int rightBound, int vx) {
     m->spriteN = spriteN;
@@ -50,9 +44,6 @@ void initMonster(Monster *m, int spriteN, int x, int y, int leftBound, int right
     m->leftBound = leftBound;
     m->rightBound = rightBound;
 }
-
-Monster monsters[MAX_MONSTERS];  // array to store monsters for a given level
-int numMonsters; // number of monsters in the current level // TODO: double check if numMonsters < MAX_MONSTERS??
 
 // NOTE: technically can do many monsters in one level
 static void _initLevelMonsters(int level) {
@@ -88,6 +79,7 @@ void drawMonsters() {
         drawSprite(MONSTER_, monsters[i].spriteN, monsters[i].x, monsters[i].y);
     }
 }
+
 // --------------- END OF MONSTER ---------------
 
 
@@ -189,7 +181,6 @@ static int _getTileBelowBottomLeft(int x, int y) { // check (CHECK_TILE_BELOW_TO
 static int _getTileBelowBottomRight(int x, int y) { // check (15 - CHECK_TILE_BELOW_TOLERANCE, 16)
     return getTileAt(x + SPRITE_SIZE - 1 - GET_TILE_TOLERANCE, y + SPRITE_SIZE);
 }
-
 int checkBelowIs(int x, int y, int tile_type) {
     return _getTileBelowBottomLeft(x, y) == tile_type || _getTileBelowBottomRight(x, y) == tile_type;
 }
