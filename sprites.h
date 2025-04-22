@@ -38,7 +38,7 @@ extern u16 sprites[];
 // !!! implementation in sprites.c !!!
 #define BLANK   0       // empty sprite (mainly for delSprite())
 
-#define P_IDLE   1      // player idle facing FRONT
+#define P_IDLE   1      // player idle facing FRONT (do player dead sprite also?)
 #define P_R_MOVE 2      // player moving RIGHT
 #define P_L_MOVE 3      // player moving LEFT
 #define ARROW_   4      // arrow sprite (to indicate current active player)
@@ -47,9 +47,13 @@ extern u16 sprites[];
 #define KEY_     6      // key sprite (for level)
 #define GOAL_    7      // goal sprite (for level)
 #define BOMB_    8      // bomb sprite (for level)
-#define MONSTER_ 9      // monster sprite (TODO: can do left right also)
+#define MONSTER_L 9      // monster sprite (facing LEFT) 
+#define MONSTER_R 10      // monster sprite (facing RIGHT)
+#define SHIELD_ 11      // shield sprite (for level)
+#define BUTTON_ 12      // button sprite (for level)
+#define BUTTON_PRESSED_ 13 // button pressed sprite (for level) optional
 
-#define LETTER_A 10
+#define LETTER_A 14
 #define LETTER_B (LETTER_A + 1)
 #define LETTER_C (LETTER_B + 1)
 #define LETTER_D (LETTER_C + 1)

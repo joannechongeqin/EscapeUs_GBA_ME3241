@@ -86,7 +86,7 @@ void updateGameState() {
 
 
 // cooldown to prevent a single button press from being registered multiple times
-#define COOLDOWN_TIME 8 // cooldown time in frames (for button press)
+#define COOLDOWN_TIME 5 // cooldown time in frames (for button press)
 int START_cooldown = 0;
 int KEY_A_cooldown = 0;
 int KEY_B_cooldown = 0;

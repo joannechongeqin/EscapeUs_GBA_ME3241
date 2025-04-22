@@ -21,6 +21,7 @@
 
 typedef struct {
     int spriteN;    // to move the sprite (redraw with same N)
+    int spriteIndex; // sprite index in the sprite table
     int x, y;       // monster's position
     int vx;         // horizontal speed (positive moves right, negative moves left)
     int leftBound;  // leftmost position the monster can move

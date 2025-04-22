@@ -21,11 +21,11 @@ int levels[MAX_LEVELS][TILES_Y][TILES_X] = {
         { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0       }, // Row 0
         { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY     }, // Row 1
         { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND, GROUND, GROUND  }, // Row 2
-        { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0, GROUND,      0,      0,      0,      0       }, // Row 3
-        { 0,        0,          0,      0,      0,      0,      0,      0, GROUND,      0,      0,      0,      0,      GOAL,   0       }, // Row 4
-        { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND, 0       }, // Row 5
-        { 0,        0,          0,      0,      0,      0,      0, MONSTER,     0,      0,      0,      0,      0,      0,      0       }, // Row 6 // NOTE: NEED MANUALLY PUT THIS INFO IN initLevelMonsters
-        { PLAYER1,  PLAYER2,    0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      0,      GROUND  }, // Row 7
+        { 0,        0,          0,      0,      0,      0,      0,      0,   BOMB,      0, GROUND,      0,      0,      0,      0       }, // Row 3
+        { 0,        0,          0,      0,      0,      0,      0, GROUND, GROUND, GROUND,      0,      0,      0,      GOAL,   0       }, // Row 4
+        { 0,        0,          0,      0,      0,      0, GROUND,      0,      0,      0,      0,      0,      0,      GROUND, 0       }, // Row 5
+        { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0       }, // Row 6 // NOTE: NEED MANUALLY PUT THIS INFO IN initLevelMonsters
+        { PLAYER1,  PLAYER2,    0,      0,      0,      0,      0,MONSTER,      0,      0,      0,      0,      0,      0,      GROUND  }, // Row 7
         { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      GROUND, GROUND  }, // Row 8
         { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      GROUND, GROUND  }  // Row 9
     } 
@@ -43,6 +43,11 @@ void initMonster(Monster *m, int spriteN, int x, int y, int leftBound, int right
     m->vx = vx;
     m->leftBound = leftBound;
     m->rightBound = rightBound;
+    if (vx > 0) {
+        m->spriteIndex = MONSTER_R; // facing right
+    } else {
+        m->spriteIndex = MONSTER_L; // facing left
+    }
 }
 
 // NOTE: technically can do many monsters in one level
@@ -55,7 +60,7 @@ static void _initLevelMonsters(int level) {
     // --- level 1  ---
     if (level == 1) {
         numMonsters = 1; 
-        initMonster(&monsters[0], MONSTER_N, 8*SPRITE_SIZE, 6*SPRITE_SIZE, 4*SPRITE_SIZE, 10*SPRITE_SIZE, 1);
+        initMonster(&monsters[0], MONSTER_N, 8*SPRITE_SIZE, 7*SPRITE_SIZE, 4*SPRITE_SIZE, 10*SPRITE_SIZE, -1);
     }
 }
 
@@ -63,6 +68,11 @@ static void _updateMonster(Monster *m) {
     m->x += m->vx; 
     if (m->x <= m->leftBound || m->x >= m->rightBound) { // when monster hits left or right bounds
         m->vx = -m->vx; // reverse direction
+        if (m->vx > 0) {
+            m->spriteIndex = MONSTER_R; // facing right
+        } else {
+            m->spriteIndex = MONSTER_L; // facing left
+        }
     }
 }
 
@@ -76,7 +86,7 @@ void updateMonsters() {
 // draw all monsters
 void drawMonsters() {
     for (int i = 0; i < numMonsters; i++) {
-        drawSprite(MONSTER_, monsters[i].spriteN, monsters[i].x, monsters[i].y);
+        drawSprite(monsters[i].spriteIndex, monsters[i].spriteN, monsters[i].x, monsters[i].y);
     }
 }
 
