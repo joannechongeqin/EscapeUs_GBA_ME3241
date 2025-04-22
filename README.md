@@ -22,13 +22,14 @@
 - using sprites/tiles of 16x16 pixels (GBA screen size 240x160), able to create [levels with static background of size 10x16 tiles](https://docs.google.com/spreadsheets/d/1p4TTlj3i2GXlGYyscvo-ErYltRo4AOVGPNbYYW5sz0M/edit?gid=0#gid=0)
 - support two characters -> can switch players, left/right/jump movements with correct position update, ground + left/right/top obstacles detection, player can stand on each other
 - sprite data for basic letters (A-Z)
+- BOTH players must enter goal to win
 - first level (kinda completed): 
     - to reach the key, player has to step on each other to reach a tile that is unable to reach by a normal jump from ground
     - got a few gaps that player(s) can fall and die
     - got a bomb in between which when player(s) touch will die
 - second level (still in progress):
-    - thinking of a moving monster that walks back and forth between two points
-    - thinking of having a shield before the key where one player has to press the button to deeactivate the shield, so that the other player can get the key
+    - a moving monster that moves back and forth between two points
+    - TODO IDEAS: thinking of having a shield before the key where one player has to press the button to deeactivate the shield, so that the other player can get the key
 
 
 ### Controls
@@ -38,7 +39,7 @@ To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`. `()` are
 | `START (ENTER)` or `A (Z)`     | start game from main menu, go to next level, return to main menu after game has ended |
 | `RIGHT`                        | move right                                                           |
 | `LEFT`                         | move left                                                            |
-| `UP` or `A (Z)`                | jump                                                                 |
+| `UP` or `A (Z)`                | jump / enter goal (door)                                             |
 | `B (X)`                        | switch player                                                        |
 
 ### TODOs
@@ -63,4 +64,4 @@ To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`. `()` are
     - button / pushable box? for the two players to co-op
     - bug to fix: sometimes player switched more than once when `A` is pressed once -> add cooldown/delay for button press ✅
     - bug to fix: after restarting the game for a few times, some of the tile elements not rendering properly -> not sure if is a memory overflow thing or what hmmmm ✅ (yes it's an overflow thing cuz `level_sprite_N` was a global variable that keep on adding without resetting)
-    - press `UP` and enter door effect to win? both players need to enter door instead of one only?
+    - press `UP` and enter door effect to win? both players need to enter door instead of one only? ✅

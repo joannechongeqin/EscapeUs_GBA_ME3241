@@ -18,15 +18,15 @@
 // RGB palette used for sprites. The sprites defined below use the index of the color in the palette (so black = 0, white = 1, ...)
 int palette[] = {
     RGB(0,0,0),     // pure black 0
-    RGB(31,31,31),  // pure white 1 - letters
-    RGB(25,25,25),  // light grey 2 - ground
-    RGB(31,28,9),   // yellow 3     - arrow, key
-    RGB(19,13,8),   // brown 4      - goal (door)
-    RGB(27,1,1),    // light red 5  - bomb
-    RGB(17,3,3),    // darker red 6 - bomb
-    RGB(22,17,4),   // mustard brown 7 - key
-    RGB(8,15,27),   // light blue 8 - monster
-    RGB(4,9,15),    // dark blue 9 - monster
+    RGB(31,31,31),  // pure white 1     - letters
+    RGB(25,25,25),  // light grey 2     - ground
+    RGB(31,28,9),   // yellow 3         - arrow, key
+    RGB(19,13,8),   // brown 4          - goal (door)
+    RGB(27,1,1),    // light red 5      - bomb
+    RGB(17,3,3),    // darker red 6     - bomb
+    RGB(22,17,4),   // mustard brown 7 - key outline
+    RGB(8,15,27),   // light blue 8     - monster
+    RGB(4,9,15),    // dark blue 9      - monster
 
     RGB(31,31,0), // pure yellow 5
     RGB(31,0,0), // pure red 6

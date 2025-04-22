@@ -14,6 +14,7 @@ typedef struct {
     int spriteIndex;   // sprite to draw
     int spriteN;       // to move the sprite (redraw with same N)
     int onGround;      // 1 if on ground, 0 if in the air
+    int enteredGoal;   // 1 if player entered goal, 0 otherwise
 } Player;
 
 extern Player players[NUM_PLAYERS];

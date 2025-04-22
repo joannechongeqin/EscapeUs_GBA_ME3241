@@ -45,11 +45,15 @@ void initPlayer(int index, int x, int y) {
     players[index].spriteN = index; 
     players[index].spriteIndex = P_IDLE; // TODO: diff sprite for diff player_N(?)
     players[index].onGround = _onGroundCheck(&players[index]); // check if player is on ground at start
+    players[index].enteredGoal = FALSE; // not entered goal at start
 }
 
 void switchPlayer() {
     playerStop(); // stop current player before switching
-    activePlayerIndex = (activePlayerIndex + 1) % NUM_PLAYERS;
+    int originalIndex = activePlayerIndex;
+    do {
+        activePlayerIndex = (activePlayerIndex + 1) % NUM_PLAYERS;
+    } while (players[activePlayerIndex].enteredGoal && activePlayerIndex != originalIndex);
 }
 
 void playerMoveRight() {

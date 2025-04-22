@@ -14,23 +14,32 @@ enum GameState {
     GAME_OVER
 } gameState;
 
+int gotKey = FALSE;
+int doorOpen = FALSE;
+int keyWithPlayer = 0;          // player that has the key
+#define KEY_GRAB_DISTANCE 16    // distance to grab key from other player (in pixels)
+#define LOSE_TOLERANCE 4        // tolerance to check if player touch bomb or monster (in pixels)
+
+int allPlayersEnteredGoal() {
+    for (int i = 0; i < NUM_PLAYERS; i++) {
+        if (!players[i].enteredGoal) 
+            return FALSE;
+    }
+    return TRUE;
+}
+
 
 void updateMovingSpritesState() {
     updatePlayers();
     drawPlayers();
 
     // draw arrow above current active player
+    if (!allPlayersEnteredGoal())
     drawSprite(ARROW_, ARROW_SPRITE_N, players[activePlayerIndex].x, players[activePlayerIndex].y - SPRITE_SIZE); 
 
     updateMonsters();
     drawMonsters();
 }
-
-
-int gotKey = FALSE;
-int keyWithPlayer = 0;          // player that has the key
-#define KEY_GRAB_DISTANCE 16    // distance to grab key from other player (in pixels)
-#define LOSE_TOLERANCE 4        // tolerance to check if player touch bomb or monster (in pixels)
 
 
 void updateGameState() {
@@ -51,17 +60,19 @@ void updateGameState() {
             }
         }
         
-        // LOSE
-        if (touch_monster || // touch monster
-            checkBelowIs(players[i].x, players[i].y, INVALID) || // fall off ground
-            getTileAt(playerLeft  + LOSE_TOLERANCE, players[i].y) == BOMB || // check if leftmost of player touch bomb (with some tolerance)
-            getTileAt(playerRight - LOSE_TOLERANCE, players[i].y) == BOMB) {  // check if rightmost of player touch bomb (with some tolerance)
+        // --- LOSE ---
+        if (!players[i].enteredGoal && // not entered goal
+            (touch_monster || // touch monster
+                checkBelowIs(players[i].x, players[i].y, INVALID) || // fall off ground
+                getTileAt(playerLeft  + LOSE_TOLERANCE, players[i].y) == BOMB || // check if leftmost of player touch bomb (with some tolerance)
+                getTileAt(playerRight - LOSE_TOLERANCE, players[i].y) == BOMB)) {  // check if rightmost of player touch bomb (with some tolerance)
                 gameState = GAME_OVER;
                 showEndingScreen(0);
         }
     }
 
-    if (gotKey) { // if already reached key, render the key near the player that has it
+    // if already has key, render the key near the active player that has it
+    if (gotKey && !doorOpen) { 
         if (keyWithPlayer != activePlayerIndex) {
             int dx = players[activePlayerIndex].x - players[keyWithPlayer].x;
             int dy = players[activePlayerIndex].y - players[keyWithPlayer].y;
@@ -69,20 +80,21 @@ void updateGameState() {
                 keyWithPlayer = activePlayerIndex; // transfer key
         }
         drawSprite(KEY_, KEY_SPRITE_N, players[keyWithPlayer].x - SPRITE_SIZE / 2, players[keyWithPlayer].y - SPRITE_SIZE);
-
-        // WIN
-        if (getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y) == GOAL) { // touch goal
-            if (gameState == LEVEL1) {
-                gameState = LEVEL1_COMPLETE;
-            } else if (gameState == LEVEL2) {
-                gameState = LEVEL2_COMPLETE;
-            }
-            showEndingScreen(1);
-        }
     }
-    else if (getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y) == KEY) { // no key and first time touch key, pick up key
-            gotKey = TRUE;
-            keyWithPlayer = activePlayerIndex;
+    // no key yet and first time touch key, pick up key
+    else if (getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y) == KEY) { 
+        gotKey = TRUE;
+        keyWithPlayer = activePlayerIndex;
+    }
+
+    // --- WIN ---
+    if (allPlayersEnteredGoal()) { 
+        if (gameState == LEVEL1) {
+            gameState = LEVEL1_COMPLETE;
+        } else if (gameState == LEVEL2) {
+            gameState = LEVEL2_COMPLETE;
+        }
+        showEndingScreen(1);
     }
 }
 
@@ -111,10 +123,9 @@ static void startGame(int level) {
     drawLevel(level);
     activePlayerIndex = 0;  // reset active player index to 0 (first player)
     gotKey = FALSE;         // reset key state
-    if (level == 0)
-        gameState = LEVEL1;
-    else if (level == 1)
-        gameState = LEVEL2;
+    doorOpen = FALSE;       // reset door state
+    if (level == 0)      gameState = LEVEL1;
+    else if (level == 1) gameState = LEVEL2;
 }
 
 
@@ -147,25 +158,47 @@ void checkbutton(void) {
     }
 
     if (gameState == LEVEL1 || gameState == LEVEL2) {
+
         // switch player
         if (keyPressedWithCooldown(buttons, KEY_B, &KEY_B_cooldown)) { // "Z" on keyboard
             switchPlayer();
         }
-        
-        // move player
-        if ((buttons & KEY_RIGHT) == KEY_RIGHT) {
-            playerMoveRight();
-        }
-        if ((buttons & KEY_LEFT) == KEY_LEFT) {
-            playerMoveLeft();
-        }
-        if ((buttons & KEY_UP) == KEY_UP || (buttons & KEY_A) == KEY_A) {
-            playerJump();
-        }
-        if ((buttons & KEY_RIGHT) == 0 && (buttons & KEY_LEFT) == 0) { 
-            playerStop(); // stop if no horizontal movement keys are held
-        }
 
+            // move player (disable control for those who already entered goal)
+        if (!players[activePlayerIndex].enteredGoal) {
+            if ((buttons & KEY_RIGHT) == KEY_RIGHT) {
+                playerMoveRight();
+            }
+            if ((buttons & KEY_LEFT) == KEY_LEFT) {
+                playerMoveLeft();
+            }
+            if ((buttons & KEY_RIGHT) == 0 && (buttons & KEY_LEFT) == 0) { 
+                playerStop(); // stop if no horizontal movement keys are held
+            }
+
+            if ((buttons & KEY_UP) == KEY_UP || (buttons & KEY_A) == KEY_A) { // jump / interact with goal
+                int tile = getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y);
+                if (tile == GOAL) {
+                    // first player with key opens door
+                    if (!doorOpen && gotKey && keyWithPlayer == activePlayerIndex) {
+                        delSprite(KEY_SPRITE_N);
+                        doorOpen = TRUE; // open door                        
+                    }
+                    // player can enter if door is already open
+                    if (doorOpen && !players[activePlayerIndex].enteredGoal) {
+                        players[activePlayerIndex].enteredGoal = TRUE;
+                        players[activePlayerIndex].x = SCREEN_WIDTH; // move player off screen
+                        players[activePlayerIndex].y = SCREEN_HEIGHT;
+                        delSprite(players[activePlayerIndex].spriteN);
+                        switchPlayer(); // switch to next player
+                        return;
+                    }
+                }
+                else {
+                    playerJump(); // jump by default if not on goal
+                }    
+            }       
+        }
         updateMovingSpritesState();
         updateGameState();
     }

@@ -20,14 +20,14 @@ int levels[MAX_LEVELS][TILES_Y][TILES_X] = {
         // 0     1       2       3       4       5       6       7       8       9      10      11      12      13      14
         { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0       }, // Row 0
         { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY     }, // Row 1
-        { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND, GROUND, GROUND  }, // Row 2
-        { 0,        0,          0,      0,      0,      0,      0,      0,   BOMB,      0, GROUND,      0,      0,      0,      0       }, // Row 3
-        { 0,        0,          0,      0,      0,      0,      0, GROUND, GROUND, GROUND,      0,      0,      0,      GOAL,   0       }, // Row 4
+        { 0,        0,          0,      0,      0,      0,      0,      0,      0,   BOMB,      0,      0,      GROUND, GROUND, GROUND  }, // Row 2
+        { 0,        0,          0,      0,      0,      0,      0, GROUND, GROUND, GROUND, GROUND,      0,      0,      0,      0       }, // Row 3
+        { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GOAL,   0       }, // Row 4
         { 0,        0,          0,      0,      0,      0, GROUND,      0,      0,      0,      0,      0,      0,      GROUND, 0       }, // Row 5
         { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0       }, // Row 6 // NOTE: NEED MANUALLY PUT THIS INFO IN initLevelMonsters
         { PLAYER1,  PLAYER2,    0,      0,      0,      0,      0,MONSTER,      0,      0,      0,      0,      0,      0,      GROUND  }, // Row 7
         { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      GROUND, GROUND  }, // Row 8
-        { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      GROUND, GROUND  }  // Row 9
+        { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      GROUND, GROUND, GROUND  }  // Row 9
     } 
 };
 
@@ -95,7 +95,8 @@ void drawMonsters() {
 
 void drawPlayers() {
     for (int i = 0; i < NUM_PLAYERS; i++) {
-        drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
+        if (!players[i].enteredGoal)
+            drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y);
     } 
 }
 
