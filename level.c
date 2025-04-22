@@ -107,6 +107,7 @@ int (*_getLevelData(int level))[TILES_X] { // get pointer to selected level
 }
 
 int current_level = 0;
+int goalCoordinates[2];
 
 void drawLevel(int level) {
     int (*levelData)[TILES_X] = _getLevelData(level);
@@ -130,8 +131,9 @@ void drawLevel(int level) {
                     drawSprite(KEY_, KEY_SPRITE_N, x, y);
                     break;
                 case GOAL:   
-                    drawSprite(GOAL_, level_sprite_N, x, y);
-                    level_sprite_N += 1;
+                    drawSprite(GOAL_, GOAL_SPRITE_N, x, y);
+                    goalCoordinates[0] = x; // so that can redraw "opened" gpoal later
+                    goalCoordinates[1] = y;
                     break;
                 case BOMB:   
                     drawSprite(BOMB_, level_sprite_N, x, y); 

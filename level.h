@@ -39,6 +39,8 @@ void drawPlayers();
 void drawLevel(int level);
 void hideLevel();
 
+extern int goalCoordinates[2];
+
 int getTileAt(int x, int y);
 
 int checkRightIs(int x, int y, int tile_type);

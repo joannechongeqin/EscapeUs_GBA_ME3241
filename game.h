@@ -184,7 +184,8 @@ void checkbutton(void) {
                     // first player with key opens door
                     if (!doorOpen && gotKey && keyWithPlayer == activePlayerIndex) {
                         delSprite(KEY_SPRITE_N);
-                        doorOpen = TRUE; // open door                        
+                        doorOpen = TRUE; // open door
+                        drawSprite(GOAL_OPEN, GOAL_SPRITE_N, goalCoordinates[0], goalCoordinates[1]); // draw opened goal / door                  
                     }
                     // player can enter if door is already open
                     if (doorOpen && !players[activePlayerIndex].enteredGoal) {

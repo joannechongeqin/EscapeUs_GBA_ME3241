@@ -90,7 +90,7 @@ u16 sprites[] = {
 0,0,0,0,0,0,0,0,
 
 
-#define P_IDLE 1        // player idle facing FRONT
+#define P_IDLE   BLANK+1    // player idle facing FRONT (do player dead sprite also?)
 // Tile 00
 0,0,0,0,0,1,0,0,
 0,0,0,1,1,2,1,1,
@@ -129,7 +129,7 @@ u16 sprites[] = {
 0,1,1,0,0,0,0,0,
 
 
-#define P_R_MOVE 2     // player moving RIGHT
+#define P_R_MOVE P_IDLE+1   // player moving RIGHT
 // Tile 00
 0,0,0,0,0,0,1,1,
 0,0,0,0,0,1,1,2,
@@ -167,7 +167,7 @@ u16 sprites[] = {
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
 
-#define P_L_MOVE 3      // player moving LEFT
+#define P_L_MOVE P_R_MOVE+1 // player moving LEFT
 // Tile 00
 0,0,0,0,0,0,0,1,
 0,0,0,0,0,0,0,2,
@@ -206,7 +206,7 @@ u16 sprites[] = {
 1,1,3,0,0,0,0,0,
 
 
-#define ARROW_   4      // arrow sprite (to indicate current active player)
+#define ARROW_   P_L_MOVE+1 // arrow sprite (to indicate current active player)
 // Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
@@ -245,7 +245,7 @@ Y,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
 
 
-#define GROUND_  5      // ground sprite (for level)
+#define GROUND_     ARROW_+1        // ground sprite (for level)
 // Tile 00
 G,G,G,G,G,G,G,G,
 G,G,G,G,G,G,G,G,
@@ -284,7 +284,7 @@ G,G,G,G,G,G,G,G,
 G,G,G,G,G,G,G,G,
 
 
-#define KEY_     6      // key sprite (for level)
+#define KEY_        GROUND_+1       // key sprite (for level)
 // Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,BR2,BR2,BR2,BR2,
@@ -323,7 +323,7 @@ BR2,BR2,BR2,BR2,0,0,0,0,
 0,0,0,0,0,0,0,0,
 
 
-#define GOAL_    7      // goal sprite (for level)
+#define GOAL_       KEY_+1          // goal/door sprite (for level)
 // Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,BR,BR,BR,BR,
@@ -361,7 +361,45 @@ BR,BR,BR,BR,BR,BR,BR,0,
 BR,BR,BR,BR,BR,BR,BR,0,
 BR,BR,BR,BR,BR,BR,BR,0,
 
-#define BOMB_    8      // bomb sprite (for level)
+#define GOAL_OPEN   GOAL_+1         // goal/door opened sprite (for level)
+// Tile 00
+0,0,0,0,0,0,0,0,
+0,0,0,0,BR,BR,BR,BR,
+0,0,0,BR,BR,0,0,0,
+0,0,BR,BR,0,0,0,0,
+0,BR,BR,0,0,0,0,0,
+0,BR,0,0,0,0,0,0,
+0,BR,0,0,0,0,0,0,
+0,BR,0,0,0,0,0,0,
+// Tile 01
+0,0,0,0,0,0,0,0,
+BR,BR,BR,BR,0,0,0,0,
+0,0,0,BR,BR,0,0,0,
+0,0,0,0,BR,BR,0,0,
+0,0,0,0,0,BR,BR,0,
+0,0,0,0,0,0,BR,0,
+0,0,0,0,0,0,BR,0,
+0,0,0,0,0,0,BR,0,
+// Tile 02
+0,BR,0,0,0,0,0,0,
+0,BR,0,0,0,0,0,0,
+0,BR,0,0,0,0,0,0,
+0,BR,0,0,0,0,0,0,
+0,BR,0,0,0,0,0,0,
+0,BR,0,0,0,0,0,0,
+0,BR,0,0,0,0,0,0,
+0,BR,0,0,0,0,0,0,
+// Tile 03
+0,0,0,0,0,0,BR,0,
+0,0,0,0,0,0,BR,0,
+0,0,0,0,0,0,BR,0,
+0,0,0,0,0,0,BR,0,
+0,0,0,0,0,0,BR,0,
+0,0,0,0,0,0,BR,0,
+0,0,0,0,0,0,BR,0,
+0,0,0,0,0,0,BR,0,
+
+#define BOMB_       GOAL_OPEN+1     // bomb sprite (for level)
 // Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
@@ -400,7 +438,7 @@ R,R,R,R,R,R,R2,0,
 R2,R2,R2,R2,R2,R2,0,0,
 
 
-#define MONSTER_L 9      // monster sprite (facing LEFT) 
+#define MONSTER_L   BOMB_+1         // monster sprite (facing LEFT) 
 // Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
@@ -438,7 +476,7 @@ B,B,B,B,B,B2,B2,B2,
 B,B,B2,B2,B2,B2,B2,0,
 B2,B2,B2,B2,B2,B2,0,0,
 
-#define MONSTER_R 10      // monster sprite (facing RIGHT)
+#define MONSTER_R   MONSTER_L+1     // monster sprite (facing RIGHT)
 // Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
@@ -476,7 +514,7 @@ B,B,B,B,B,B2,B2,B2,
 B,B,B,B,B,B2,B2,0,
 B2,B2,B2,B2,B2,B2,0,0,
 
-#define SHIELD_ 11      // shield sprite (for level)
+#define SHIELD_     MONSTER_R+1     // shield sprite (for level)
 //Tile 00
 0,P,P,P,P,P,P,P,
 P,P,0,0,0,0,0,0,
@@ -518,7 +556,7 @@ P,P,0,0,0,0,P,P,
 0,P,P,P,P,P,P,0,
 
 
-#define BUTTON_ 12      // button sprite (for level)
+#define BUTTON_     SHIELD_+1       // button sprite (for level)
 //Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
@@ -561,7 +599,7 @@ P,P,0,0,0,0,P,P,
 8,8,8,0,0,0,0,0,
 
 
-#define BUTTON_PRESSED_ 13 // button pressed sprite (for level) optional
+#define BUTTON_PRESSED_ BUTTON_+1   // button pressed sprite (for level) optional
 //Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,
@@ -604,7 +642,7 @@ P,P,0,0,0,0,P,P,
 8,8,8,0,0,0,0,0,
 
 
-#define LETTER_A 14
+#define LETTER_A (BUTTON_PRESSED_+1)
 //Tile 00
 0,0,P,P,P,P,0,0,
 0,P,P,0,0,P,P,0,
