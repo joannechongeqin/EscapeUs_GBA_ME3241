@@ -5,7 +5,15 @@
 
 #include "menu.h"
 
-enum GameState { MAIN_MENU, GAMEPLAY, END, WIN_LEVEL1 } gameState;
+enum GameState {
+    MAIN_MENU,
+    LEVEL1,
+    LEVEL2,
+    LEVEL1_COMPLETE,
+    LEVEL2_COMPLETE,
+    GAME_OVER
+} gameState;
+
 
 void updateMovingSpritesState() {
     updatePlayers();
@@ -48,12 +56,7 @@ void updateGameState() {
             checkBelowIs(players[i].x, players[i].y, INVALID) || // fall off ground
             getTileAt(playerLeft  + LOSE_TOLERANCE, players[i].y) == BOMB || // check if leftmost of player touch bomb (with some tolerance)
             getTileAt(playerRight - LOSE_TOLERANCE, players[i].y) == BOMB) {  // check if rightmost of player touch bomb (with some tolerance)
-                gameState = END;
-                if (gameState == WIN_LEVEL1) {
-                    gameState = WIN_LEVEL1; // restart level 2 (TODO: IF WANT EVIL JUST RESTART FROM LEVEL 1 HOHO. i doing this for now cuz i lazy to replay everything for debugging)
-                } else {
-                    gameState = END; // go to main menu
-                }
+                gameState = GAME_OVER;
                 showEndingScreen(0);
         }
     }
@@ -69,11 +72,10 @@ void updateGameState() {
 
         // WIN
         if (getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y) == GOAL) { // touch goal
-            
-            if (gameState == WIN_LEVEL1) { // win level 2
-                gameState = END; // go to level 1
-            } else { // win level 1
-                gameState = WIN_LEVEL1; // go to level 2
+            if (gameState == LEVEL1) {
+                gameState = LEVEL1_COMPLETE;
+            } else if (gameState == LEVEL2) {
+                gameState = LEVEL2_COMPLETE;
             }
             showEndingScreen(1);
         }
@@ -109,7 +111,10 @@ static void startGame(int level) {
     drawLevel(level);
     activePlayerIndex = 0;  // reset active player index to 0 (first player)
     gotKey = FALSE;         // reset key state
-    gameState = GAMEPLAY;
+    if (level == 0)
+        gameState = LEVEL1;
+    else if (level == 1)
+        gameState = LEVEL2;
 }
 
 
@@ -124,19 +129,24 @@ void checkbutton(void) {
     int aPressed     = keyPressedWithCooldown(buttons, KEY_A, &KEY_A_cooldown);     // "X" on keyboard
 
     if (startPressed || aPressed) {
-        if (gameState == MAIN_MENU) { // start level 1 from main menu
+        // start level 1 from main menu
+        if (gameState == MAIN_MENU) {
             startGame(0);
-        } else if (gameState == WIN_LEVEL1) { // start level 2 after winning level 1
-            startGame(1);
+        } 
+        // complete level 1, start level 2
+        if (gameState == LEVEL1_COMPLETE) {
+            startGame(1); 
+            gameState = LEVEL2;
         }
-        else if (gameState == END) { // return to main menu after game end
+        // return to main menu after game end
+        else if (gameState == GAME_OVER || gameState == LEVEL2_COMPLETE) {
             clearScreen();
             showMainMenu();
             gameState = MAIN_MENU;
         }
     }
 
-    if (gameState == GAMEPLAY) {
+    if (gameState == LEVEL1 || gameState == LEVEL2) {
         // switch player
         if (keyPressedWithCooldown(buttons, KEY_B, &KEY_B_cooldown)) { // "Z" on keyboard
             switchPlayer();

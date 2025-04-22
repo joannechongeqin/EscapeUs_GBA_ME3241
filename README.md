@@ -52,7 +52,7 @@ To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`. `()` are
     - detect if reach door with key -> WIN ✅
     - detect if hit bomb -> LOSE ✅
     - detect if fall off platform -> LOSE ✅
-    - gameState naming is confusing... but i lazy fix now will fix one day
+    - gameState naming is confusing... but i lazy fix now will fix one day ✅
 - tile/collision detection `level.c`:
     - add some tolerance to getTileXXX() -> or math got some issue i think TT ✅ IT'S FINALLY WORKING NOW (I HOPE), basically just added more checks at diff pixels, lmk if noticed any bug
 - `player.c`:
