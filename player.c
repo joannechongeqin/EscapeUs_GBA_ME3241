@@ -79,9 +79,24 @@ static int _canJump(Player* p) {
     return p->onGround;
 }
 
+static int abs(int x) {
+    return (x < 0) ? -x : x;
+}   
+
 void playerJump() {
     Player* p = currentPlayer();
     if (_canJump(p)) { // only jump if on ground
+        // block jump if another player is directly on top
+        for (int i = 0; i < NUM_PLAYERS; i++) {
+            if (i == activePlayerIndex) continue; // skip self
+            Player* other = &players[i];
+            int xOverlap = abs(p->x - other->x) < SPRITE_SIZE - 1;
+            int yAbove = p->y == other->y + SPRITE_SIZE;
+            if (xOverlap && yAbove) {
+                return;
+            }
+        }
+
         p->vy = JUMP_STRENGTH;
         p->onGround = 0;
     }

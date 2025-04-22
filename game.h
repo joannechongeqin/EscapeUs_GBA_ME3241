@@ -104,10 +104,12 @@ void updateGameState() {
 int START_cooldown = 0;
 int KEY_A_cooldown = 0;
 int KEY_B_cooldown = 0;
+int KEY_UP_cooldown = 0;
 static void updateCooldown() {
     if (START_cooldown > 0) START_cooldown--;
     if (KEY_A_cooldown > 0) KEY_A_cooldown--;
     if (KEY_B_cooldown > 0) KEY_B_cooldown--;
+    if (KEY_UP_cooldown > 0) KEY_UP_cooldown--;
 }
 static int keyPressedWithCooldown(u16 buttons, int key, int* cooldownVar) {
     if ((buttons & key) == key && *cooldownVar == 0) {
@@ -176,7 +178,7 @@ void checkbutton(void) {
                 playerStop(); // stop if no horizontal movement keys are held
             }
 
-            if ((buttons & KEY_UP) == KEY_UP || (buttons & KEY_A) == KEY_A) { // jump / interact with goal
+            if (keyPressedWithCooldown(buttons, KEY_UP, &KEY_UP_cooldown)|| keyPressedWithCooldown(buttons, KEY_A, &KEY_A_cooldown)) { // jump / interact with goal) { // "C" on keyboard
                 int tile = getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y);
                 if (tile == GOAL) {
                     // first player with key opens door
