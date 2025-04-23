@@ -67,6 +67,12 @@ void updateGameState() {
                 getTileAt(playerLeft  + LOSE_TOLERANCE, players[i].y) == BOMB || // check if leftmost of player touch bomb (with some tolerance)
                 getTileAt(playerRight - LOSE_TOLERANCE, players[i].y) == BOMB)) {  // check if rightmost of player touch bomb (with some tolerance)
                 gameState = GAME_OVER;
+                if (players[i].spriteIndex == P_R_MOVE) {
+                    players[i].spriteIndex = P_R_DEAD; // dead sprite facing right
+                } else  {
+                    players[i].spriteIndex = P_L_DEAD; // dead sprite facing left (default)
+                }
+                drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y); // draw dead player sprite
                 showEndingScreen(0);
         }
     }
