@@ -14,6 +14,8 @@
 #define BR2 7 // MUSTARD BROWN
 #define B 8 // LIGHT BLUE
 #define B2 9 // DARK BLUE
+#define G 15 // pure green
+#define G2 14 // darkest green
 
 // RGB palette used for sprites. The sprites defined below use the index of the color in the palette (so black = 0, white = 1, ...)
 int palette[] = {
