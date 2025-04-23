@@ -42,20 +42,20 @@ extern u16 sprites[];
 #define P_IDLE   BLANK+1    // player idle facing FRONT (do player dead sprite also?)
 #define P_R_MOVE P_IDLE+1   // player moving RIGHT
 #define P_L_MOVE P_R_MOVE+1 // player moving LEFT
-#define ARROW_   P_L_MOVE+1 // arrow sprite (to indicate current active player)
+#define P_R_DEAD P_L_MOVE+1 // player is dead (facing left)
+#define P_L_DEAD P_R_DEAD+1 // player is dead (facing right)
+#define ARROW_   P_L_DEAD+1 // arrow sprite (to indicate current active player)
 
 #define GROUND_     ARROW_+1        // ground sprite (for level)
 #define KEY_        GROUND_+1       // key sprite (for level)
 #define GOAL_       KEY_+1          // goal/door sprite (for level)
 #define GOAL_OPEN   GOAL_+1         // goal/door opened sprite (for level)
 #define BOMB_       GOAL_OPEN+1     // bomb sprite (for level)
-#define MONSTER_L   BOMB_+1         // monster sprite (facing LEFT) 
+#define EXPLODED    BOMB_+1         // bomb exploded sprite
+#define MONSTER_L   EXPLODED+1      // monster sprite (facing LEFT) 
 #define MONSTER_R   MONSTER_L+1     // monster sprite (facing RIGHT)
-#define SHIELD_     MONSTER_R+1     // shield sprite (for level)
-#define BUTTON_     SHIELD_+1       // button sprite (for level)
-#define BUTTON_PRESSED_ BUTTON_+1   // button pressed sprite (for level) optional
 
-#define LETTER_A (BUTTON_PRESSED_+1)
+#define LETTER_A (MONSTER_R+1)
 #define LETTER_B (LETTER_A + 1)
 #define LETTER_C (LETTER_B + 1)
 #define LETTER_D (LETTER_C + 1)
