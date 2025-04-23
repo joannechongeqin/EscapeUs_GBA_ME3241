@@ -10,9 +10,9 @@ int _firstXtoCentralizeText(int text_length, int letter_interval) {
 
 void showMainMenu() {
     // DRAW TITLE
-    int title_letters[TITLE_LENGTH] = {LETTER_T, LETTER_I, LETTER_T, LETTER_L, LETTER_E}; // TODO: THINK OF A TITLE
+    int title_letters[TITLE_LENGTH] = {TITLE_E, TITLE_S, TITLE_C, TITLE_A, TITLE_P, TITLE_E, BLANK, TITLE_U, TITLE_S, BLANK};
     int title_first_x = _firstXtoCentralizeText(TITLE_LENGTH, LETTER_INTERVAL);
-    int title_y = 40;
+    int title_y = 50;
     for (int i = 0; i < TITLE_LENGTH; i++) 
         drawSprite(title_letters[i], TITLE_SPRITE_N + i, title_first_x + LETTER_INTERVAL * i, title_y);
 

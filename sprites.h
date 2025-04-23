@@ -16,7 +16,7 @@ extern u16 sprites[];
 #define LETTER_SIZE       8   // size of each letter in pixels (8x8)
 #define LETTER_INTERVAL   16  // interval between letters in pixels
 
-#define TITLE_LENGTH      5     // <title> in menu
+#define TITLE_LENGTH      10     // <title> in menu
 #define START_LENGTH1     11    // "PRESS START" button in menu
 #define START_LENGTH2     7     // "TO PLAY" in menu
 #define ENDING_LENGTH     8     // "YOU WIN!" or "YOU LOSE" in ending screen
@@ -82,5 +82,12 @@ extern u16 sprites[];
 #define LETTER_Y (LETTER_X + 1)
 #define LETTER_Z (LETTER_Y + 1)
 #define LETTER_EXCLAMATION (LETTER_Z + 1)
+
+#define TITLE_E (LETTER_EXCLAMATION+1)
+#define TITLE_S (TITLE_E+1)
+#define TITLE_C (TITLE_S+1)
+#define TITLE_A (TITLE_C+1)
+#define TITLE_P (TITLE_A+1)
+#define TITLE_U (TITLE_P+1)
 
 #endif
