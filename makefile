@@ -10,7 +10,7 @@ include $(HAMDIR)/system/master.mak
 #
 # Set the name of your desired GBA image name here
 #
-PROGNAME=final_project
+PROGNAME=escape_us
 
 #
 # Set a list of files you want to compile
