@@ -26,10 +26,9 @@ void Handler(void)
 // -----------------------------------------------------------------------------
 int main(void)
 {
-    // Set Mode 2 (not applicable anymore)
-    // *(unsigned short *) 0x4000000 = 0x40 | 0x2 | 0x1000;
+    // Set Mode 2 (not applicable anymore, use default Mode 0 instead since we not doing background)
+    *(unsigned short *) 0x4000000 = 0x40 | 0x0 | 0x1000;
     
-    // use default Mode 0 
 
     fillPalette();
     fillSprites();
