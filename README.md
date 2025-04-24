@@ -47,3 +47,5 @@ https://github.com/user-attachments/assets/5a54a100-f698-4580-ad05-a17290e8c554
 | **mygbalib.h/.c**   | - Provides rendering helper functions to draw and delete sprites on the screen, as well as clear the screen. |
 | **gba.h**           | - Contains constant definitions for the GBA hardware, including memory addresses, screen configurations, and other system constants. |
 
+
+> This GBA game was developed as part of the final project for the ME3241 Microprocessor Applications course in AY2024/2025 Semester 2.
