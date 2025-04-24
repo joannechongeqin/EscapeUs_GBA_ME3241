@@ -40,19 +40,19 @@ extern u16 sprites[];
 // !!! implementation in sprites.c !!!
 #define BLANK   0       // empty sprite (mainly for delSprite())
 
-#define P1_IDLE   BLANK+1    // player idle facing FRONT (do player dead sprite also?)
-#define P1_R_MOVE P1_IDLE+1   // player moving RIGHT
-#define P1_L_MOVE P1_R_MOVE+1 // player moving LEFT
-#define P1_R_DEAD P1_L_MOVE+1 // player is dead (facing left)
-#define P1_L_DEAD P1_R_DEAD+1 // player is dead (facing right)
+#define P1_IDLE   BLANK+1       // player idle facing FRONT (do player dead sprite also?)
+#define P1_R_MOVE P1_IDLE+1     // player moving RIGHT
+#define P1_L_MOVE P1_R_MOVE+1   // player moving LEFT
+#define P1_R_DEAD P1_L_MOVE+1   // player is dead (facing left)
+#define P1_L_DEAD P1_R_DEAD+1   // player is dead (facing right)
 
-#define P2_IDLE   P1_L_DEAD+1    // player idle facing FRONT (do player dead sprite also?)
-#define P2_R_MOVE P2_IDLE+1   // player moving RIGHT
-#define P2_L_MOVE P2_R_MOVE+1 // player moving LEFT
-#define P2_R_DEAD P2_L_MOVE+1 // player is dead (facing left)
-#define P2_L_DEAD P2_R_DEAD+1 // player is dead (facing right)
+#define P2_IDLE   P1_L_DEAD+1   // player idle facing FRONT (do player dead sprite also?)
+#define P2_R_MOVE P2_IDLE+1     // player moving RIGHT
+#define P2_L_MOVE P2_R_MOVE+1   // player moving LEFT
+#define P2_R_DEAD P2_L_MOVE+1   // player is dead (facing left)
+#define P2_L_DEAD P2_R_DEAD+1   // player is dead (facing right)
 
-#define ARROW_   P2_L_DEAD+1 // arrow sprite (to indicate current active player)
+#define ARROW_   P2_L_DEAD+1    // arrow sprite (to indicate current active player)
 
 #define GROUND_     ARROW_+1        // ground sprite (for level)
 #define KEY_        GROUND_+1       // key sprite (for level)
