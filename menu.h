@@ -32,8 +32,9 @@ void showMainMenu() {
     // DRAW SOME EXTRA SPRITES TO LOOK GOOD
     drawSprite(P1_R_MOVE, PLAYER1_N, 60, 36);
     drawSprite(ARROW_, ARROW_SPRITE_N, 60, 20);
-	drawSprite(KEY_, KEY_SPRITE_N, 112, 12);
-	drawSprite(GROUND_, LEVEL_SPRITE_N, 112, 38);
+    drawSprite(P2_R_DEAD, PLAYER2_N, 80, 36);
+	 drawSprite(KEY_, KEY_SPRITE_N, 118, 8);
+	 drawSprite(GROUND_, LEVEL_SPRITE_N, 118, 28);
     drawSprite(GOAL_, LEVEL_SPRITE_N + 1, 160, 36);
 }
 

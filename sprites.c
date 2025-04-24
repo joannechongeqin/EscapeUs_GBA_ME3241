@@ -22,7 +22,8 @@
 #define R3  15  // light red
 #define PK  16  // pink
 #define PK2 17  // dark pink
-
+#define GR  18  // ground grey 1
+#define GR2 19  // ground grey 2
 
 // RGB palette used for sprites. The sprites defined below use the index of the color in the palette (so black = 0, white = 1, ...)
 int palette[] = {
@@ -42,8 +43,10 @@ int palette[] = {
     RGB(30,21,6),   // light orange 13  - exploded
     RGB(30,14,4),   // orange 14        - exploded
     RGB(28,7,8),    // light red 15     - exploded
-    RGB(28,14,14),  // pink 16
-    RGB(22,8,12),   // dark pink 17
+    RGB(28,14,14),  // pink 16          - player
+    RGB(22,8,12),   // dark pink 17     - player
+    RGB(9,10,10),   // ground grey 1 18 - ground
+    RGB(7,8,7)      // ground grey 2 19 - ground
 };
 
 // Sprite array, defining each big 16x16 sprite as 4 8x8 tiles, using the palette above
@@ -516,42 +519,41 @@ Y,0,0,0,0,0,0,0,
 
 #define GROUND_     ARROW_+1        // ground sprite (for level)
 // Tile 00
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-// Tile 0G
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
+GR2,GR2,GR,GR,GR2,GR2,GR2,GR,
+GR,GR2,GR,GR2,GR,GR2,GR2,GR2,
+GR2,GR2,GR2,GR,GR2,GR2,GR2,GR,
+GR2,GR2,GR2,GR2,GR2,GR2,GR,GR,
+GR,GR2,GR2,GR,GR,GR2,GR2,GR2,
+GR2,GR2,GR2,GR2,GR,GR2,GR,GR,
+GR,GR2,GR2,GR,GR,GR2,GR,GR2,
+GR2,GR2,GR,GR2,GR2,GR2,GR2,GR2,
+// Tile 01
+GR,GR2,GR,GR2,GR2,GR2,GR2,GR,
+GR,GR2,GR2,GR,GR,GR2,GR,GR,
+GR2,GR2,GR,GR2,GR2,GR2,GR2,GR2,
+GR2,GR2,GR,GR2,GR2,GR2,GR2,GR,
+GR2,GR2,GR2,GR,GR2,GR2,GR2,GR2,
+GR,GR2,GR,GR2,GR,GR,GR,GR2,
+GR2,GR2,GR2,GR,GR2,GR2,GR2,GR,
+GR2,GR2,GR2,GR2,GR2,GR2,GR2,GR,
 // Tile 02
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
+GR,GR2,GR,GR,GR,GR2,GR2,GR,
+GR2,GR2,GR,GR2,GR2,GR2,GR,GR,
+GR2,GR2,GR2,GR,GR,GR2,GR,GR2,
+GR2,GR2,GR2,GR,GR2,GR2,GR2,GR2,
+GR,GR2,GR,GR2,GR2,GR2,GR,GR2,
+GR,GR2,GR,GR2,GR2,GR2,GR,GR2,
+GR2,GR2,GR,GR2,GR2,GR2,GR2,GR2,
+GR,GR,GR2,GR2,GR,GR2,GR,GR2,
 // Tile 03
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-G,G,G,G,G,G,G,G,
-
+GR2,GR2,GR,GR2,GR,GR2,GR,GR,
+GR,GR2,GR2,GR2,GR2,GR2,GR2,GR2,
+GR,GR2,GR2,GR,GR,GR,GR2,GR2,
+GR2,GR2,GR,GR2,GR2,GR2,GR2,GR,
+GR,GR,GR2,GR2,GR2,GR2,GR2,GR2,
+GR2,GR2,GR,GR,GR2,GR2,GR,GR,
+GR2,GR2,GR2,GR,GR,GR2,GR,GR2,
+GR2,GR2,GR2,GR2,GR,GR,GR2,GR,
 
 #define KEY_        GROUND_+1       // key sprite (for level)
 // Tile 00

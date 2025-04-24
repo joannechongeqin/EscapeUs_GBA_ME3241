@@ -403,6 +403,26 @@ flat_data = [
 'R3', 0, 0, 0, 0, 0, 0, 'R3', 'R3', 0, 0, 0, 0, 0, 0, 0
 ]
 
+# ground
+flat_data = [
+    'GR2', 'GR2', 'GR', 'GR', 'GR2', 'GR2', 'GR2', 'GR', 'GR', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR2', 'GR', 
+'GR', 'GR2', 'GR', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR', 'GR', 'GR2', 'GR', 'GR', 
+'GR2', 'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 
+'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR', 'GR', 'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR2', 'GR', 
+'GR', 'GR2', 'GR2', 'GR', 'GR', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR2', 
+'GR2', 'GR2', 'GR2', 'GR2', 'GR', 'GR2', 'GR', 'GR', 'GR', 'GR2', 'GR', 'GR2', 'GR', 'GR', 'GR', 'GR2', 
+'GR', 'GR2', 'GR2', 'GR', 'GR', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR', 
+'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR', 
+'GR', 'GR2', 'GR', 'GR', 'GR', 'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR', 'GR2', 'GR', 'GR2', 'GR', 'GR', 
+'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR', 'GR', 'GR', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 
+'GR2', 'GR2', 'GR2', 'GR', 'GR', 'GR2', 'GR', 'GR2', 'GR', 'GR2', 'GR2', 'GR', 'GR', 'GR', 'GR2', 'GR2', 
+'GR2', 'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR2', 'GR', 
+'GR', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR', 'GR2', 'GR', 'GR', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 
+'GR', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR', 'GR', 'GR2', 'GR2', 'GR', 'GR', 
+'GR2', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR', 'GR', 'GR2', 'GR', 'GR2', 
+'GR', 'GR', 'GR2', 'GR2', 'GR', 'GR2', 'GR', 'GR2', 'GR2', 'GR2', 'GR2', 'GR2', 'GR', 'GR', 'GR2', 'GR'
+]
+
 matrix = [flat_data[i:i+16] for i in range(0, len(flat_data), 16)]
 
 def extract_tile(matrix, row_start, col_start):
@@ -431,7 +451,7 @@ print_flat(bottom_right)
 
 
 # scale 0-255 colour to 0-31 range
-r, g, b = 182,73,102
+r, g, b = 65, 68, 61
 
 
 def scale_colors(r, g, b):
