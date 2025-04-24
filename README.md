@@ -1,67 +1,44 @@
-### Code Structure
-- header/include dependency chain: `main.c -> game.h -> menu.h -> level.h -> mygbalib.h -> player.h -> sprites.h -> gba.h`
-- note: need to split `.h` and `.c`, else might get `multiple definitions` error
-- helpful shortcut keys: `F10` to `clean` (remove all build files) and `F7` to `Build + Run in VBA`
+## ***Escape Us***  
+> *A 2D puzzle platformer game where you take control of two crewmates — suspiciously familiar faces from* ***Among Us*** *— who have been ejected into a dangerous dungeon.*
+> *Whether you are innocent or an impostor is anyone's guess, but one thing is for sure: you need to work together to survive and escape.*
 
-| File(s)              | Description / Notes                                                                                  |
-|----------------------|------------------------------------------------------------------------------------------------------|
-| `main.c`             | project entry point                                                                                  |
-| `game.h`             | checkbutton, main gameplay logic (update game state)                                                 |
-| `menu.h`             | simple menu to start a session, display win / lose ending screen                                     |
-| `level.h/.c`         | level designs, store and get data for each level, draw level on screen                               |
-| `mygbalib.h/.c`      | graphics rendering (drawSprite, clearScreen etc)                                                     |
-| `player.h/.c`        | player movement (left/right, jump), gravity, switch player, update players                           |
-| `sprites.h/.c`       | sprites info *(if changing `#define` values, update both `.h` and `.c`, technically the `.h` one is being used everywhere else but just putting in `.c` for easy reference)* |
-| `gba.h`              | gba constant value defines                                                                             |
+- **Your goal is simple:** collect the key, unlock the exit door, and guide BOTH crewmates safely to the exit.
+- **Spot a platform that is just out of reach?** Switch between the two crewmates and cooperate in creative ways to reach it!
+- **The mission fails if:** either of the crewmates falls off the platform, touches a bomb, or runs into a roaming slime monster.
 
+## How To Play
+To play, open and run `escape_us.gba` using `VisualBoyAdvance.exe`. The following are GBA button controls，with their equivalent keybindings for PC/laptop keyboards (shown in parentheses).
 
-### Current Progress
-- dummy start + ending screen
-- correct win / lose gamestate detection
-- cooldown button press for `START`, `A`, `B` to prevent a single button press from being registered multiple times
-- using sprites/tiles of 16x16 pixels (GBA screen size 240x160), able to create [levels with static background of size 10x16 tiles](https://docs.google.com/spreadsheets/d/1p4TTlj3i2GXlGYyscvo-ErYltRo4AOVGPNbYYW5sz0M/edit?gid=0#gid=0)
-- support two characters -> can switch players, left/right/jump movements with correct position update, ground + left/right/top obstacles detection, player can stand on each other
-- sprite data for basic letters (A-Z)
-- BOTH players must enter goal to win
-- first level (kinda completed): 
-    - to reach the key, player has to step on each other to reach a tile that is unable to reach by a normal jump from ground
-    - got a few gaps that player(s) can fall and die
-    - got a bomb in between which when player(s) touch will die
-- second level (still in progress):
-    - a moving monster that moves back and forth between two points
-    - TODO IDEAS: thinking of having a shield before the key where one player has to press the button to deeactivate the shield, so that the other player can get the key
+| **Key**                        | **Action**                                                             |
+|--------------------------------|------------------------------------------------------------------------|
+| `START` (`ENTER`) or `A` (`Z`) | Start the game, proceed to the next level, or return to the main menu. |
+| `→`                            | Move right.                                                            |
+| `←`                            | Move left.                                                             |
+| `↑` or `A` (`Z`)               | Jump or enter the exit door.                                           |
+| `B` (`X`)                      | Switch between crewmates.                                              |
+
+## Game Elements
+| **Game Element** | **Description** |
+|------------------|-----------------|
+| **Crewmate(s)**<br><img src="assets/crewmate.png" width="50"/> | You in the game! The character(s) that you control. |
+| **Arrow**<br><img src="assets/arrow.png" width="50"/> | A visual cue that points to the crewmate you are currently controlling. |
+| **Platform**<br><img src="assets/platform.png" width="50"/> | These are your safe zones within the game. Watch your steps while moving around! |
+| **Key**<br><img src="assets/key.png" width="50"/> | The key is your ticket to freedom. It can be passed between crewmates if they’re close enough when you switch between characters. |
+| **Exit**<br><img src="assets/exit.png" width="50"/> | Your way out — but only if you have gotten the key first. |
+| **Bomb**<br><img src="assets/bomb.png" width="50"/> | Explosive and dangerous! |
+| **Slime Monster**<br><img src="assets/slime_monster.png" width="50"/> | While they may look cute, these little guys are deadly. They patrol back and forth between two points. |
 
 
-### Controls
-To play, open and run `final_project.gba` using `VisualBoyAdvance.exe`. `()` are keybindings for PC/laptop keyboard. 
-| Key                            | Action                                                               |
-|--------------------------------|----------------------------------------------------------------------|
-| `START (ENTER)` or `A (Z)`     | start game from main menu, go to next level, return to main menu after game has ended |
-| `RIGHT`                        | move right                                                           |
-| `LEFT`                         | move left                                                            |
-| `UP` or `A (Z)`                | jump / enter goal (door)                                             |
-| `B (X)`                        | switch player                                                        |
 
-### TODOs
-- think of a game title!
-- `menu.h`
-    - fix start screen, youLose / youWin screen -> refactor into a for loop? ✅
-- `sprites.h/.c`
-    - fix sprites data (player, bomb, arrow, key, door etc) and color palette data 
-- game logic `game.h` and `player.h/.c`: 
-    - detect if get key -> key follows player around after obtaining it ✅
-    - detect if reach door with key -> WIN ✅
-    - detect if hit bomb -> LOSE ✅
-    - detect if fall off platform -> LOSE ✅
-    - gameState naming is confusing... but i lazy fix now will fix one day ✅
-- tile/collision detection `level.c`:
-    - add some tolerance to getTileXXX() -> or math got some issue i think TT ✅ IT'S FINALLY WORKING NOW (I HOPE), basically just added more checks at diff pixels, lmk if noticed any bug
-- `player.c`:
-    - logic for: (1) players cannot walk into each other, (2) players can step on each other ✅
-- ideas: 
-    - make two players and press `A` to switch player to control? -> need to refactored `player.h/.c` into a "class"-like structure first (C dont support real class) ✅
-    - random falling bombs from the top?
-    - button / pushable box? for the two players to co-op
-    - bug to fix: sometimes player switched more than once when `A` is pressed once -> add cooldown/delay for button press ✅
-    - bug to fix: after restarting the game for a few times, some of the tile elements not rendering properly -> not sure if is a memory overflow thing or what hmmmm ✅ (yes it's an overflow thing cuz `level_sprite_N` was a global variable that keep on adding without resetting)
-    - press `UP` and enter door effect to win? both players need to enter door instead of one only? ✅
+## Code Structure
+| **File**            | **Description** |
+|---------------------|-----------------|
+| **main.c**          | - Serves as the main entry point for the game.<br>- Initializes the game environment and sets up configurations, such as loading the color palette and sprite data into GBA memory.<br>- Handles GBA interrupts, specifically the timer interrupt, which is triggered at a certain frequency to check user inputs (button presses) and refresh screen graphics. |
+| **game.h**          | - Contains the primary logic of the game.<br>- Checks for button input (with cooldown feature). Based on the user input, updates the game state.<br>- Checks win and loss conditions to update and track game states.<br>- Manages the core game flow and transitions between menus, levels, and game-over screens. |
+| **menu.h**          | - Handles the display of the main menu and the ending screens. |
+| **level.h/.c**      | - Manages the structure of the game levels. Each level is represented by a grid of tiles, where each tile is 16x16 pixels (the standard sprite size). The GBA screen, with a resolution of 240x160 pixels, is divided into a 10x16 tile grid.<br>- Stores and renders level data on screen, including the initialization and movement logic of slime monsters.<br>- Contains helper functions to obtain the types for static tiles at specific coordinates, for collision detection and evaluating the game state. |
+| **player.h/.c**     | - Manages player (crewmate) attributes (e.g., position, velocity) and handles interactions with the environment.<br>- Contains the main logic for player movements and switching between players.<br>- Implements core physics features such as gravity, jumping, falling, and landing on surfaces or other players.<br>- Performs collision detection to prevent movement through walls, ceilings, obstacles, or other players. |
+| **sprites.h/.c**    | - Stores information about the sprite color palette and the actual sprite data (the graphical representation of the elements). Each sprite is represented as a 16x16 pixel image, which is divided into four 8x8 tiles. |
+| **mygbalib.h/.c**   | - Provides rendering helper functions to draw and delete sprites on the screen, as well as clear the screen. |
+| **gba.h**           | - Contains constant definitions for the GBA hardware, including memory addresses, screen configurations, and other system constants. |
+
