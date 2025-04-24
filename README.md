@@ -6,7 +6,7 @@
 - **Spot a platform that is just out of reach?** Switch between the two crewmates and cooperate in creative ways to reach it!
 - **The mission fails if:** either of the crewmates falls off the platform, touches a bomb, or runs into a roaming slime monster.
 
-## How To Play
+### How To Play
 To play, open and run `escape_us.gba` using `VisualBoyAdvance.exe`. The following are GBA button controls，with their equivalent keybindings for PC/laptop keyboards (shown in parentheses).
 
 | **Key**                        | **Action**                                                             |
@@ -17,7 +17,7 @@ To play, open and run `escape_us.gba` using `VisualBoyAdvance.exe`. The followin
 | `↑` or `A` (`Z`)               | Jump or enter the exit door.                                           |
 | `B` (`X`)                      | Switch between crewmates.                                              |
 
-## Game Elements
+### Game Elements
 | **Game Element** | **Description** |
 |------------------|-----------------|
 | **Crewmate(s)**<br><img src="assets/crewmate.png" width="50"/> | You in the game! The character(s) that you control. |
@@ -28,9 +28,14 @@ To play, open and run `escape_us.gba` using `VisualBoyAdvance.exe`. The followin
 | **Bomb**<br><img src="assets/bomb.png" width="50"/> | Explosive and dangerous! |
 | **Slime Monster**<br><img src="assets/slime_monster.png" width="50"/> | While they may look cute, these little guys are deadly. They patrol back and forth between two points. |
 
+### Spoiler Alert!: Complete Walkthrough Video
+https://github.com/user-attachments/assets/a9fcdbac-9fb1-4b0c-b6a6-0e0c3f816914
+
+### All Ways to Die
+https://github.com/user-attachments/assets/5a54a100-f698-4580-ad05-a17290e8c554
 
 
-## Code Structure
+### Code Structure
 | **File**            | **Description** |
 |---------------------|-----------------|
 | **main.c**          | - Serves as the main entry point for the game.<br>- Initializes the game environment and sets up configurations, such as loading the color palette and sprite data into GBA memory.<br>- Handles GBA interrupts, specifically the timer interrupt, which is triggered at a certain frequency to check user inputs (button presses) and refresh screen graphics. |
