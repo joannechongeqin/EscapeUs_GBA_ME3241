@@ -48,7 +48,7 @@ int main(void)
     // Set Timer Mode
     // --> TIMER_FREQUENCY_1024 --> 61.025 micro seconds per tick
     // --> interrupt every 100 Hz (10 ms) --> 0.01 s / (61.025e-6) = 164 ticks
-    REG_TM0D = 65208 - 164;													// set timer initial value
+    REG_TM0D = 65535 - 164;													// set timer initial value
     REG_TM0CNT |= TIMER_FREQUENCY_1024 | TIMER_ENABLE | TIMER_INTERRUPTS;	// set timer frequency and enable timer
 
     while(1);
