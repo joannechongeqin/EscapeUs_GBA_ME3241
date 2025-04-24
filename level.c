@@ -29,6 +29,19 @@ int levels[MAX_LEVELS][TILES_Y][TILES_X] = {
         { PLAYER1,  PLAYER2,    0,      0,      0,      0,      0,MONSTER,      0,      0,      0,      0,      0,      0,      GROUND  }, // Row 7
         { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      0,      GROUND, GROUND  }, // Row 8
         { GROUND,   GROUND,     0,      0, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND,      0,      GROUND, GROUND, GROUND  }  // Row 9
+    },
+    {   // ----- LEVEL 2 -----
+        // 0     1       2       3       4       5       6       7       8       9      10      11      12      13      14
+        { 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    }, // Row 0
+        { 0,      0,      0,      0,      0,      0,      0,    KEY,      0,      0,      0,      0,      0,      0,      0    }, // Row 1
+        { 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    }, // Row 2
+        { 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    }, // Row 3
+        { 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    }, // Row 4
+        { 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    }, // Row 5
+        { 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    }, // Row 6
+        { 0,      0,      0,      0,      0,      0,      PLAYER1,GOAL,   PLAYER2,0,      0,      0,      0,      0,      0    }, // Row 7
+        { 0,      0,      0,      0,      GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, 0,      0,      0,      0    }, // Row 8
+        { 0,      0,      0,      0,      GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, GROUND, 0,      0,      0,      0    }  // Row 9
     } 
 };
 

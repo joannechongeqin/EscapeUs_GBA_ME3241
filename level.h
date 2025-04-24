@@ -3,7 +3,7 @@
 
 #include "mygbalib.h"
 
-#define MAX_LEVELS      2
+#define MAX_LEVELS      3
 #define SPRITE_SIZE     16
 #define TILES_X         (SCREEN_WIDTH / SPRITE_SIZE)  // 15
 #define TILES_Y         (SCREEN_HEIGHT / SPRITE_SIZE) // 10

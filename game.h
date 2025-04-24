@@ -9,8 +9,10 @@ enum GameState {
     MAIN_MENU,
     LEVEL1,
     LEVEL2,
+    LEVEL3,
     LEVEL1_COMPLETE,
     LEVEL2_COMPLETE,
+    LEVEL3_COMPLETE,
     GAME_OVER
 } gameState;
 
@@ -110,6 +112,8 @@ void updateGameState() {
             gameState = LEVEL1_COMPLETE;
         } else if (gameState == LEVEL2) {
             gameState = LEVEL2_COMPLETE;
+        } else if (gameState == LEVEL3) {
+            gameState = LEVEL3_COMPLETE;
         }
         showEndingScreen(1);
     }
@@ -145,6 +149,7 @@ static void startGame(int level) {
     doorOpen = FALSE;       // reset door state
     if (level == 0)      gameState = LEVEL1;
     else if (level == 1) gameState = LEVEL2;
+    else if (level == 2) gameState = LEVEL3;
 }
 
 
@@ -169,15 +174,19 @@ void checkbutton(void) {
             startGame(1); 
             gameState = LEVEL2;
         }
+        else if (gameState == LEVEL2_COMPLETE) {
+            startGame(2); 
+            gameState = LEVEL3;
+        }
         // return to main menu after game end
-        else if (gameState == GAME_OVER || gameState == LEVEL2_COMPLETE) {
+        else if (gameState == GAME_OVER || gameState == LEVEL3_COMPLETE) {
             clearScreen();
             showMainMenu();
             gameState = MAIN_MENU;
         }
     }
 
-    if (gameState == LEVEL1 || gameState == LEVEL2) {
+    if (gameState == LEVEL1 || gameState == LEVEL2 || gameState == LEVEL3) {
 
         // switch player
         if (keyPressedWithCooldown(buttons, KEY_B, &KEY_B_cooldown)) { // "Z" on keyboard
@@ -198,7 +207,7 @@ void checkbutton(void) {
 
             if (upPressed || aPressed) { // jump / interact with goal) { // "Z" on keyboard
                 int tile = getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y);
-                if (tile == GOAL) {
+                if (tile == GOAL && gotKey) {
                     // first player with key opens door
                     if (!doorOpen && gotKey && keyWithPlayer == activePlayerIndex) {
                         delSprite(KEY_SPRITE_N);
