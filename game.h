@@ -117,7 +117,7 @@ void updateGameState() {
 
 
 // cooldown to prevent a single button press from being registered multiple times
-#define COOLDOWN_TIME 5 // cooldown time in frames (for button press)
+#define COOLDOWN_TIME 10 // cooldown time in frames (for button press) - each frame 0.02s so 10 x 0.02s = 0.2s cooldown
 int START_cooldown = 0;
 int KEY_A_cooldown = 0;
 int KEY_B_cooldown = 0;
@@ -157,6 +157,7 @@ void checkbutton(void) {
 
     int startPressed = keyPressedWithCooldown(buttons, KEY_START, &START_cooldown); // "ENTER" on keyboard
     int aPressed     = keyPressedWithCooldown(buttons, KEY_A, &KEY_A_cooldown);     // "X" on keyboard
+    int upPressed   = keyPressedWithCooldown(buttons, KEY_UP, &KEY_UP_cooldown);     // "UP" on keyboard
 
     if (startPressed || aPressed) {
         // start level 1 from main menu
@@ -195,7 +196,7 @@ void checkbutton(void) {
                 playerStop(); // stop if no horizontal movement keys are held
             }
 
-            if (keyPressedWithCooldown(buttons, KEY_UP, &KEY_UP_cooldown)|| keyPressedWithCooldown(buttons, KEY_A, &KEY_A_cooldown)) { // jump / interact with goal) { // "C" on keyboard
+            if (upPressed || aPressed) { // jump / interact with goal) { // "Z" on keyboard
                 int tile = getTileAt(players[activePlayerIndex].x, players[activePlayerIndex].y);
                 if (tile == GOAL) {
                     // first player with key opens door
