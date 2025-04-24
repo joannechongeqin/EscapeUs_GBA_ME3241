@@ -12,7 +12,7 @@ void showMainMenu() {
     // DRAW TITLE
     int title_letters[TITLE_LENGTH] = {TITLE_E, TITLE_S, TITLE_C, TITLE_A, TITLE_P, TITLE_E, BLANK, TITLE_U, TITLE_S, BLANK};
     int title_first_x = _firstXtoCentralizeText(TITLE_LENGTH, LETTER_INTERVAL);
-    int title_y = 50;
+    int title_y = 60;
     for (int i = 0; i < TITLE_LENGTH; i++) 
         drawSprite(title_letters[i], TITLE_SPRITE_N + i, title_first_x + LETTER_INTERVAL * i, title_y);
 
@@ -28,8 +28,14 @@ void showMainMenu() {
     int to_play_y = 120;
     for (int i = 0; i < START_LENGTH2; i++) 
         drawSprite(to_play_letters[i], START_SPRITE_N + START_LENGTH1 + i, to_play_first_x + LETTER_INTERVAL * i, to_play_y);
-}
 
+    // DRAW SOME EXTRA SPRITES TO LOOK GOOD
+    drawSprite(P_R_MOVE, PLAYER1_N, 60, 36);
+    drawSprite(ARROW_, ARROW_SPRITE_N, 60, 20);
+	drawSprite(KEY_, KEY_SPRITE_N, 112, 12);
+	drawSprite(GROUND_, LEVEL_SPRITE_N, 112, 38);
+    drawSprite(GOAL_, LEVEL_SPRITE_N + 1, 160, 36);
+}
 
 void showEndingScreen(int isWin) {
     int win_letters[ENDING_LENGTH]  = {LETTER_Y, LETTER_O, LETTER_U, BLANK, LETTER_W, LETTER_I, LETTER_N, LETTER_EXCLAMATION};
