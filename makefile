@@ -19,7 +19,8 @@ OFILES +=main.o	\
 	player.o	\
 	sprites.o	\
 	mygbalib.o	\
-	level.o
+	level.o	\
+	asm_switchPlayer.o
 
 #
 # Set a list of libraries you want to link
@@ -50,4 +51,4 @@ include $(HAMDIR)/system/standard-targets.mak
 ##########################################################################################
 
 clean:
-	rm -f *.o *.i *.ii *.gba *.s
+	rm -f *.o *.i *.ii *.gba main.s player.s level.s sprite.s mygbalib.s

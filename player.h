@@ -6,7 +6,7 @@
 #define MOVE_INTERVAL       2   // number of pixel to move per step
 #define GRAVITY             1   // gravity force pulling the player down
 #define JUMP_STRENGTH       -8  // initial jump velocity
-#define NUM_PLAYERS         2   // NOTE: must have 2 players for now (some functions are hardcoded for 2 players)
+#define NUM_PLAYERS         2   // NOTE: must have 2 players for now (some functions are hardcoded for 2 players) --> if change this need change in asm_switchPlayer.s also
 
 typedef struct {
     int x, y;          // position

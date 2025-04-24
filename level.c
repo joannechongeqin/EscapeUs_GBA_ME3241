@@ -7,7 +7,7 @@ int levels[MAX_LEVELS][TILES_Y][TILES_X] = {
         { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 0
         { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 1
         { 0,    KEY,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 2 // TODO: UNCOMMENT THIS LINE
-        // { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY   },   // Row 2   // TODO: COMMENT THIS LINE (THIS JUST FOR DEBUGGING)
+        // { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY   },   // Row X   // TODO: COMMENT THIS LINE (THIS JUST FOR QUICK DEBUGGING)
         { 0,    GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0    },   // Row 3
         { 0,    0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GOAL },   // Row 4
         { 0,    0,      0,      GROUND, 0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GROUND }, // Row 5
@@ -19,9 +19,10 @@ int levels[MAX_LEVELS][TILES_Y][TILES_X] = {
     {   // ----- LEVEL 1 -----
         // 0     1       2       3       4       5       6       7       8       9      10      11      12      13      14
         { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0       }, // Row 0
-        { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY     }, // Row 1
+        { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY     }, // Row 1 // TODO: UNCOMMENT THIS LINE
         { 0,        0,          0,      0,      0,      0,      0,      0,      0,   BOMB,      0,      0,      GROUND, GROUND, GROUND  }, // Row 2
         { 0,        0,          0,      0,      0,      0,      0, GROUND, GROUND, GROUND, GROUND,      0,      0,      0,      0       }, // Row 3
+    	  // { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      KEY     }, // Row X // TODO: COMMENT THIS LINE (THIS JUST FOR QUICK DEBUGGING)
         { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      GOAL,   0       }, // Row 4
         { 0,        0,          0,      0,      0,      0, GROUND,      0,      0,      0,      0,      0,      0,      GROUND, 0       }, // Row 5
         { 0,        0,          0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0,      0       }, // Row 6 // NOTE: NEED MANUALLY PUT THIS INFO IN initLevelMonsters

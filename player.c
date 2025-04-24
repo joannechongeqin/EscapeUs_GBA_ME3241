@@ -48,13 +48,14 @@ void initPlayer(int index, int x, int y) {
     players[index].enteredGoal = FALSE; // not entered goal at start
 }
 
-void switchPlayer() {
-    playerStop(); // stop current player before switching
-    int originalIndex = activePlayerIndex;
-    do {
-        activePlayerIndex = (activePlayerIndex + 1) % NUM_PLAYERS;
-    } while (players[activePlayerIndex].enteredGoal && activePlayerIndex != originalIndex);
-}
+// ---switchPlayer() IS WRITTEN IN ASSEMBLY ---
+// void switchPlayer() {
+//     playerStop(); // stop current player before switching
+//     int originalIndex = activePlayerIndex;
+//     do {
+//         activePlayerIndex = (activePlayerIndex + 1) % NUM_PLAYERS;
+//     } while (players[activePlayerIndex].enteredGoal && activePlayerIndex != originalIndex);
+// }
 
 void playerMoveRight() {
     Player* p = currentPlayer();
