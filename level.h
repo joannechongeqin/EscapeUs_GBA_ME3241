@@ -40,6 +40,7 @@ void drawLevel(int level);
 void hideLevel();
 
 extern int goalCoordinates[2];
+extern int bombCoodinates[2];
 
 int getTileAt(int x, int y);
 

@@ -16,6 +16,11 @@
 #define B2  9   // DARK BLUE
 #define GN  10  // pure green
 #define GN2 11  // darkest green
+#define Y2  12  // light yellow
+#define OG  13  // light orange
+#define OG2 14  // orange
+#define R3  15  // light red
+
 
 // RGB palette used for sprites. The sprites defined below use the index of the color in the palette (so black = 0, white = 1, ...)
 int palette[] = {
@@ -31,6 +36,11 @@ int palette[] = {
     RGB(4,9,15),    // dark blue 9      - monster
     RGB(0,31,0),    // pure green 10    - player
     RGB(0,16,0),    // darkest green 11 - player
+    RGB(30,28,11),  // light yellow 12  - exploded 
+    RGB(30,21,6),   // light orange 13  - exploded
+    RGB(30,14,4),   // orange 14        - exploded
+    RGB(28,7,8),    // light red 15     - exploded
+
 };
 
 // Sprite array, defining each big 16x16 sprite as 4 8x8 tiles, using the palette above
@@ -503,41 +513,41 @@ R2,R2,R2,R2,R2,R2,0,0,
 
 #define EXPLODED    BOMB_+1         // bomb exploded sprite
 // Tile 00
-0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,
-0,0,R2,R2,R2,R2,R2,R2,
-0,R2,R,R,R,R,R,R,
-R2,R,R,R,R,R,R,R,
-R2,P,P,P,P,P,P,P,
+0,0,0,0,0,0,0,R3,
+0,R3,0,0,0,0,R3,OG2,
+0,0,R3,R3,0,R3,R3,OG2,
+0,0,R3,OG2,R3,R3,OG2,OG,
+0,0,0,R3,OG2,OG2,OG2,OG,
+0,0,0,R3,OG2,OG,OG,Y2,
+0,R3,R3,OG2,OG2,OG,Y2,Y2,
+R3,OG2,OG2,OG,OG,Y2,Y2,Y2,
 // Tile 01
-0,0,0,R,0,0,0,0,
-0,0,R,Y,R,0,0,0,
-0,R2,0,R,0,0,0,0,
-R2,0,0,0,0,0,0,0,
-R2,R2,R2,R2,R2,R2,0,0,
-R,R,R,R,R,R,R2,0,
-R,R,R,R,R,R,R,R2,
-P,P,P,P,P,P,P,R2,
+R3,0,0,0,0,0,0,R3,
+OG2,R3,0,0,0,R3,R3,0,
+OG2,R3,0,R3,R3,OG2,R3,0,
+OG,OG2,R3,OG2,OG2,R3,0,0,
+OG,OG2,OG2,OG,OG2,R3,0,0,
+Y2,OG,OG,OG2,R3,0,0,0,
+Y2,Y2,OG,OG2,OG2,R3,R3,0,
+Y2,Y2,Y2,OG,OG,OG2,OG2,R3,
 // Tile 02
-R2,P,0,0,0,P,0,P,
-R2,P,P,0,P,P,0,0,
-R2,P,P,0,P,P,0,P,
-R2,P,P,0,P,P,0,P,
-R2,P,P,P,P,P,P,P,
-R2,R,R,R,R,R,R,R,
-0,R2,R,R,R,R,R,R,
-0,0,R2,R2,R2,R2,R2,R2,
+R3,OG2,OG2,OG,OG,Y2,Y2,Y2,
+0,R3,R3,OG2,OG2,OG,Y2,Y2,
+0,0,0,R3,OG2,OG,OG,Y2,
+0,0,R3,OG2,OG,OG2,OG2,OG,
+0,0,R3,OG2,OG2,R3,OG2,OG,
+0,R3,OG2,R3,R3,0,R3,OG2,
+0,R3,R3,0,0,0,R3,OG2,
+R3,0,0,0,0,0,0,R3,
 // Tile 03
-P,0,P,0,0,0,P,R2,
-P,0,P,P,0,P,P,R2,
-0,0,P,P,0,P,P,R2,
-P,0,P,P,0,P,P,R2,
-P,P,P,P,P,P,P,R2,
-R,R,R,R,R,R,R,R2,
-R,R,R,R,R,R,R2,0,
-R2,R2,R2,R2,R2,R2,0,0,
+Y2,Y2,Y2,OG,OG,OG2,OG2,R3,
+Y2,Y2,OG,OG2,OG2,R3,R3,0,
+Y2,OG,OG,OG2,R3,0,0,0,
+OG,OG2,OG2,OG,R3,0,0,0,
+OG,OG2,R3,R3,OG2,R3,0,0,
+OG2,R3,0,0,R3,R3,0,0,
+OG2,R3,0,0,0,0,R3,0,
+R3,0,0,0,0,0,0,0,
 
 #define MONSTER_L   EXPLODED+1      // monster sprite (facing LEFT) 
 // Tile 00

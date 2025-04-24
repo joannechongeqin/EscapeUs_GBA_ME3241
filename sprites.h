@@ -27,7 +27,8 @@ extern u16 sprites[];
 #define ARROW_SPRITE_N    2
 #define KEY_SPRITE_N      3
 #define GOAL_SPRITE_N     4
-#define MONSTER_N         5
+#define BOMB_SPRITE_N     5
+#define MONSTER_N         6
 
 #define TITLE_SPRITE_N    MONSTER_N + MAX_MONSTERS
 #define START_SPRITE_N    TITLE_SPRITE_N + TITLE_LENGTH

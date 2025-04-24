@@ -56,21 +56,24 @@ void updateGameState() {
                  (rightDiff >= 0 && rightDiff <=  SPRITE_SIZE - LOSE_TOLERANCE))) {
                 touch_monster = TRUE;
                 break;
-            }
+            }      
         }
         
+        int fallOffGround = checkBelowIs(players[i].x, players[i].y, INVALID);
+
+        int touch_bomb = getTileAt(playerLeft  + LOSE_TOLERANCE, players[i].y) == BOMB || // check if leftmost of player touch bomb (with some tolerance)
+                         getTileAt(playerRight - LOSE_TOLERANCE, players[i].y) == BOMB; // check if rightmost of player touch bomb (with some tolerance)
+
         // --- LOSE ---
         if (!players[i].enteredGoal && // not entered goal
-            (touch_monster || // touch monster
-                checkBelowIs(players[i].x, players[i].y, INVALID) || // fall off ground
-                getTileAt(playerLeft  + LOSE_TOLERANCE, players[i].y) == BOMB || // check if leftmost of player touch bomb (with some tolerance)
-                getTileAt(playerRight - LOSE_TOLERANCE, players[i].y) == BOMB)) {  // check if rightmost of player touch bomb (with some tolerance)
+            (touch_monster || touch_bomb || fallOffGround)) { // and (touch monster or bomb or fall off ground)
                 gameState = GAME_OVER;
                 if (players[i].spriteIndex == P_R_MOVE) {
                     players[i].spriteIndex = P_R_DEAD; // dead sprite facing right
                 } else  {
                     players[i].spriteIndex = P_L_DEAD; // dead sprite facing left (default)
                 }
+                if (touch_bomb) drawSprite(EXPLODED, BOMB_SPRITE_N, bombCoodinates[0], bombCoodinates[1]); // draw bomb exploded sprite
                 drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y); // draw dead player sprite
                 showEndingScreen(0);
         }
