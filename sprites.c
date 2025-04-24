@@ -5,17 +5,17 @@
 
 #include "sprites.h"
 
-#define P  1 // WHITE
-#define G  2 // GREY
-#define Y  3 // YELLOW
-#define BR  4 // BROWN
-#define R  5 // RED
-#define R2 6 // DARKER RED
-#define BR2 7 // MUSTARD BROWN
-#define B 8 // LIGHT BLUE
-#define B2 9 // DARK BLUE
-#define GN 10 // pure green
-#define GN2 11 // darkest green
+#define P   1   // WHITE
+#define G   2   // GREY
+#define Y   3   // YELLOW
+#define BR  4   // BROWN
+#define R   5   // RED
+#define R2  6   // DARKER RED
+#define BR2 7   // MUSTARD BROWN
+#define B   8   // LIGHT BLUE
+#define B2  9   // DARK BLUE
+#define GN  10  // pure green
+#define GN2 11  // darkest green
 
 // RGB palette used for sprites. The sprites defined below use the index of the color in the palette (so black = 0, white = 1, ...)
 int palette[] = {
@@ -29,14 +29,12 @@ int palette[] = {
     RGB(22,17,4),   // mustard brown 7 - key outline
     RGB(8,15,27),   // light blue 8     - monster
     RGB(4,9,15),    // dark blue 9      - monster
-    RGB(0,31,0), // pure green 10       - player
-    RGB(0,16,0), // darkest green 11    - player
-
+    RGB(0,31,0),    // pure green 10    - player
+    RGB(0,16,0),    // darkest green 11 - player
 };
 
 // Sprite array, defining each big 16x16 sprite as 4 8x8 tiles, using the palette above
-// TODO: NOW ALL DUMMY SPRITES
-// !!!!! RMB #DEFINE SPRITES_INDEX IN sprites.h !!!!!
+// !!!!! RMB #DEFINE SPRITES_INDEX IN sprites.h, make sure is in the correct order !!!!!
 u16 sprites[] = {
 
 #define BLANK   0       // empty sprite (mainly for delSprite())

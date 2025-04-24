@@ -16,7 +16,7 @@ extern u16 sprites[];
 #define LETTER_SIZE       8   // size of each letter in pixels (8x8)
 #define LETTER_INTERVAL   16  // interval between letters in pixels
 
-#define TITLE_LENGTH      10     // <title> in menu
+#define TITLE_LENGTH      10    // <title> in menu
 #define START_LENGTH1     11    // "PRESS START" button in menu
 #define START_LENGTH2     7     // "TO PLAY" in menu
 #define ENDING_LENGTH     8     // "YOU WIN!" or "YOU LOSE" in ending screen

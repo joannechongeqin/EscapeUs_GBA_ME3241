@@ -49,7 +49,6 @@ void updateGameState() {
         int touch_monster = FALSE;
         for (int j = 0; j < numMonsters; j++) {
             int monsterLeft = monsters[j].x; int monsterRight = monsters[j].x + SPRITE_SIZE - 1;
-            
             int leftDiff = playerRight - monsterLeft;
             int rightDiff = monsterRight - playerLeft;
             if (players[i].y == monsters[j].y && 
