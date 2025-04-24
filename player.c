@@ -43,7 +43,11 @@ void initPlayer(int index, int x, int y) {
     players[index].vx = 0;
     players[index].vy = 0;
     players[index].spriteN = index; 
-    players[index].spriteIndex = P_IDLE; // TODO: diff sprite for diff player_N(?)
+    if (index == PLAYER1_N) {
+        players[index].spriteIndex = P1_IDLE; // player 1 sprite
+    } else {
+        players[index].spriteIndex = P2_IDLE; // player 2 sprite
+    }
     players[index].onGround = _onGroundCheck(&players[index]); // check if player is on ground at start
     players[index].enteredGoal = FALSE; // not entered goal at start
 }
@@ -60,19 +64,31 @@ void initPlayer(int index, int x, int y) {
 void playerMoveRight() {
     Player* p = currentPlayer();
     p->vx = MOVE_INTERVAL;
-    p->spriteIndex = P_R_MOVE;
+    if (p->spriteN == PLAYER1_N) {
+        p->spriteIndex = P1_R_MOVE;
+    } else {
+        p->spriteIndex = P2_R_MOVE;
+    }
 }
 
 void playerMoveLeft() {
     Player* p = currentPlayer();
     p->vx = -MOVE_INTERVAL;
-    p->spriteIndex = P_L_MOVE;
+    if (p->spriteN == PLAYER1_N) {
+        p->spriteIndex = P1_L_MOVE;
+    } else {
+        p->spriteIndex = P2_L_MOVE;
+    }
 }
 
 void playerStop() {
     Player* p = currentPlayer();
     p->vx = 0;
-    p->spriteIndex = P_IDLE;
+    if (p->spriteN == PLAYER1_N) {
+        p->spriteIndex = P1_IDLE;
+    } else {
+        p->spriteIndex = P2_IDLE;
+    }
 }
 
 

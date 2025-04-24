@@ -30,7 +30,7 @@ void showMainMenu() {
         drawSprite(to_play_letters[i], START_SPRITE_N + START_LENGTH1 + i, to_play_first_x + LETTER_INTERVAL * i, to_play_y);
 
     // DRAW SOME EXTRA SPRITES TO LOOK GOOD
-    drawSprite(P_R_MOVE, PLAYER1_N, 60, 36);
+    drawSprite(P1_R_MOVE, PLAYER1_N, 60, 36);
     drawSprite(ARROW_, ARROW_SPRITE_N, 60, 20);
 	drawSprite(KEY_, KEY_SPRITE_N, 112, 12);
 	drawSprite(GROUND_, LEVEL_SPRITE_N, 112, 38);

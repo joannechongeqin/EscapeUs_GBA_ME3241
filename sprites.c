@@ -20,6 +20,8 @@
 #define OG  13  // light orange
 #define OG2 14  // orange
 #define R3  15  // light red
+#define PK  16  // pink
+#define PK2 17  // dark pink
 
 
 // RGB palette used for sprites. The sprites defined below use the index of the color in the palette (so black = 0, white = 1, ...)
@@ -40,7 +42,8 @@ int palette[] = {
     RGB(30,21,6),   // light orange 13  - exploded
     RGB(30,14,4),   // orange 14        - exploded
     RGB(28,7,8),    // light red 15     - exploded
-
+    RGB(28,14,14),  // pink 16
+    RGB(22,8,12),   // dark pink 17
 };
 
 // Sprite array, defining each big 16x16 sprite as 4 8x8 tiles, using the palette above
@@ -89,7 +92,7 @@ u16 sprites[] = {
 0,0,0,0,0,0,0,0,
 
 
-#define P_IDLE   BLANK+1    // player idle facing FRONT
+#define P1_IDLE   BLANK+1    // player idle facing FRONT
 // Tile 00
 0,0,0,0,GN2,GN2,GN2,GN2,
 0,0,0,GN2,GN,GN,GN,GN,
@@ -128,7 +131,7 @@ GN2,GN2,GN2,GN2,GN2,GN2,0,0,
 0,0,GN2,GN2,GN2,0,0,0,
 
 
-#define P_R_MOVE P_IDLE+1   // player moving RIGHT
+#define P1_R_MOVE P1_IDLE+1   // player moving RIGHT
 // Tile 00
 0,0,0,0,0,GN2,GN2,GN2,
 0,0,0,0,GN2,GN,GN,GN,
@@ -166,7 +169,7 @@ GN2,GN2,GN2,GN2,GN2,0,0,0,
 0,GN2,GN2,GN2,GN2,0,0,0,
 0,0,GN2,GN2,0,0,0,0,
 
-#define P_L_MOVE P_R_MOVE+1 // player moving LEFT
+#define P1_L_MOVE P1_R_MOVE+1 // player moving LEFT
 // Tile 00
 0,0,0,0,0,GN2,GN2,GN2,
 0,0,0,0,GN2,GN,GN,GN,
@@ -204,7 +207,7 @@ GN2,GN2,GN2,GN2,GN2,GN2,GN2,0,
 0,GN2,GN2,GN2,GN2,0,0,0,
 0,0,GN2,GN2,0,0,0,0,
 
-#define P_R_DEAD P_L_MOVE+1 // player is dead (facing left)
+#define P1_R_DEAD P1_L_MOVE+1 // player is dead (facing left)
 // Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,GN2,GN2,0,
@@ -242,7 +245,7 @@ GN2,GN2,GN2,GN2,GN2,0,0,0,
 0,GN2,GN2,GN2,GN2,0,0,0,
 0,0,GN2,GN2,0,0,0,0,
 
-#define P_L_DEAD P_R_DEAD+1 // player is dead (facing right)
+#define P1_L_DEAD P1_R_DEAD+1 // player is dead (facing right)
 // Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,GN2,GN2,0,
@@ -280,7 +283,199 @@ GN2,GN2,GN2,GN2,GN2,0,0,0,
 0,GN2,GN2,GN2,GN2,0,0,0,
 0,0,GN2,GN2,0,0,0,0,
 
-#define ARROW_   P_L_DEAD+1 // arrow sprite (to indicate current active player)
+#define P2_IDLE   P1_L_DEAD+1    // player idle facing FRONT (do player dead sprite also?)
+// Tile 00
+0,0,0,0,PK2,PK2,PK2,PK2,
+0,0,0,PK2,PK,PK,PK,PK,
+0,0,PK2,PK,PK,PK,PK2,PK2,
+0,0,PK2,PK,PK,PK2,B,B,
+0,0,PK2,PK,PK,PK2,B,B,
+0,0,PK2,PK,PK,PK2,B,B,
+0,0,PK2,PK,PK,PK,PK2,PK2,
+0,0,PK2,PK,PK,PK,PK,PK,
+// Tile 01
+PK2,PK2,PK2,PK2,0,0,0,0,
+PK,PK,PK,PK,PK2,0,0,0,
+PK2,PK2,PK,PK,PK,PK2,0,0,
+B,B,PK2,PK,PK,PK2,0,0,
+B,B,PK2,PK,PK,PK2,0,0,
+B,B,PK2,PK,PK,PK2,0,0,
+PK2,PK2,PK,PK,PK,PK2,0,0,
+PK,PK,PK,PK,PK,PK2,0,0,
+// Tile 02
+0,0,PK2,PK2,PK,PK,PK,PK,
+0,0,PK2,PK2,PK2,PK,PK,PK,
+0,0,PK2,PK2,PK2,PK2,PK,PK,
+0,0,PK2,PK2,PK2,PK2,PK2,PK,
+0,0,PK2,PK2,PK2,PK2,PK2,PK2,
+0,0,PK2,PK2,PK2,PK2,PK2,0,
+0,0,PK2,PK2,PK2,PK2,PK2,0,
+0,0,0,PK2,PK2,PK2,0,0,
+// Tile 03
+PK,PK,PK,PK,PK2,PK2,0,0,
+PK,PK,PK,PK2,PK2,PK2,0,0,
+PK,PK,PK2,PK2,PK2,PK2,0,0,
+PK,PK2,PK2,PK2,PK2,PK2,0,0,
+PK2,PK2,PK2,PK2,PK2,PK2,0,0,
+0,PK2,PK2,PK2,PK2,PK2,0,0,
+0,PK2,PK2,PK2,PK2,PK2,0,0,
+0,0,PK2,PK2,PK2,0,0,0,
+
+
+#define P2_R_MOVE P2_IDLE+1   // player moving RIGHT
+// Tile 00
+0,0,0,0,0,PK2,PK2,PK2,
+0,0,0,0,PK2,PK,PK,PK,
+0,0,0,PK2,PK,PK,PK,PK,
+0,0,0,PK2,PK,PK,PK,PK2,
+0,PK2,PK2,PK2,PK,PK,PK2,B2,
+0,PK2,PK,PK2,PK,PK,PK2,B2,
+0,PK2,PK,PK2,PK,PK,PK,PK2,
+0,PK2,PK2,PK2,PK2,PK,PK,PK,
+// Tile 01
+PK2,PK2,PK2,0,0,0,0,0,
+PK,PK,PK,PK2,0,0,0,0,
+PK2,PK2,PK2,PK2,PK2,0,0,0,
+B,B,B,B,B,PK2,0,0,
+B,B,B,B,B,B,PK2,0,
+B2,B,B,B,B,B,PK2,0,
+B2,B2,B2,B2,B2,PK2,0,0,
+PK2,PK2,PK2,PK2,PK2,0,0,0,
+// Tile 02
+0,PK2,PK2,PK2,PK2,PK,PK,PK,
+0,PK2,PK2,PK2,PK2,PK,PK,PK,
+0,PK2,PK2,PK2,PK2,PK2,PK,PK,
+0,PK2,PK2,PK2,PK2,PK2,PK2,PK2,
+0,PK2,PK2,PK2,PK2,PK2,PK2,PK2,
+0,PK2,PK2,PK2,PK2,PK2,PK2,PK2,
+0,0,0,PK2,PK2,PK2,PK2,0,
+0,0,0,0,PK2,PK2,0,0,
+// Tile 03
+PK,PK,PK,PK,PK2,0,0,0,
+PK,PK,PK,PK,PK2,0,0,0,
+PK,PK,PK,PK2,PK2,0,0,0,
+PK2,PK2,PK2,PK2,PK2,0,0,0,
+PK2,PK2,PK2,PK2,PK2,0,0,0,
+PK2,PK2,PK2,PK2,PK2,0,0,0,
+0,PK2,PK2,PK2,PK2,0,0,0,
+0,0,PK2,PK2,0,0,0,0,
+
+#define P2_L_MOVE P2_R_MOVE+1 // player moving LEFT
+// Tile 00
+0,0,0,0,0,PK2,PK2,PK2,
+0,0,0,0,PK2,PK,PK,PK,
+0,0,0,PK2,PK2,PK2,PK2,PK2,
+0,0,PK2,B,B,B,B,B,
+0,PK2,B,B,B,B,B,B,
+0,PK2,B,B,B,B,B,B2,
+0,0,PK2,B2,B2,B2,B2,B2,
+0,0,0,PK2,PK2,PK2,PK2,PK2,
+// Tile 01
+PK2,PK2,PK2,0,0,0,0,0,
+PK,PK,PK,PK2,0,0,0,0,
+PK,PK,PK,PK,PK2,0,0,0,
+PK2,PK,PK,PK,PK2,0,0,0,
+B2,PK2,PK,PK,PK2,PK2,PK2,0,
+B2,PK2,PK,PK,PK2,PK,PK2,0,
+PK2,PK,PK,PK,PK2,PK,PK2,0,
+PK,PK,PK,PK2,PK2,PK2,PK2,0,
+// Tile 02
+0,0,0,PK2,PK,PK,PK,PK,
+0,0,0,PK2,PK,PK,PK,PK,
+0,0,0,PK2,PK2,PK,PK,PK,
+0,0,0,PK2,PK2,PK2,PK2,PK2,
+0,0,0,PK2,PK2,PK2,PK2,PK2,
+0,0,0,PK2,PK2,PK2,PK2,PK2,
+0,0,0,PK2,PK2,PK2,PK2,0,
+0,0,0,0,PK2,PK2,0,0,
+// Tile 03
+PK,PK,PK,PK2,PK2,PK2,PK2,0,
+PK,PK,PK,PK2,PK2,PK2,PK2,0,
+PK,PK,PK2,PK2,PK2,PK2,PK2,0,
+PK2,PK2,PK2,PK2,PK2,PK2,PK2,0,
+PK2,PK2,PK2,PK2,PK2,PK2,PK2,0,
+PK2,PK2,PK2,PK2,PK2,PK2,PK2,0,
+0,PK2,PK2,PK2,PK2,0,0,0,
+0,0,PK2,PK2,0,0,0,0,
+
+#define P2_R_DEAD P2_L_MOVE+1 // player is dead (facing left)
+// Tile 00
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,PK2,PK2,0,
+0,0,0,0,PK2,P,P,PK2,
+0,0,0,0,PK2,P,P,P,
+0,0,0,0,PK2,P,P,P,
+0,0,0,0,0,PK2,PK2,P,
+0,PK2,PK2,PK2,PK2,R,PK2,P,
+0,PK2,PK,PK2,R,R,R,PK2,
+// Tile 01
+0,0,0,0,0,0,0,0,
+0,PK2,PK2,0,0,0,0,0,
+PK2,P,P,PK2,0,0,0,0,
+P,P,P,PK2,0,0,0,0,
+P,P,P,PK2,0,0,0,0,
+P,PK2,PK2,0,0,0,0,0,
+P,PK2,R,PK2,0,0,0,0,
+PK2,R,R,R,PK2,0,0,0,
+// Tile 02
+0,PK2,PK2,PK2,PK2,R,R,R,
+0,PK2,PK2,PK2,PK,PK,PK2,PK2,
+0,PK2,PK2,PK2,PK2,PK,PK,PK,
+0,PK2,PK2,PK2,PK2,PK2,PK2,PK2,
+0,PK2,PK2,PK2,PK2,PK2,PK2,PK2,
+0,0,0,PK2,PK2,PK2,PK2,PK2,
+0,0,0,PK2,PK2,PK2,PK2,0,
+0,0,0,0,PK2,PK2,0,0,
+// Tile 03
+R,R,R,PK2,PK2,0,0,0,
+PK2,PK2,PK2,PK,PK2,0,0,0,
+PK,PK,PK,PK,PK2,0,0,0,
+PK2,PK2,PK2,PK2,PK2,0,0,0,
+PK2,PK2,PK2,PK2,PK2,0,0,0,
+PK2,PK2,PK2,PK2,PK2,0,0,0,
+0,PK2,PK2,PK2,PK2,0,0,0,
+0,0,PK2,PK2,0,0,0,0,
+
+#define P2_L_DEAD P2_R_DEAD+1 // player is dead (facing right)
+// Tile 00
+0,0,0,0,0,0,0,0,
+0,0,0,0,0,PK2,PK2,0,
+0,0,0,0,PK2,P,P,PK2,
+0,0,0,0,PK2,P,P,P,
+0,0,0,0,PK2,P,P,P,
+0,0,0,0,0,PK2,PK2,P,
+0,0,0,0,PK2,R,PK2,P,
+0,0,0,PK2,R,R,R,PK2,
+// Tile 01
+0,0,0,0,0,0,0,0,
+0,PK2,PK2,0,0,0,0,0,
+PK2,P,P,PK2,0,0,0,0,
+P,P,P,PK2,0,0,0,0,
+P,P,P,PK2,0,0,0,0,
+P,PK2,PK2,0,0,0,0,0,
+P,PK2,R,PK2,PK2,PK2,PK2,0,
+PK2,R,R,R,PK2,PK,PK2,0,
+// Tile 02
+0,0,0,PK2,PK2,R,R,R,
+0,0,0,PK2,PK,PK2,PK2,PK2,
+0,0,0,PK2,PK,PK,PK,PK,
+0,0,0,PK2,PK2,PK2,PK2,PK2,
+0,0,0,PK2,PK2,PK2,PK2,PK2,
+0,0,0,PK2,PK2,PK2,PK2,PK2,
+0,0,0,PK2,PK2,PK2,PK2,0,
+0,0,0,0,PK2,PK2,0,0,
+// Tile 03
+R,R,R,PK2,PK2,PK2,PK2,0,
+PK2,PK2,PK,PK,PK2,PK2,PK2,0,
+PK,PK,PK,PK2,PK2,PK2,PK2,0,
+PK2,PK2,PK2,PK2,PK2,PK2,PK2,0,
+PK2,PK2,PK2,PK2,PK2,PK2,PK2,0,
+PK2,PK2,PK2,PK2,PK2,0,0,0,
+0,PK2,PK2,PK2,PK2,0,0,0,
+0,0,PK2,PK2,0,0,0,0,
+
+
+#define ARROW_   P2_L_DEAD+1 // arrow sprite (to indicate current active player)
 // Tile 00
 0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,

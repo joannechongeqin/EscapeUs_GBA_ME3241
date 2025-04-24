@@ -431,7 +431,7 @@ print_flat(bottom_right)
 
 
 # scale 0-255 colour to 0-31 range
-r, g, b = 249, 118, 35
+r, g, b = 182,73,102
 
 
 def scale_colors(r, g, b):

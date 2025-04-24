@@ -68,11 +68,20 @@ void updateGameState() {
         if (!players[i].enteredGoal && // not entered goal
             (touch_monster || touch_bomb || fallOffGround)) { // and (touch monster or bomb or fall off ground)
                 gameState = GAME_OVER;
-                if (players[i].spriteIndex == P_R_MOVE) {
-                    players[i].spriteIndex = P_R_DEAD; // dead sprite facing right
-                } else  {
-                    players[i].spriteIndex = P_L_DEAD; // dead sprite facing left (default)
+                if (players[i].spriteN == PLAYER1_N) {
+                    if (players[i].spriteIndex == P1_R_MOVE) {
+                        players[i].spriteIndex = P1_R_DEAD; // dead sprite facing right
+                    } else {
+                        players[i].spriteIndex = P1_L_DEAD; // dead sprite facing left (default)
+                    }
+                } else {
+                    if (players[i].spriteIndex == P2_R_MOVE) {
+                        players[i].spriteIndex = P2_R_DEAD; // dead sprite facing right
+                    } else {
+                        players[i].spriteIndex = P2_L_DEAD; // dead sprite facing left (default)
+                    }
                 }
+
                 if (touch_bomb) drawSprite(EXPLODED, BOMB_SPRITE_N, bombCoodinates[0], bombCoodinates[1]); // draw bomb exploded sprite
                 drawSprite(players[i].spriteIndex, players[i].spriteN, players[i].x, players[i].y); // draw dead player sprite
                 showEndingScreen(0);
