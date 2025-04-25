@@ -3,11 +3,11 @@
 > *Whether you are innocent or an impostor is anyone's guess, but one thing is for sure: you need to work together to survive and escape.*
 
 - **Your goal is simple:** collect the key, unlock the exit door, and guide BOTH crewmates safely to the exit.
-- **Spot a platform that is just out of reach?** Switch between the two crewmates and cooperate in creative ways to reach it!
+- **Spot a key that is just out of reach?** Switch between the two crewmates and cooperate in creative ways to reach it!
 - **The mission fails if:** either of the crewmates falls off the platform, touches a bomb, or runs into a roaming slime monster.
 
 ### How To Play
-To play, open and run `escape_us.gba` using `VisualBoyAdvance.exe`. The following are GBA button controls，with their equivalent keybindings for PC/laptop keyboards (shown in parentheses).
+To play, open and run [`escape_us.gba`](./escape_us.gba) using [`VisualBoyAdvance.exe`](./VisualBoyAdvance.exe). The following are GBA button controls，with their equivalent keybindings for PC/laptop keyboards (shown in parentheses).
 
 | **Key**                        | **Action**                                                             |
 |--------------------------------|------------------------------------------------------------------------|
@@ -22,8 +22,8 @@ To play, open and run `escape_us.gba` using `VisualBoyAdvance.exe`. The followin
 |------------------|-----------------|
 | **Crewmate(s)**<br><img src="assets/crewmate.png" width="50"/> | You in the game! The character(s) that you control. |
 | **Arrow**<br><img src="assets/arrow.png" width="50"/> | A visual cue that points to the crewmate you are currently controlling. |
-| **Platform**<br><img src="assets/platform.png" width="50"/> | These are your safe zones within the game. Watch your steps while moving around! |
-| **Key**<br><img src="assets/key.png" width="50"/> | The key is your ticket to freedom. It can be passed between crewmates if they’re close enough when you switch between characters. |
+| **Platform**<br><img src="assets/platform.png" width="50"/> | Your safe zones within the game. Watch your steps while moving around! |
+| **Key**<br><img src="assets/key.png" width="50"/> | Your ticket to freedom. It can be passed between crewmates if they’re close enough when you switch between characters. |
 | **Exit**<br><img src="assets/exit.png" width="50"/> | Your way out — but only if you have gotten the key first. |
 | **Bomb**<br><img src="assets/bomb.png" width="50"/> | Explosive and dangerous! |
 | **Slime Monster**<br><img src="assets/slime_monster.png" width="50"/> | While they may look cute, these little guys are deadly. They patrol back and forth between two points. |
